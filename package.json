@@ -1,0 +1,33 @@
+{
+  "name": "statically-generated-music-sheets",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@emotion/react": "^11.11.4",
+    "@emotion/styled": "^11.11.5",
+    "@mui/icons-material": "^5.15.20",
+    "@mui/material": "^5.15.20",
+    "@mui/system": "^5.15.20",
+    "@reduxjs/toolkit": "^2.2.5",
+    "classnames": "^2.5.1",
+    "immer": "^10.1.1",
+    "next": "14.2.4",
+    "next-redux-wrapper": "^8.1.0",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "react-redux": "^9.1.2",
+    "soundfont-player": "^0.12.0",
+    "tone": "^15.0.4",
+    "vis-network": "^9.1.9"
+  },
+  "devDependencies": {
+    "eslint": "8.57.0",
+    "eslint-config-next": "14.2.4"
+  }
+}
