@@ -196,7 +196,7 @@ function App({ Component, pageProps }) {
                 </ToolbarTitle>
                 <Hidden mdDown>
                   <NavLinks>
-                    <StyledLink href="">
+                    <StyledLink href="/">
                       <Button color="inherit">Play and Visualize</Button>
                     </StyledLink>
                     <StyledLink href="/compose">
