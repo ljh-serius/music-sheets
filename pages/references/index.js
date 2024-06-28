@@ -8,7 +8,7 @@ export const getStaticProps = async (context) => {
                 ...guitar.shapes.names.map((shape) => {
                     return {
                         label: `Chord: ${guitar.arppegios[chordKey].name} in ${key} (Shape: ${shape})`,
-                        href: `/music-sheets/references/chords/${encodeURIComponent(key)}/${chordKey.replace('#', '%23')}/${shape}`,
+                        href: `/references/chords/${encodeURIComponent(key)}/${chordKey.replace('#', '%23')}/${shape}`,
                     };
                 })
             ];
@@ -18,12 +18,12 @@ export const getStaticProps = async (context) => {
             return [
                 {
                     label: `Arpeggio: ${guitar.arppegios[arppegioKey].name} in ${key}`,
-                    href: `/music-sheets/references/arppegios/${encodeURIComponent(key)}/${arppegioKey.replace('#', '%23')}`,
+                    href: `/references/arppegios/${encodeURIComponent(key)}/${arppegioKey.replace('#', '%23')}`,
                 },
                 ...guitar.shapes.names.map((shape) => {
                     return {
                         label: `Arpeggio: ${guitar.arppegios[arppegioKey].name} in ${key} (Shape: ${shape})`,
-                        href: `/music-sheets/references/arppegios/${encodeURIComponent(key)}/${arppegioKey.replace('#', '%23')}/${shape}/`,
+                        href: `/references/arppegios/${encodeURIComponent(key)}/${arppegioKey.replace('#', '%23')}/${shape}/`,
                     };
                 }),
             ];
@@ -35,14 +35,14 @@ export const getStaticProps = async (context) => {
                     ...guitar.scales[scaleKey].modes.map((mode) => {
                         return {
                             label: `Scale: ${guitar.scales[scaleKey].name} in ${key} (Mode: ${mode.name})`,
-                            href: `/music-sheets/references/scales/${encodeURIComponent(key)}/${scaleKey}/modal/${decodeURIComponent(mode.name.toLowerCase().replace(' ', '-')).replace('#', '%23')}`,
+                            href: `/references/scales/${encodeURIComponent(key)}/${scaleKey}/modal/${decodeURIComponent(mode.name.toLowerCase().replace(' ', '-')).replace('#', '%23')}`,
                         };
                     }),
                     ...guitar.scales[scaleKey].modes.flatMap((mode) => {
                         return guitar.shapes.names.map((shape) => {
                             return {
                                 label: `Scale: ${guitar.scales[scaleKey].name} in ${key} (Mode: ${mode.name}, Shape: ${shape})`,
-                                href: `/music-sheets/references/scales/${encodeURIComponent(key)}/${scaleKey}/modal/${decodeURIComponent(mode.name.toLowerCase().replace(' ', '-')).replace('#', '%23')}/${shape}`,
+                                href: `/references/scales/${encodeURIComponent(key)}/${scaleKey}/modal/${decodeURIComponent(mode.name.toLowerCase().replace(' ', '-')).replace('#', '%23')}/${shape}`,
                             };
                         });
                     }),
@@ -51,12 +51,12 @@ export const getStaticProps = async (context) => {
                 return [
                     {
                         label: `Scale: ${guitar.scales[scaleKey].name} in ${key} (Single)`,
-                        href: `/music-sheets/references/scales/${encodeURIComponent(key)}/${scaleKey}/single`,
+                        href: `/references/scales/${encodeURIComponent(key)}/${scaleKey}/single`,
                     },
                     ...guitar.shapes.names.map((shape) => {
                         return {
                             label: `Scale: ${guitar.scales[scaleKey].name} in ${key} (Single, Shape: ${shape})`,
-                            href: `/music-sheets/references/scales/${encodeURIComponent(key)}/${scaleKey}/single/${shape}`,
+                            href: `/references/scales/${encodeURIComponent(key)}/${scaleKey}/single/${shape}`,
                         };
                     }),
                 ];
