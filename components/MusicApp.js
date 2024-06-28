@@ -1,6 +1,6 @@
-import React, { useState, useEffect, useCallback } from 'react';
 import { IconButton } from '@mui/material';
 import { styled } from '@mui/system';
+import { useCallback, useEffect } from 'react';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import FretboardControls from '../components/FretboardControls';
 import Progressor from '../components/Progressor';
@@ -109,10 +109,11 @@ const MusicApp = (props) => {
       if (display === 'scale') {
         dispatch(updateBoards(selectedFretboard.id, 'generalSettings.choice', 'scale'));
         dispatch(updateBoards(selectedFretboard.id, 'scaleSettings.scale', scale));
-        if (guitar.scales[scale].isModal && modeIndex >= 0) {
+        if (guitar.scales[scale].isModal) {
           dispatch(updateBoards(selectedFretboard.id, 'modeSettings.mode', guitar.scales[scale].modes[modeIndex].name));
           if (shape !== '') {
             dispatch(updateBoards(selectedFretboard.id, 'modeSettings.shape', shape));
+            dispatch(updateBoards(selectedFretboard.id, 'scaleSettings.shape', shape));
           }
         } else {
           dispatch(updateBoards(selectedFretboard.id, 'scaleSettings.shape', shape));

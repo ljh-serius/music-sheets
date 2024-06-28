@@ -124,35 +124,35 @@ function App({ Component, pageProps }) {
       </DrawerHeader>
       <Divider />
       <List>
-        <Link href="/" passHref>
+        <Link href="/music-sheets" passHref>
           <ListItem  onClick={handleDrawerToggle}>
             <ListItemText>
               <Typography>Play and Visualize</Typography>
             </ListItemText>
           </ListItem>
         </Link>
-        <Link href="/compose" passHref>
+        <Link href="/music-sheets/compose" passHref>
           <ListItem onClick={handleDrawerToggle}>
             <ListItemText>
               <Typography>Compose and Share</Typography>
             </ListItemText>
           </ListItem>
         </Link>
-        <Link href="/learn" passHref>
+        <Link href="/music-sheets/learn" passHref>
           <ListItem onClick={handleDrawerToggle}>
             <ListItemText>
               <Typography>Learn Songs</Typography>
             </ListItemText>
           </ListItem>
         </Link>
-        <Link href="/circle" passHref>
+        <Link href="/music-sheets/circle" passHref>
           <ListItem onClick={handleDrawerToggle}>
             <ListItemText>
               <Typography>The Circle Of Fifths</Typography>
             </ListItemText>
           </ListItem>
         </Link>
-        <Link href="/references" passHref>
+        <Link href="/music-sheets/references" passHref>
           <ListItem onClick={handleDrawerToggle}>
             <ListItemText>
               <Typography>References</Typography>
@@ -196,19 +196,19 @@ function App({ Component, pageProps }) {
                 </ToolbarTitle>
                 <Hidden mdDown>
                   <NavLinks>
-                    <StyledLink href="/">
+                    <StyledLink href="/music-sheets">
                       <Button color="inherit">Play and Visualize</Button>
                     </StyledLink>
-                    <StyledLink href="/compose">
+                    <StyledLink href="/music-sheets/compose">
                       <Button color="inherit">Compose and Share</Button>
                     </StyledLink>
-                    <StyledLink href="/learn">
+                    <StyledLink href="/music-sheets/learn">
                       <Button color="inherit">Learn Songs</Button>
                     </StyledLink>
-                    <StyledLink href="/circle">
+                    <StyledLink href="/music-sheets/circle">
                       <Button color="inherit">The Circle Of Fifths</Button>
                     </StyledLink>
-                    <StyledLink href="/references">
+                    <StyledLink href="/music-sheets/references">
                       <Button color="inherit">References</Button>
                     </StyledLink>
                   </NavLinks>

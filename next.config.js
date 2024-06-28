@@ -2,9 +2,7 @@
 const isProd = process.env.NODE_ENV === 'production'
 
 const nextConfig = {
-  export: 'output',
-  assetPrefix: isProd ? '/music-sheets/' : '',
-  basePath: isProd ? '/music-sheets' : '',
+  output: 'export'
 }
 
 module.exports = nextConfig
