@@ -248,7 +248,6 @@ const MusicApp = (props) => {
 };
 
 const mapStateToProps = (state, ownProps) => {
-  console.log('own props', ownProps)
   const filteredBoards = state.fretboard.components.filter(board => board.generalSettings.page === ownProps.display);
   return {
     boards: filteredBoards,
