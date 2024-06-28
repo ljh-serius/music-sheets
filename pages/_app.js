@@ -22,6 +22,7 @@ import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import { Open_Sans } from 'next/font/google';
 import { Provider } from 'react-redux';
 import store from '../redux/store';
+import '../styles/styles.css';
 
 const inter = Open_Sans({ subsets: ['latin'], weight: ['300', '400', '500', '700'] });
 
@@ -123,28 +124,28 @@ function App({ Component, pageProps }) {
       <Divider />
       <List>
         <Link href="/" passHref>
-          <ListItem button onClick={handleDrawerToggle}>
+          <ListItem  onClick={handleDrawerToggle}>
             <ListItemText>
               <Typography>Play and Visualize</Typography>
             </ListItemText>
           </ListItem>
         </Link>
         <Link href="/compose" passHref>
-          <ListItem button onClick={handleDrawerToggle}>
+          <ListItem onClick={handleDrawerToggle}>
             <ListItemText>
               <Typography>Compose and Share</Typography>
             </ListItemText>
           </ListItem>
         </Link>
         <Link href="/learn" passHref>
-          <ListItem button onClick={handleDrawerToggle}>
+          <ListItem onClick={handleDrawerToggle}>
             <ListItemText>
               <Typography>Learn Songs</Typography>
             </ListItemText>
           </ListItem>
         </Link>
         <Link href="/circle" passHref>
-          <ListItem button onClick={handleDrawerToggle}>
+          <ListItem onClick={handleDrawerToggle}>
             <ListItemText>
               <Typography>The Circle Of Fifths</Typography>
             </ListItemText>
@@ -169,6 +170,7 @@ function App({ Component, pageProps }) {
             <CssBaseline />
             <AppBarStyled position="fixed" open={drawerOpen}>
               <ToolbarContent>
+              <Hidden mdUp>
                 <IconButton
                   color="inherit"
                   aria-label="open drawer"
@@ -178,6 +180,7 @@ function App({ Component, pageProps }) {
                 >
                   <MenuIcon />
                 </IconButton>
+                </Hidden>
                 <ToolbarTitle variant="secondary" startIcon={<FavoriteIcon />}>
                   <Typography variant="h6" noWrap component="div">
                     Fretty

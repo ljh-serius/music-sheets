@@ -159,7 +159,7 @@ const MusicApp = (props) => {
   const { arppegio } = selectedFretboard.arppegioSettings;
   const { fret } = selectedFretboard.chordSettings;
   const { chord } = selectedFretboard.chordSettings;
-  const { selectedScale = scale } = selectedFretboard.scaleSettings;
+  const selectedScale = selectedFretboard.scaleSettings.scale;
   const { mode } = selectedFretboard.modeSettings;
 
   const components = (
