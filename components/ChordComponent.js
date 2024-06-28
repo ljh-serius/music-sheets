@@ -11,7 +11,6 @@ const Root = styled('div')({
 });
 
 const ChordComponent = ({ board, keyIndex, quality, shape}) => {
-  console.log("props ", {board, keyIndex, quality, shape });
   return (
     <Root>
       <MusicApp

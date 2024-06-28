@@ -132,7 +132,6 @@ const MusicApp = (props) => {
         dispatch(updateBoards(selectedFretboard.id, 'generalSettings.choice', 'chord'));
         dispatch(updateBoards(selectedFretboard.id, 'chordSettings.chord', quality));
         if (shape !== '') {
-          console.log(shape)
           dispatch(updateBoards(selectedFretboard.id, 'chordSettings.shape', shape));
         }
       }

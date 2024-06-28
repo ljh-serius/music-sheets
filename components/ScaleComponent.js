@@ -11,7 +11,6 @@ const Root = styled('div')({
 });
 
 const ScaleComponent = ({ board, keyIndex, scale, modeIndex, shape }) => {
-  console.log("props ", { board, keyIndex, scale, modeIndex, shape })
   return (
     <Root>
       <MusicApp
