@@ -1,6 +1,6 @@
 // pages\references\[key]\scales\[scale]\modal\[mode]\[shape]\index.js
-import ScaleComponent from '../../../../../../components/ScaleComponent';
-import guitar from '../../../../../../config/guitar';
+import ScaleComponent from '../../../../../../../components/ScaleComponent';
+import guitar from '../../../../../../../config/guitar';
 
 export const getStaticPaths = async () => {
   const { notes, scales, shapes } = guitar;
