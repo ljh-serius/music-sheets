@@ -9,13 +9,12 @@ export const getStaticPaths = async () => {
     const paths = [];
 
     notes.sharps.forEach((key) => {
-        const encodedKey = encodeURIComponent(key);
         if (arppegios && Object.keys(arppegios).length > 0) {
             Object.keys(arppegios).forEach((arppegioKey) => {
                 const arppegio = arppegios[arppegioKey];
                 if (arppegio) {
                     shapes.names.forEach((shape) => {
-                        paths.push({ params: { key: encodedKey, arppegio: arppegioKey, shape: shape } });
+                        paths.push({ params: { key: key, arppegio: arppegioKey, shape: shape } });
                     });
                 }
             });
@@ -31,17 +30,14 @@ export const getStaticPaths = async () => {
 
 export const getStaticProps = async ({ params }) => {
     const { key, arppegio, shape } = params;
-    const decodedKey = decodeURIComponent(key);
-    const decodedArppegio = decodeURIComponent(arppegio);
-    const decodedShape = decodeURIComponent(shape).toUpperCase();
 
-    const keyIndex = guitar.notes.sharps.indexOf(decodedKey);
-    const validShape = decodedShape || 'C';
+    const keyIndex = guitar.notes.sharps.indexOf(key);
+    const validShape = shape || 'C';
 
     return {
         props: {
             keyIndex,
-            quality: decodedArppegio,
+            quality: arppegio,
             shape: validShape,
             board: 'references'
         },

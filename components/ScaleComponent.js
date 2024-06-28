@@ -10,7 +10,7 @@ const Root = styled('div')({
   padding: '100px 0',
 });
 
-const ScaleComponent = ({ board, keyIndex, scale, modeIndex, shape = '' }) => {
+const ScaleComponent = ({ board, keyIndex, scale, modeIndex, shape }) => {
   return (
     <Root>
       <MusicApp

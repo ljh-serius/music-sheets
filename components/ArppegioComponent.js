@@ -10,7 +10,7 @@ const Root = styled('div')({
 });
 
 
-const ArppegioComponent = ({ board, keyIndex, quality, shape = '' }) => {
+const ArppegioComponent = ({ board, keyIndex, quality, shape}) => {
   return (
     <Root>
       <MusicApp

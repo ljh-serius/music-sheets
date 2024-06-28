@@ -10,7 +10,8 @@ const Root = styled('div')({
   padding: '100px 0',
 });
 
-const ChordComponent = ({ board, keyIndex, quality, shape = '' }) => {
+const ChordComponent = ({ board, keyIndex, quality, shape}) => {
+  console.log("props ", {board, keyIndex, quality, shape });
   return (
     <Root>
       <MusicApp

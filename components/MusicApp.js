@@ -111,7 +111,7 @@ const MusicApp = (props) => {
         dispatch(updateBoards(selectedFretboard.id, 'scaleSettings.scale', scale));
         if (guitar.scales[scale].isModal && modeIndex >= 0) {
           dispatch(updateBoards(selectedFretboard.id, 'modeSettings.mode', guitar.scales[scale].modes[modeIndex].name));
-          if (shape) {
+          if (shape !== '') {
             dispatch(updateBoards(selectedFretboard.id, 'modeSettings.shape', shape));
           }
         } else {
@@ -122,7 +122,7 @@ const MusicApp = (props) => {
       if (display === 'arppegio') {
         dispatch(updateBoards(selectedFretboard.id, 'generalSettings.choice', 'arppegio'));
         dispatch(updateBoards(selectedFretboard.id, 'arppegioSettings.arppegio', quality));
-        if (shape) {
+        if (shape !== '') {
           dispatch(updateBoards(selectedFretboard.id, 'arppegioSettings.shape', shape));
         }
       }
@@ -130,7 +130,8 @@ const MusicApp = (props) => {
       if (display === 'chord') {
         dispatch(updateBoards(selectedFretboard.id, 'generalSettings.choice', 'chord'));
         dispatch(updateBoards(selectedFretboard.id, 'chordSettings.chord', quality));
-        if (shape) {
+        if (shape !== '') {
+          console.log(shape)
           dispatch(updateBoards(selectedFretboard.id, 'chordSettings.shape', shape));
         }
       }
