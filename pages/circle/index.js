@@ -6,7 +6,7 @@ const TheCircleOfFifths = () => {
   return (
     <div>
       <MusicApp 
-        display="circle"
+        board="circle"
         showFretboardControls={false} 
         showCircleOfFifths={true} 
         showFretboard={false} 

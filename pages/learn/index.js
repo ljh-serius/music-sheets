@@ -6,7 +6,7 @@ const LearnSongs = () => {
   return (
     <div>
       <MusicApp 
-        display="learn"
+        board="learn"
         showFretboardControls={false} 
         showCircleOfFifths={false} 
         showFretboard={true} 

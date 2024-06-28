@@ -5,7 +5,7 @@ const PlayAndVisualize = () => {
   return (
     <div>
         <MusicApp 
-            display="home"
+            board="home"
             showFretboardControls={true} 
             showCircleOfFifths={false} 
             showFretboard={true} 

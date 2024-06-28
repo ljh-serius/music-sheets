@@ -5,7 +5,7 @@ const ComposeAndShare = () => {
   return (
     <div>
       <MusicApp 
-        display="compose"
+        board="compose"
         showFretboardControls={false} 
         showCircleOfFifths={false} 
         showFretboard={true} 
