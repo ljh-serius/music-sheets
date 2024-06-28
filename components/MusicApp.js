@@ -88,24 +88,26 @@ const MusicApp = (props) => {
     showAddMoreFretboardsButton,
     showFretboard,
     updateBoards,
-    display,
     keyIndex,
     scale,
     modeIndex,
     shape,
-  } = props;
+    quality,
+    display,
+    } = props;
 
   const updateBoardsCallback = useCallback(() => {
     if (selectedFretboard?.id) {
       if (!isNaN(keyIndex)) {
-        dispatch(updateBoards(selectedFretboard.id, 'keySettings.scale', keyIndex));
+        dispatch(updateBoards(selectedFretboard.id, 'keySettings.' + display, keyIndex));
       }
 
       if (!isNaN(modeIndex)) {
         dispatch(updateBoards(selectedFretboard.id, 'keySettings.mode', modeIndex));
       }
 
-      if (scale) {
+      if (display === 'scale') {
+        dispatch(updateBoards(selectedFretboard.id, 'generalSettings.choice', 'scale'));
         dispatch(updateBoards(selectedFretboard.id, 'scaleSettings.scale', scale));
         if (guitar.scales[scale].isModal && modeIndex >= 0) {
           dispatch(updateBoards(selectedFretboard.id, 'modeSettings.mode', guitar.scales[scale].modes[modeIndex].name));
@@ -116,8 +118,24 @@ const MusicApp = (props) => {
           dispatch(updateBoards(selectedFretboard.id, 'scaleSettings.shape', shape));
         }
       }
+
+      if (display === 'arppegio') {
+        dispatch(updateBoards(selectedFretboard.id, 'generalSettings.choice', 'arppegio'));
+        dispatch(updateBoards(selectedFretboard.id, 'arppegioSettings.arppegio', quality));
+        if (shape) {
+          dispatch(updateBoards(selectedFretboard.id, 'arppegioSettings.shape', shape));
+        }
+      }
+
+      if (display === 'chord') {
+        dispatch(updateBoards(selectedFretboard.id, 'generalSettings.choice', 'chord'));
+        dispatch(updateBoards(selectedFretboard.id, 'chordSettings.chord', quality));
+        if (shape) {
+          dispatch(updateBoards(selectedFretboard.id, 'chordSettings.shape', shape));
+        }
+      }
     }
-  }, [dispatch, selectedFretboard, keyIndex, modeIndex, scale, shape]);
+  }, [dispatch, display, selectedFretboard, keyIndex, modeIndex, scale, shape, quality]);
 
   useEffect(() => {
     updateBoardsCallback();
@@ -156,9 +174,9 @@ const MusicApp = (props) => {
 
   const selectedKey = selectedFretboard.keySettings[choice];
   const selectedShape = selectedFretboard[choice + 'Settings'].shape;
-  const { arppegio } = selectedFretboard.arppegioSettings;
+  const selectedArppegio = selectedFretboard.arppegioSettings.arppegio;
   const { fret } = selectedFretboard.chordSettings;
-  const { chord } = selectedFretboard.chordSettings;
+  const selectedChord = selectedFretboard.chordSettings.chord;
   const selectedScale = selectedFretboard.scaleSettings.scale;
   const { mode } = selectedFretboard.modeSettings;
 
@@ -192,9 +210,9 @@ const MusicApp = (props) => {
               onCopyLink={() => console.log('aaa')}
               selectedMode={mode || ''}
               selectedScale={selectedScale || ''}
-              selectedChord={chord || ''}
+              selectedChord={selectedChord || ''}
               selectedShape={selectedShape || ''}
-              selectedArppegio={arppegio}
+              selectedArppegio={selectedArppegio}
               selectedFret={fret}
               addChordToProgression={addChordToProgression}
               saveProgression={saveProgression}
@@ -248,7 +266,7 @@ const MusicApp = (props) => {
 };
 
 const mapStateToProps = (state, ownProps) => {
-  const filteredBoards = state.fretboard.components.filter(board => board.generalSettings.page === ownProps.display);
+  const filteredBoards = state.fretboard.components.filter(board => board.generalSettings.page === ownProps.board);
   return {
     boards: filteredBoards,
     progressions: state.partitions,

@@ -207,7 +207,7 @@ export default {
         "D": [null, null, 0, 2, 3, 2]
       }
     },
-    "m": {
+    "min": {
       "name": "Minor",
       "formula": [3, 4, 5],
       "intervals": ["1", "b3", "5"],
@@ -387,7 +387,7 @@ export default {
         "D": [null, null, 0, 1, 2, 1]
       }
     },
-    "m7": {
+    "min7": {
       "name": "Minor 7th",
       "formula": [3, 4, 3, 2],
       "intervals": ["1", "b3", "5", "b7"],
@@ -402,7 +402,7 @@ export default {
         "D": [null, null, 0, 2, 1, 1]
       }
     },
-    "m7b5": {
+    "min7b5": {
       "name": "Minor 7b5",
       "intervals": ["1", "b3", "b5", "b7"],
       "formula": [3, 3, 4, 2],

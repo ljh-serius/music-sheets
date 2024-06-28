@@ -1,5 +1,6 @@
-import ScalesComponent from '../../../../../../components/ScalesComponent';
-import guitar from '../../../../../../config/guitar';
+//pages\references\[key]\scales\[scale]\single\[shape]\index.js
+import ScaleComponent from '../../../../../../../components/ScaleComponent';
+import guitar from '../../../../../../../config/guitar';
 
 export const getStaticPaths = async () => {
     const { notes, scales, shapes } = guitar;
@@ -35,10 +36,10 @@ export const getStaticProps = async ({ params }) => {
             scale: decodedScale,
             modeIndex,
             shape: validShape,
-            display: 'home', // Ensure display is provided
+            board: 'references', // Ensure display is provided
         },
     };
 };
 
 
-export default ScalesComponent;
+export default ScaleComponent;

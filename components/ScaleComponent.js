@@ -1,4 +1,4 @@
-// components/ScalesComponent.js
+// components/ScaleComponent.js
 import React from 'react';
 import MusicApp from './MusicApp'; // Adjust the path if needed
 import { styled } from '@mui/system';
@@ -10,16 +10,17 @@ const Root = styled('div')({
   padding: '100px 0',
 });
 
-const ScalesComponent = ({ display, keyIndex, scale, modeIndex, shape }) => {
+const ScaleComponent = ({ board, keyIndex, scale, modeIndex, shape = '' }) => {
   return (
     <Root>
       <MusicApp
-        display={display}
+        display="scale"
+        board={board}
         keyIndex={keyIndex}
         scale={scale}
         modeIndex={modeIndex}
         shape={shape}
-        showFretboardControls={true}
+        showFretboardControls={false}
         showCircleOfFifths={false}
         showFretboard={true}
         showChordComposer={false}
@@ -30,4 +31,4 @@ const ScalesComponent = ({ display, keyIndex, scale, modeIndex, shape }) => {
   );
 };
 
-export default ScalesComponent;
+export default ScaleComponent;

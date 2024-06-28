@@ -152,6 +152,13 @@ function App({ Component, pageProps }) {
             </ListItemText>
           </ListItem>
         </Link>
+        <Link href="/references" passHref>
+          <ListItem onClick={handleDrawerToggle}>
+            <ListItemText>
+              <Typography>References</Typography>
+            </ListItemText>
+          </ListItem>
+        </Link>
       </List>
       <Divider />
     </DrawerContent>
@@ -200,6 +207,9 @@ function App({ Component, pageProps }) {
                     </StyledLink>
                     <StyledLink href="/circle">
                       <Button color="inherit">The Circle Of Fifths</Button>
+                    </StyledLink>
+                    <StyledLink href="/references">
+                      <Button color="inherit">References</Button>
                     </StyledLink>
                   </NavLinks>
                 </Hidden>

@@ -48,7 +48,6 @@ const FretboardControls = ({
 }) => {
   const capitalize = (s) => s.charAt(0).toUpperCase() + s.slice(1);
 
-  console.log(selectedKey)
   const handleButtonClick = (newChoice) => {
     handleChoiceChange(newChoice);
   };
@@ -262,7 +261,6 @@ const FretboardControls = ({
 };
 
 const KeySelector = ({ choice, selectedKey, onElementChange }) => {
-  console.log("selected key", selectedKey)
   return (
     choice && (
       <SelectContainer>
