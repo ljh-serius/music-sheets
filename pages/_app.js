@@ -57,6 +57,7 @@ const AppBarStyled = styled(AppBar, {
     easing: theme.transitions.easing.sharp,
     duration: theme.transitions.duration.leavingScreen,
   }),
+  padding: '0 25px',
   ...(open && {
     width: '100%',
     marginLeft: `${drawerWidth}px`,
@@ -70,7 +71,6 @@ const AppBarStyled = styled(AppBar, {
 const DrawerHeader = styled('div')(({ theme }) => ({
   display: 'flex',
   alignItems: 'center',
-  padding: theme.spacing(0, 1),
   ...theme.mixins.toolbar,
   justifyContent: 'flex-end',
 }));
@@ -81,6 +81,7 @@ const Container = styled('div')({
 
 const NavLinks = styled('div')({
   display: 'flex',
+  alignItems: 'center',
   textDecoration: 'none',
   gap: '16px', // Add spacing between menu items
 });
@@ -186,7 +187,7 @@ function App({ Component, pageProps }) {
                     Fretty
                   </Typography>
                 </ToolbarTitle>
-                <Hidden smDown>
+                <Hidden mdDown>
                   <NavLinks>
                     <StyledLink href="/">
                       <Button color="inherit">Play and Visualize</Button>
