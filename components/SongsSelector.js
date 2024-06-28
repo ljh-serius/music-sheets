@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Button, Card, CardContent, Typography, Grid } from '@mui/material';
-import { styled, } from '@mui/system';
+import { styled } from '@mui/system';
 import { keys, mostCommonSongs } from '../config/mostCommonSongs';
 import guitar from '../config/guitar';
 
@@ -105,10 +105,12 @@ const Root = styled('div')({
 
 const ChoiceButton = styled(Button)({
   width: '100%',
+  margin: '10px 0', // Added margin between buttons
 });
 
 const StyledButton = styled(Button)({
-  borderRadius: '20px'
+  borderRadius: '20px',
+  margin: '10px', // Added margin between buttons
 });
 
 const BackButton = styled(Button)({
@@ -121,12 +123,14 @@ const CardsContainer = styled('div')({
   flexDirection: 'row',
   flexWrap: 'nowrap',
   width: '100vw',
+  margin: '10px 0', // Added margin between cards container and other elements
 });
 
 const StyledCard = styled(Card)({
   minWidth: 200,
   cursor: 'pointer',
   transition: 'transform 0.3s ease',
+  margin: '10px', // Added margin between cards
   '&:hover': {
     transform: 'scale(1.05)',
   },
@@ -239,7 +243,7 @@ const SongsSelector = ({ playProgression, getScaleNotes }) => {
       <Root>
         {showChordProgression ? (
           <>
-            <Typography variant="h6" className={classes.backButton}>Chord Progressions:</Typography>
+            <Typography variant="h6">Chord Progressions:</Typography>
             <BackButton
               variant="outlined"
               color="primary"

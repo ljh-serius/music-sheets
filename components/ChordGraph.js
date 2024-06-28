@@ -1,10 +1,12 @@
 import React, { useEffect, useRef } from 'react';
-import { DataSet, Network } from 'vis-network';
+import { Network } from "vis-network";
+import visData from "vis-data"
 
 const ChordGraph = ({ nodesData, edgesData, onNodeClick }) => {
     const containerRef = useRef(null);
 
     useEffect(() => {
+        const { DataSet } = visData
         const nodes = new DataSet(nodesData);
         const edges = new DataSet(edgesData);
 

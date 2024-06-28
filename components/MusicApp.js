@@ -21,14 +21,19 @@ import { CoPresent } from '@mui/icons-material';
 const Root = styled('div')({
   display: 'flex',
   flexDirection: 'column',
-  width: '65%',
   margin: '0 auto',
+  width: '80%', // Default width for mobile and tablet
+  '@media (min-width: 1024px)': { // Adjust the width for desktop (1024px and above)
+    width: '65%',
+  },
 });
 
 const FretboardContainer = styled('div')({
   width: '100%',
   overflowX: 'auto',
   maxWidth: '100vw',
+  marginTop: '20px',
+  marginBottom: '20px',
 });
 
 const ShadowyContainer = styled('div')({
@@ -38,15 +43,22 @@ const ShadowyContainer = styled('div')({
   justifyContent: 'space-around',
   alignItems: 'center',
   zIndex: 1000,
+  marginTop: '20px',
+  marginBottom: '20px',
 });
 
 const ButtonGroup = styled('div')({
   display: 'flex',
   justifyContent: 'center',
   gap: '8px',
+  marginTop: '20px',
+  marginBottom: '20px',
 });
 
-const ChordPressionDisplay = styled('div')({});
+const ChordPressionDisplay = styled('div')({
+  marginTop: '20px',
+  marginBottom: '20px',
+});
 
 const MusicApp = (props) => {
   const dispatch = useDispatch();
@@ -76,29 +88,28 @@ const MusicApp = (props) => {
     showAddMoreFretboardsButton,
     showFretboard,
     updateBoards,
-    display, keyIndex, scale, modeIndex, shape,
+    display,
+    keyIndex,
+    scale,
+    modeIndex,
+    shape,
   } = props;
 
   const updateBoardsCallback = useCallback(() => {
-    console.log("props",  {
-      display, keyIndex, scale, modeIndex, shape
-    });
-    console.log("selected fretboard ", selectedFretboard)
-
-    if (selectedFretboard?.id ) {
-      if(!isNaN(keyIndex)){
+    if (selectedFretboard?.id) {
+      if (!isNaN(keyIndex)) {
         dispatch(updateBoards(selectedFretboard.id, 'keySettings.scale', keyIndex));
       }
 
-      if(!isNaN(modeIndex)){
+      if (!isNaN(modeIndex)) {
         dispatch(updateBoards(selectedFretboard.id, 'keySettings.mode', modeIndex));
       }
 
-      if(scale){
+      if (scale) {
         dispatch(updateBoards(selectedFretboard.id, 'scaleSettings.scale', scale));
-        if(guitar.scales[scale].isModal && modeIndex >= 0){
+        if (guitar.scales[scale].isModal && modeIndex >= 0) {
           dispatch(updateBoards(selectedFretboard.id, 'modeSettings.mode', guitar.scales[scale].modes[modeIndex].name));
-          if(shape){
+          if (shape) {
             dispatch(updateBoards(selectedFretboard.id, 'modeSettings.shape', shape));
           }
         } else {
@@ -106,7 +117,7 @@ const MusicApp = (props) => {
         }
       }
     }
-  }, []);
+  }, [dispatch, selectedFretboard, keyIndex, modeIndex, scale, shape]);
 
   useEffect(() => {
     updateBoardsCallback();
@@ -144,12 +155,13 @@ const MusicApp = (props) => {
   const { choice } = selectedFretboard.generalSettings;
 
   const selectedKey = selectedFretboard.keySettings[choice];
-  const { selectedShape = shape } = selectedFretboard[choice + 'Settings'];
+  const selectedShape = selectedFretboard[choice + 'Settings'].shape;
   const { arppegio } = selectedFretboard.arppegioSettings;
   const { fret } = selectedFretboard.chordSettings;
   const { chord } = selectedFretboard.chordSettings;
   const { selectedScale = scale } = selectedFretboard.scaleSettings;
   const { mode } = selectedFretboard.modeSettings;
+
   const components = (
     <Root>
       {showAddMoreFretboardsButton && (
@@ -177,7 +189,6 @@ const MusicApp = (props) => {
               choice={choice}
               onCleanFretboard={cleanFretboard}
               selectedKey={isNaN(selectedKey) ? '' : selectedKey}
-              // onCopyLink={() => navigator.clipboard.writeText(window.location.href).then(() => alert("The link has been copied successfully."), () => alert("Oops, something went wrong. You can copy the link directly."))}
               onCopyLink={() => console.log('aaa')}
               selectedMode={mode || ''}
               selectedScale={selectedScale || ''}
@@ -229,7 +240,6 @@ const MusicApp = (props) => {
     </Root>
   );
 
-  
   return (
     <>
       {components}

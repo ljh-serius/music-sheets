@@ -12,7 +12,6 @@ const withFretboardState = (WrappedComponent) => {
         
         const { boards } = props;
 
-        console.log("boards", boards)
         const [selectedFretboardIndex, setSelectedFretboardIndex] = useState(0);
         const [selectedFretboard, setSelectedFretboard] = useState(boards[selectedFretboardIndex]);
         

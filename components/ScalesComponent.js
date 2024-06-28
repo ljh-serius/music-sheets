@@ -11,8 +11,6 @@ const Root = styled('div')({
 });
 
 const ScalesComponent = ({ display, keyIndex, scale, modeIndex, shape }) => {
-  
-  console.log("salamu allah alaykoum ", { display, keyIndex, scale, modeIndex, shape })
   return (
     <Root>
       <MusicApp

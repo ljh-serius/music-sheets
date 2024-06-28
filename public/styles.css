@@ -68,7 +68,6 @@
     margin-left: 25px;
 }
 
-
 .partitions .last-chord {
     margin-right: 25px;
 }
@@ -101,19 +100,19 @@
 }
 
 .root-note {
-    background-color: lightcoral;
+    background-color: purple;
 }
 
 .third-note {
-    background-color: lightyellow;
+    background-color: lightsalmon;
 }
 
 .fifth-note {
-    background-color: lightsteelblue;
+    background-color: lightgoldenrodyellow;
 }
 
 .seventh-note {
-    background-color: purple;
+    background-color: lightcoral;
 }
 
 .playing-note {

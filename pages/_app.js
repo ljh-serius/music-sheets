@@ -13,53 +13,75 @@ import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import Divider from '@mui/material/Divider';
 import Hidden from '@mui/material/Hidden';
-import { styled, } from '@mui/system';
-import Link from 'next/link'
+import Box from '@mui/material/Box';
+import { styled, useTheme } from '@mui/material/styles';
+import Link from 'next/link';
 import { createTheme, ThemeProvider } from '@mui/material';
-import '../public/styles.css';
-import { Open_Sans } from 'next/font/google'
+import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
+import ChevronRightIcon from '@mui/icons-material/ChevronRight';
+import { Open_Sans } from 'next/font/google';
 import { Provider } from 'react-redux';
-import store from '../redux/store'
+import store from '../redux/store';
 
-const inter = Open_Sans({ subsets: ['latin'],   weight: ["300", "400", "500", "700"],})
- 
+const inter = Open_Sans({ subsets: ['latin'], weight: ['300', '400', '500', '700'] });
+
 const theme = createTheme({
   typography: {
-    fontFamily: [
-      'Chilanka',
-      'cursive',
-    ].join(','),
-},});
-
-const Root = styled('div')({
-  display: 'flex',
-  flexDirection: 'column',
-  alignItems: 'center',
-  padding: '100px 0',
-  width: '80%',
-  margin: '0 auto'
+    fontFamily: ['Chilanka', 'cursive'].join(','),
+  },
 });
+
+const drawerWidth = 240;
+
+const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(({ theme, open }) => ({
+  flexGrow: 1,
+  padding: theme.spacing(3),
+  transition: theme.transitions.create('margin', {
+    easing: theme.transitions.easing.sharp,
+    duration: theme.transitions.duration.leavingScreen,
+  }),
+  ...(open && {
+    transition: theme.transitions.create('margin', {
+      easing: theme.transitions.easing.easeOut,
+      duration: theme.transitions.duration.enteringScreen,
+    }),
+    marginLeft: 0,
+  }),
+}));
+
+const AppBarStyled = styled(AppBar, {
+  shouldForwardProp: (prop) => prop !== 'open',
+})(({ theme, open }) => ({
+  transition: theme.transitions.create(['margin', 'width'], {
+    easing: theme.transitions.easing.sharp,
+    duration: theme.transitions.duration.leavingScreen,
+  }),
+  ...(open && {
+    width: '100%',
+    marginLeft: `${drawerWidth}px`,
+    transition: theme.transitions.create(['margin', 'width'], {
+      easing: theme.transitions.easing.easeOut,
+      duration: theme.transitions.duration.enteringScreen,
+    }),
+  }),
+}));
+
+const DrawerHeader = styled('div')(({ theme }) => ({
+  display: 'flex',
+  alignItems: 'center',
+  padding: theme.spacing(0, 1),
+  ...theme.mixins.toolbar,
+  justifyContent: 'flex-end',
+}));
 
 const Container = styled('div')({
-    width: '100%',
-});
-
-const StyledAppBar = styled(AppBar)({
-  display: 'flex',
-  justifyContent: 'space-between',
-  padding: 10
-});
-
-const MenuButton = styled(IconButton)({
-});
-
-const Title = styled(Typography)({
-  flexGrow: 1,
+  width: '100%',
 });
 
 const NavLinks = styled('div')({
   display: 'flex',
   textDecoration: 'none',
+  gap: '16px', // Add spacing between menu items
 });
 
 const StyledLink = styled(Link)({
@@ -68,7 +90,7 @@ const StyledLink = styled(Link)({
 });
 
 const DrawerContent = styled('div')({
-  width: 250,
+  width: drawerWidth,
 });
 
 const ToolbarContent = styled('div')({
@@ -77,31 +99,56 @@ const ToolbarContent = styled('div')({
   width: '100%',
 });
 
-const ToolbarTitle = styled(Button)({
-});
+const ToolbarTitle = styled(Button)({});
 
-function App({Component, pageProps}) {
-
+function App({ Component, pageProps }) {
+  const theme = useTheme();
   const [drawerOpen, setDrawerOpen] = useState(false);
 
   const handleDrawerToggle = () => {
     setDrawerOpen(!drawerOpen);
   };
 
+  const handleDrawerClose = () => {
+    setDrawerOpen(false);
+  };
+
   const drawer = (
     <DrawerContent>
+      <DrawerHeader>
+        <IconButton onClick={handleDrawerClose}>
+          {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
+        </IconButton>
+      </DrawerHeader>
+      <Divider />
       <List>
-        <Link href="/" onClick={handleDrawerToggle}>
-          <ListItemText primary="Play and Visualize" />
+        <Link href="/" passHref>
+          <ListItem button onClick={handleDrawerToggle}>
+            <ListItemText>
+              <Typography>Play and Visualize</Typography>
+            </ListItemText>
+          </ListItem>
         </Link>
-        <Link href="/compose" onClick={handleDrawerToggle}>
-          <ListItemText primary="Compose and Share" />
+        <Link href="/compose" passHref>
+          <ListItem button onClick={handleDrawerToggle}>
+            <ListItemText>
+              <Typography>Compose and Share</Typography>
+            </ListItemText>
+          </ListItem>
         </Link>
-        <Link href="/learn" onClick={handleDrawerToggle}>
-          <ListItemText primary="Learn Songs" />
+        <Link href="/learn" passHref>
+          <ListItem button onClick={handleDrawerToggle}>
+            <ListItemText>
+              <Typography>Learn Songs</Typography>
+            </ListItemText>
+          </ListItem>
         </Link>
-        <Link href="/circle" onClick={handleDrawerToggle}>
-          <ListItemText primary="The Circle Of Fifths" />
+        <Link href="/circle" passHref>
+          <ListItem button onClick={handleDrawerToggle}>
+            <ListItemText>
+              <Typography>The Circle Of Fifths</Typography>
+            </ListItemText>
+          </ListItem>
         </Link>
       </List>
       <Divider />
@@ -118,30 +165,25 @@ function App({Component, pageProps}) {
       `}</style>
       <Provider store={store}>
         <ThemeProvider theme={theme}>
-          <div className="container">
-            <Head>
-              <title>Fretty</title>
-              <meta name="description" content="Generated by create next app" />
-              <link rel="icon" href="/favicon.ico" />
-            </Head>
-          </div>
-          <Root>
+          <Box sx={{ display: 'flex' }}>
             <CssBaseline />
-            <StyledAppBar position="fixed">
+            <AppBarStyled position="fixed" open={drawerOpen}>
               <ToolbarContent>
-                <MenuButton
-                  edge="start"
+                <IconButton
                   color="inherit"
-                  aria-label="menu"
+                  aria-label="open drawer"
                   onClick={handleDrawerToggle}
+                  edge="end"
+                  sx={{ mr: 2, ...(drawerOpen && { display: 'none' }) }}
                 >
                   <MenuIcon />
-                </MenuButton>
+                </IconButton>
                 <ToolbarTitle variant="secondary" startIcon={<FavoriteIcon />}>
-                  <Title variant="h6">
+                  <Typography variant="h6" noWrap component="div">
                     Fretty
-                  </Title>
+                  </Typography>
                 </ToolbarTitle>
+                <Hidden smDown>
                   <NavLinks>
                     <StyledLink href="/">
                       <Button color="inherit">Play and Visualize</Button>
@@ -156,10 +198,20 @@ function App({Component, pageProps}) {
                       <Button color="inherit">The Circle Of Fifths</Button>
                     </StyledLink>
                   </NavLinks>
+                </Hidden>
               </ToolbarContent>
-            </StyledAppBar>
+            </AppBarStyled>
             <nav>
+              <Hidden mdUp>
                 <Drawer
+                  sx={{
+                    width: drawerWidth,
+                    flexShrink: 0,
+                    '& .MuiDrawer-paper': {
+                      width: drawerWidth,
+                      boxSizing: 'border-box',
+                    },
+                  }}
                   variant="temporary"
                   open={drawerOpen}
                   onClose={handleDrawerToggle}
@@ -169,15 +221,19 @@ function App({Component, pageProps}) {
                 >
                   {drawer}
                 </Drawer>
+              </Hidden>
             </nav>
-            <Container>
+            <Main open={drawerOpen}>
+              <DrawerHeader />
+              <Container>
                 <Component {...pageProps} />
-            </Container>
-          </Root>
+              </Container>
+            </Main>
+          </Box>
         </ThemeProvider>
       </Provider>
     </>
-  )
+  );
 }
 
 export default App;

@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
-import { FormControl, InputLabel, Select, MenuItem, Button, Grid } from '@mui/material';
+import { FormControl, Button, Grid } from '@mui/material';
 import { styled } from '@mui/system';
 import ChordGraph from './ChordGraph';
-import guitar from '../config/guitar'; // Import your guitar configuration
 import PropTypes from 'prop-types';
 
 const Root = styled('div')({
@@ -30,20 +29,10 @@ const initialRomanNumerals = [
 ];
 
 const ChordComposer = ({ addChordToProgression, saveProgression, playProgression }) => {
-  const [selectedKey, setSelectedKey] = useState('');
-  const [selectedQuality, setSelectedQuality] = useState('major');
   const [chordPath, setChordPath] = useState([]);
   const [nodes, setNodes] = useState([]);
   const [edges, setEdges] = useState([]);
   const [showInitial, setShowInitial] = useState(true);
-
-  const handleKeyChange = (event) => {
-    setSelectedKey(event.target.value);
-  };
-
-  const handleQualityChange = (event) => {
-    setSelectedQuality(event.target.value);
-  };
 
   const handleNodeClick = (nodeId) => {
     const chosenRoman = nodeId.split('-')[1];
@@ -51,7 +40,7 @@ const ChordComposer = ({ addChordToProgression, saveProgression, playProgression
     const newNodes = initialRomanNumerals
       .filter((numeral) => numeral !== chosenRoman)
       .map((roman, index) => ({
-        id: `${selectedKey}-${roman}-${selectedQuality}-${nodes.length + index}`,
+        id: `$${roman}-${nodes.length + index}-${chordPath.join('-')}`,
         label: roman,
         group: 'roman',
         x: Math.random() * 400,
@@ -70,18 +59,8 @@ const ChordComposer = ({ addChordToProgression, saveProgression, playProgression
     setShowInitial(false);
   };
 
-  const handleSaveProgression = () => {
-    chordPath.forEach((chord) => {
-      addChordToProgression({
-        keySignature: selectedKey,
-        chord: chord.label,
-      });
-    });
-    saveProgression();
-  };
-
   const initialNodes = initialRomanNumerals.map((roman, index) => ({
-    id: `${selectedKey}-${roman}-${selectedQuality}-${index}`,
+    id: `${roman}-${index}`,
     label: roman,
     group: 'roman',
     x: Math.random() * 400,
@@ -98,31 +77,10 @@ const ChordComposer = ({ addChordToProgression, saveProgression, playProgression
               ))}
             </ProgressionContainer>
           </Grid>
-          <Grid item xs={12}>
-            <StyledFormControl>
-              <InputLabel>Key</InputLabel>
-              <Select value={selectedKey} onChange={handleKeyChange}>
-                {guitar.notes.sharps.map((note, index) => (
-                  <MenuItem key={index} value={note}>{note}</MenuItem>
-                ))}
-              </Select>
-            </StyledFormControl>
-          </Grid>
-          <Grid item xs={12}>
-            <StyledFormControl>
-              <InputLabel>Quality</InputLabel>
-              <Select value={selectedQuality} onChange={handleQualityChange}>
-                <MenuItem value="major">Major</MenuItem>
-                <MenuItem value="minor">Minor</MenuItem>
-              </Select>
-            </StyledFormControl>
-          </Grid>
         </Grid>
         <GraphContainer>
           <ChordGraph nodesData={showInitial ? initialNodes : nodes} edgesData={edges} onNodeClick={handleNodeClick} />
         </GraphContainer>
-        <Button onClick={handleSaveProgression}>Save Progression</Button>
-        <Button onClick={() => playProgression(chordPath)}>Play Progression</Button>
       </Root>
   );
 };
