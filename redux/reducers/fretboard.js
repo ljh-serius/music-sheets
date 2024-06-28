@@ -50,7 +50,6 @@ const fretboard = (state = initialState, action) => {
           ),
         };
       } else {
-        console.log("newComponents", newComponents)
         return {
           ...state,
           components: newComponents.map((fretboard) =>

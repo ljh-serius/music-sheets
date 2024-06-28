@@ -48,6 +48,7 @@ const FretboardControls = ({
 }) => {
   const capitalize = (s) => s.charAt(0).toUpperCase() + s.slice(1);
 
+  console.log(selectedKey)
   const handleButtonClick = (newChoice) => {
     handleChoiceChange(newChoice);
   };
@@ -261,6 +262,7 @@ const FretboardControls = ({
 };
 
 const KeySelector = ({ choice, selectedKey, onElementChange }) => {
+  console.log("selected key", selectedKey)
   return (
     choice && (
       <SelectContainer>
@@ -268,7 +270,7 @@ const KeySelector = ({ choice, selectedKey, onElementChange }) => {
         <Select
           labelId="key-signature-label"
           id="key-signature-select"
-          value={selectedKey || ''} // Ensure default value
+          value={selectedKey} // Ensure default value
           onChange={(e) => onElementChange(e.target.value, 'key')}
           displayEmpty
         >
@@ -288,9 +290,9 @@ FretboardControls.propTypes = {
   arppegiosNames: PropTypes.array.isRequired,
   choice: PropTypes.string.isRequired,
   onCleanFretboard: PropTypes.func.isRequired,
-  selectedKey: PropTypes.number,
+  selectedKey: PropTypes.any,
   onCopyLink: PropTypes.func.isRequired,
-  selectedMode: PropTypes.number,
+  selectedMode: PropTypes.any,
   selectedScale: PropTypes.string,
   selectedChord: PropTypes.string,
   selectedShape: PropTypes.string,

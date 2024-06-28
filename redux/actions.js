@@ -40,6 +40,7 @@ export function newFretboard(numberOfStrings = 6, numberOfFrets = 22, tuning = [
       scale: '',
       formula: [],
       notes: [],
+      shape: '',
       intervals: [],
       fretboard: newLayout(numberOfStrings, numberOfFrets, tuning)
     },
@@ -48,6 +49,7 @@ export function newFretboard(numberOfStrings = 6, numberOfFrets = 22, tuning = [
       mode: '',
       notes: [],
       intervals: [],
+      shape: '',
       formula: [],
       fretboard: newLayout(numberOfStrings, numberOfFrets, tuning)
     },
@@ -57,6 +59,7 @@ export function newFretboard(numberOfStrings = 6, numberOfFrets = 22, tuning = [
       notes: [],
       intervals: [],
       formula: [],
+      shape: '',
       fretboard: newLayout(numberOfStrings, numberOfFrets, tuning)
     },
 

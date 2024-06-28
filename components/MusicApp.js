@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { IconButton } from '@mui/material';
 import { styled } from '@mui/system';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
@@ -15,6 +15,8 @@ import { connect } from 'react-redux';
 import { addFretboard, updateStateProperty, setProgression, setProgressionKey } from '../redux/actions';
 import guitar from '../config/guitar';
 import SongsSelector from '../components/SongsSelector';
+import { useDispatch } from 'react-redux';
+import { CoPresent } from '@mui/icons-material';
 
 const Root = styled('div')({
   display: 'flex',
@@ -47,7 +49,8 @@ const ButtonGroup = styled('div')({
 const ChordPressionDisplay = styled('div')({});
 
 const MusicApp = (props) => {
-  const router = useRouter();
+  const dispatch = useDispatch();
+
   const {
     boards,
     selectedFretboard,
@@ -72,7 +75,42 @@ const MusicApp = (props) => {
     showSongsSelector,
     showAddMoreFretboardsButton,
     showFretboard,
+    updateBoards,
+    display, keyIndex, scale, modeIndex, shape,
   } = props;
+
+  const updateBoardsCallback = useCallback(() => {
+    console.log("props",  {
+      display, keyIndex, scale, modeIndex, shape
+    });
+    console.log("selected fretboard ", selectedFretboard)
+
+    if (selectedFretboard?.id ) {
+      if(!isNaN(keyIndex)){
+        dispatch(updateBoards(selectedFretboard.id, 'keySettings.scale', keyIndex));
+      }
+
+      if(!isNaN(modeIndex)){
+        dispatch(updateBoards(selectedFretboard.id, 'keySettings.mode', modeIndex));
+      }
+
+      if(scale){
+        dispatch(updateBoards(selectedFretboard.id, 'scaleSettings.scale', scale));
+        if(guitar.scales[scale].isModal && modeIndex >= 0){
+          dispatch(updateBoards(selectedFretboard.id, 'modeSettings.mode', guitar.scales[scale].modes[modeIndex].name));
+          if(shape){
+            dispatch(updateBoards(selectedFretboard.id, 'modeSettings.shape', shape));
+          }
+        } else {
+          dispatch(updateBoards(selectedFretboard.id, 'scaleSettings.shape', shape));
+        }
+      }
+    }
+  }, []);
+
+  useEffect(() => {
+    updateBoardsCallback();
+  }, [updateBoardsCallback]);
 
   if (!selectedFretboard) {
     return <div>Loading...</div>;
@@ -103,6 +141,15 @@ const MusicApp = (props) => {
   const currentScale = selectedFretboardIndex >= 0 && selectedFretboard ? guitar.scales[selectedFretboard.scaleSettings.scale] : 'major';
   const scaleModes = currentScale?.isModal ? currentScale.modes : [];
 
+  const { choice } = selectedFretboard.generalSettings;
+
+  const selectedKey = selectedFretboard.keySettings[choice];
+  const { selectedShape = shape } = selectedFretboard[choice + 'Settings'];
+  const { arppegio } = selectedFretboard.arppegioSettings;
+  const { fret } = selectedFretboard.chordSettings;
+  const { chord } = selectedFretboard.chordSettings;
+  const { selectedScale = scale } = selectedFretboard.scaleSettings;
+  const { mode } = selectedFretboard.modeSettings;
   const components = (
     <Root>
       {showAddMoreFretboardsButton && (
@@ -127,16 +174,17 @@ const MusicApp = (props) => {
               handleChoiceChange={handleChoiceChange}
               scaleModes={scaleModes}
               arppegiosNames={Object.keys(guitar.arppegios)}
-              choice={selectedFretboard.generalSettings.choice}
+              choice={choice}
               onCleanFretboard={cleanFretboard}
-              selectedKey={parseInt(selectedFretboard.keySettings[selectedFretboard.generalSettings.choice])}
-              onCopyLink={() => navigator.clipboard.writeText(window.location.href).then(() => alert("The link has been copied successfully."), () => alert("Oops, something went wrong. You can copy the link directly."))}
-              selectedMode={parseInt(selectedFretboard.modeSettings.mode || 0)}
-              selectedScale={selectedFretboard.scaleSettings.scale || ''}
-              selectedChord={selectedFretboard.chordSettings.chord || ''}
-              selectedShape={selectedFretboard[selectedFretboard.generalSettings.choice + 'Settings'].shape || ''}
-              selectedArppegio={selectedFretboard.arppegioSettings.arppegio}
-              selectedFret={selectedFretboard.chordSettings.fret}
+              selectedKey={isNaN(selectedKey) ? '' : selectedKey}
+              // onCopyLink={() => navigator.clipboard.writeText(window.location.href).then(() => alert("The link has been copied successfully."), () => alert("Oops, something went wrong. You can copy the link directly."))}
+              onCopyLink={() => console.log('aaa')}
+              selectedMode={mode || ''}
+              selectedScale={selectedScale || ''}
+              selectedChord={chord || ''}
+              selectedShape={selectedShape || ''}
+              selectedArppegio={arppegio}
+              selectedFret={fret}
               addChordToProgression={addChordToProgression}
               saveProgression={saveProgression}
               playProgression={playProgression}
@@ -181,6 +229,7 @@ const MusicApp = (props) => {
     </Root>
   );
 
+  
   return (
     <>
       {components}
@@ -189,16 +238,17 @@ const MusicApp = (props) => {
 };
 
 const mapStateToProps = (state, ownProps) => {
+  console.log('own props', ownProps)
   const filteredBoards = state.fretboard.components.filter(board => board.generalSettings.page === ownProps.display);
   return {
     boards: filteredBoards,
-    progressions: state.partitions
+    progressions: state.partitions,
   };
 };
 
 const mapDispatchToProps = {
   addFretboard,
-  updateStateProperty,
+  updateBoards: updateStateProperty,
   setProgression,
   setProgressionKey,
 };

@@ -9,22 +9,16 @@ const defaultTuning = [4, 11, 7, 2, 9, 4];
 const withFretboardState = (WrappedComponent) => {
     return (props) => {
         const dispatch = useDispatch();
+        
         const { boards } = props;
-        
-        const [selectedFretboardIndex, setSelectedFretboardIndex] = useState(-1);
-        const [selectedFretboard, setSelectedFretboard] = useState(null);
 
-        useEffect(() => {
-            if (boards && boards.length > 0 && selectedFretboardIndex === -1) {
-                setSelectedFretboardIndex(0);
-            }
-        }, [boards]);
+        console.log("boards", boards)
+        const [selectedFretboardIndex, setSelectedFretboardIndex] = useState(0);
+        const [selectedFretboard, setSelectedFretboard] = useState(boards[selectedFretboardIndex]);
         
         useEffect(() => {
-            if (selectedFretboardIndex >= 0 && boards.length > 0) {
-                setSelectedFretboard(boards[selectedFretboardIndex]);
-            }
-        }, [selectedFretboardIndex, boards]);
+            setSelectedFretboard(boards[selectedFretboardIndex])
+        }, [boards]);
 
         useEffect(() => {
             const restoredChordProgression = JSON.parse(localStorage.getItem('progression'));
@@ -32,7 +26,6 @@ const withFretboardState = (WrappedComponent) => {
                 dispatch(setProgression(restoredChordProgression));
             }
         }, [dispatch]);
-        
         
         const handleFretboardSelect = (index) => {
             setSelectedFretboardIndex(index);
@@ -46,7 +39,7 @@ const withFretboardState = (WrappedComponent) => {
         }, [dispatch]);
 
         useEffect(() => {
-            if (selectedFretboardIndex === -1) return;
+            if (selectedFretboardIndex === -1 || !selectedFretboard) return;
 
             const { chordSettings, keySettings, scaleSettings, generalSettings, modeSettings, arppegioSettings } = selectedFretboard;
             const choice = generalSettings.choice;
@@ -323,6 +316,7 @@ const withFretboardState = (WrappedComponent) => {
                 selectedFretboardIndex={selectedFretboardIndex}
                 setSelectedFretboardIndex={setSelectedFretboardIndex}
                 getScaleNotes={getScaleNotes}
+                boards={boards}
             />
         );
     };

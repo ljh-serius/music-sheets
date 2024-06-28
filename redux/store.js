@@ -1,9 +1,7 @@
 import rootReducer from "./reducers/index";
-import { configureStore } from '@reduxjs/toolkit';
-import { createWrapper } from 'next-redux-wrapper';
+import { createStore, applyMiddleware, compose } from 'redux';
 
-const makeStore = () => configureStore({
-  reducer: rootReducer,
-});
-
-export const wrapper = createWrapper(makeStore);
+// const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+export default createStore(rootReducer, /* preloadedState, */ compose(
+    applyMiddleware()
+  ));
