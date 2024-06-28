@@ -1,6 +1,6 @@
 // pages/references/[key]/arppegios/[arppegio]/[quality]/[shape]/index.js
-import ArpeggioComponent from '../../../../../../../components/ArppegioComponent';
-import guitar from '../../../../../../../config/guitar';
+import ArpeggioComponent from '../../../../../../components/ArppegioComponent';
+import guitar from '../../../../../../config/guitar';
 
 export const getStaticPaths = async () => {
     const { notes, arppegios, shapes } = guitar;

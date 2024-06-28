@@ -1,6 +1,6 @@
 //pages\references\[key]\scales\[scale]\single\[shape]\index.js
-import ScaleComponent from '../../../../../../../../components/ScaleComponent';
-import guitar from '../../../../../../../../config/guitar';
+import ScaleComponent from '../../../../../../components/ScaleComponent';
+import guitar from '../../../../../../config/guitar';
 
 export const getStaticPaths = async () => {
     const { notes, scales, shapes } = guitar;
@@ -9,9 +9,7 @@ export const getStaticPaths = async () => {
     notes.sharps.forEach((key) => {
         Object.keys(scales).forEach((scaleKey) => {
             const scale = scales[scaleKey];
-            shapes.names.forEach((shape) => {
-                paths.push({ params: { key: key, scale: scaleKey, shape: shape } });
-            });
+            paths.push({ params: { key: key, scale: scaleKey } });
         });
     });
 
@@ -19,20 +17,18 @@ export const getStaticPaths = async () => {
 };
 
 export const getStaticProps = async ({ params }) => {
-    const { key, scale, shape } = params;
+    const { key, scale } = params;
 
     const keyIndex = guitar.notes.sharps.indexOf(key);
     const modeIndex = -1;
-
-    const validShape = shape || 'C';
 
     return {
         props: {
             keyIndex,
             scale: scale,
             modeIndex,
-            shape: validShape,
-            board: 'references', // Ensure display is provided
+            board: 'references', 
+            shape: ''
         },
     };
 };

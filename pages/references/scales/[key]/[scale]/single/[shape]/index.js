@@ -9,7 +9,9 @@ export const getStaticPaths = async () => {
     notes.sharps.forEach((key) => {
         Object.keys(scales).forEach((scaleKey) => {
             const scale = scales[scaleKey];
-            paths.push({ params: { key: key, scale: scaleKey } });
+            shapes.names.forEach((shape) => {
+                paths.push({ params: { key: key, scale: scaleKey, shape: shape } });
+            });
         });
     });
 
@@ -17,18 +19,20 @@ export const getStaticPaths = async () => {
 };
 
 export const getStaticProps = async ({ params }) => {
-    const { key, scale } = params;
+    const { key, scale, shape } = params;
 
     const keyIndex = guitar.notes.sharps.indexOf(key);
     const modeIndex = -1;
+
+    const validShape = shape || 'C';
 
     return {
         props: {
             keyIndex,
             scale: scale,
             modeIndex,
-            board: 'references', 
-            shape: ''
+            shape: validShape,
+            board: 'references', // Ensure display is provided
         },
     };
 };

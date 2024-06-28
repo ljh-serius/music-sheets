@@ -1,5 +1,5 @@
 import React from 'react';
-import MusicApp from '../../../components/MusicApp';
+import MusicApp from '../../components/MusicApp';
 
 const LearnSongs = () => {
 

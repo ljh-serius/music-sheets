@@ -1,6 +1,6 @@
 // pages\references\[key]\scales\[scale]\modal\[mode]\[shape]\index.js
-import ScaleComponent from '../../../../../../../../../components/ScaleComponent';
-import guitar from '../../../../../../../../../config/guitar';
+import ScaleComponent from '../../../../../../components/ScaleComponent';
+import guitar from '../../../../../../config/guitar';
 
 export const getStaticPaths = async () => {
   const { notes, scales, shapes } = guitar;
@@ -11,9 +11,7 @@ export const getStaticPaths = async () => {
       const scale = scales[scaleKey];
       if (scale.isModal) {
         scale.modes.forEach((mode) => {
-          shapes.names.forEach((shape) => {
-            paths.push({ params: { key: key, scale: scaleKey, mode: mode.name.toLowerCase().replace(' ', '-'), shape: shape } });
-          });
+            paths.push({ params: { key: key, scale: scaleKey, mode: mode.name.toLowerCase().replace(' ', '-')} });
         });
       }
     });
@@ -23,7 +21,8 @@ export const getStaticPaths = async () => {
 };
 
 export const getStaticProps = async ({ params }) => {
-  const { key, scale, mode, shape } = params;
+  const { key, scale, mode } = params;
+
   const keyIndex = guitar.notes.sharps.indexOf(key);
   const scaleObj = guitar.scales[scale];
   let modeIndex = -1;
@@ -32,15 +31,14 @@ export const getStaticProps = async ({ params }) => {
   }
 
   const validMode = modeIndex >= 0 ? modeIndex : 0;
-  const validShape = shape || 'C';
 
   return {
     props: {
       keyIndex,
       scale: scale,
       modeIndex: validMode,
-      shape: validShape,
-      board: 'references'
+      board: 'references',
+      shape: ''
     },
   };
 };

@@ -11,7 +11,9 @@ export const getStaticPaths = async () => {
       const scale = scales[scaleKey];
       if (scale.isModal) {
         scale.modes.forEach((mode) => {
-            paths.push({ params: { key: key, scale: scaleKey, mode: mode.name.toLowerCase().replace(' ', '-')} });
+          shapes.names.forEach((shape) => {
+            paths.push({ params: { key: key, scale: scaleKey, mode: mode.name.toLowerCase().replace(' ', '-'), shape: shape } });
+          });
         });
       }
     });
@@ -21,8 +23,7 @@ export const getStaticPaths = async () => {
 };
 
 export const getStaticProps = async ({ params }) => {
-  const { key, scale, mode } = params;
-
+  const { key, scale, mode, shape } = params;
   const keyIndex = guitar.notes.sharps.indexOf(key);
   const scaleObj = guitar.scales[scale];
   let modeIndex = -1;
@@ -31,14 +32,15 @@ export const getStaticProps = async ({ params }) => {
   }
 
   const validMode = modeIndex >= 0 ? modeIndex : 0;
+  const validShape = shape || 'C';
 
   return {
     props: {
       keyIndex,
       scale: scale,
       modeIndex: validMode,
-      board: 'references',
-      shape: ''
+      shape: validShape,
+      board: 'references'
     },
   };
 };
