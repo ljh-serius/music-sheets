@@ -21,10 +21,6 @@ export const getStaticPaths = async () => {
         }
     });
 
-    // Write the paths object to a log file
-    const logFilePath = path.join(process.cwd(), 'paths-arppegios.json');
-    fs.writeFileSync(logFilePath, JSON.stringify(paths, null, 2));
-
     return { paths, fallback: false };
 };
 
@@ -34,6 +30,22 @@ export const getStaticProps = async ({ params }) => {
     const keyIndex = guitar.notes.sharps.indexOf(key);
     const validShape = shape || 'C';
 
+    // Generate the title based on the params
+    const title = `Arppegio: ${guitar.arppegios[arppegio].name} in ${key} (Shape: ${shape})`;
+
+    // Define the path to the JSON file
+    const fileName = `article_${title.replace(/[^\w\s]/gi, '').replace(/\s/g, '_')}.json`;
+    const filePath = path.join(process.cwd(), 'articles', fileName);
+    
+    // Read the content of the JSON file
+    let articleContent = {};
+    try {
+        const fileContent = await fs.promises.readFile(filePath, 'utf-8');
+        articleContent = JSON.parse(fileContent);
+    } catch (error) {
+        console.error(`Error reading file ${filePath}:`, error);
+    }
+    
     return {
         props: {
             keyIndex,

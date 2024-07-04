@@ -19,7 +19,6 @@ const References = ({ elements = [] }) => {
 
     return (
         <div>
-            test
             <nav aria-label="breadcrumb">
                 <ol className="breadcrumb">
                     {breadcrumb.map((crumb, index) => (

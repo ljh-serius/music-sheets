@@ -2,6 +2,7 @@
 import React from 'react';
 import MusicApp from './MusicApp'; // Adjust the path if needed
 import { styled } from '@mui/system';
+import ArticleCard from './ArticleCard'; // Adjust the path if needed
 
 const Root = styled('div')({
   display: 'flex',
@@ -10,7 +11,7 @@ const Root = styled('div')({
   padding: '100px 0',
 });
 
-const ScaleComponent = ({ board, keyIndex, scale, modeIndex, shape }) => {
+const ScaleComponent = ({ board, keyIndex, scale, modeIndex, shape, articleContent }) => {
   return (
     <Root>
       <MusicApp
@@ -27,6 +28,7 @@ const ScaleComponent = ({ board, keyIndex, scale, modeIndex, shape }) => {
         showProgressor={false}
         showSongsSelector={false}
       />
+      <ArticleCard article={articleContent}></ArticleCard>
     </Root>
   );
 };

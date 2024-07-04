@@ -1,5 +1,6 @@
 import React from 'react';
 import MusicApp from '../../components/MusicApp';
+import Head from 'next/head';
 
 const ComposeAndShare = () => {
   return (
@@ -9,7 +10,7 @@ const ComposeAndShare = () => {
         showFretboardControls={false} 
         showCircleOfFifths={false} 
         showFretboard={true} 
-        showChordComposer={true} 
+        showChordComposer={false} 
         showProgressor={false} />
     </div>
   );

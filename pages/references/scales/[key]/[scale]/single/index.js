@@ -1,4 +1,5 @@
-//pages\references\[key]\scales\[scale]\single\[shape]\index.js
+import fs from 'fs';
+import path from 'path';
 import ScaleComponent from '../../../../../../components/ScaleComponent';
 import guitar from '../../../../../../config/guitar';
 
@@ -9,7 +10,11 @@ export const getStaticPaths = async () => {
     notes.sharps.forEach((key) => {
         Object.keys(scales).forEach((scaleKey) => {
             const scale = scales[scaleKey];
-            paths.push({ params: { key: key, scale: scaleKey } });
+            if (!scale.isModal) {
+                shapes.names.forEach((shape) => {
+                    paths.push({ params: { key: key, scale: scaleKey, shape: shape } });
+                });
+            }
         });
     });
 
@@ -17,21 +22,37 @@ export const getStaticPaths = async () => {
 };
 
 export const getStaticProps = async ({ params }) => {
-    const { key, scale } = params;
+    const { key, scale, shape } = params;
 
     const keyIndex = guitar.notes.sharps.indexOf(key);
-    const modeIndex = -1;
+    const scaleObj = guitar.scales[scale];
+
+    // Generate the title based on the params
+    const title = `Scale ${scaleObj.name} in ${key} (Single, Shape: ${shape})`;
+
+    // Define the path to the JSON file
+    const fileName = `article_${title.replace(/[^\w\s]/gi, '').replace(/\s/g, '_')}.json`;
+    const filePath = path.join(process.cwd(), 'articles', fileName);
+    
+    // Read the content of the JSON file
+    let articleContent = {};
+    try {
+        const fileContent = await fs.promises.readFile(filePath, 'utf-8');
+        articleContent = JSON.parse(fileContent);
+    } catch (error) {
+        console.error(`Error reading file ${filePath}:`, error);
+    }
 
     return {
         props: {
             keyIndex,
             scale: scale,
-            modeIndex,
-            board: 'references', 
-            shape: ''
+            modeIndex: -1,
+            shape: shape,
+            board: 'references',
+            articleContent,  // Pass the content of the article as props
         },
     };
 };
-
 
 export default ScaleComponent;

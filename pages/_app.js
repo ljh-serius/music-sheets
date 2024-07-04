@@ -1,4 +1,3 @@
-import Head from 'next/head';
 import React, { useState } from 'react';
 import AppBar from '@mui/material/AppBar';
 import Typography from '@mui/material/Typography';
