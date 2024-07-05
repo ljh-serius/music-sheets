@@ -3,6 +3,7 @@ import React from 'react';
 import MusicApp from './MusicApp'; // Adjust the path if needed
 import { styled } from '@mui/system';
 import ArticleCard from './ArticleCard'; // Adjust the path if needed
+import Meta from './ReferencesMeta';
 
 const Root = styled('div')({
   display: 'flex',
@@ -14,6 +15,7 @@ const Root = styled('div')({
 const ScaleComponent = ({ board, keyIndex, scale, modeIndex, shape, articleContent }) => {
   return (
     <Root>
+      <Meta title={articleContent.title}></Meta>
       <MusicApp
         display="scale"
         board={board}

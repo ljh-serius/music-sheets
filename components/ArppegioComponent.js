@@ -2,6 +2,7 @@ import React from 'react';
 import MusicApp from './MusicApp'; // Adjust the path if needed
 import { styled } from '@mui/system';
 import ArticleCard from './ArticleCard'; // Adjust the path if needed
+import Meta from './ReferencesMeta';
 
 const Root = styled('div')({
   display: 'flex',
@@ -14,7 +15,8 @@ const Root = styled('div')({
 const ArppegioComponent = ({ board, keyIndex, quality, shape, articleContent}) => {
   return (
     <Root>
-      <MusicApp
+        <Meta title={articleContent.title}></Meta>
+        <MusicApp
         display="arppegio"
         board={board}
         keyIndex={keyIndex}

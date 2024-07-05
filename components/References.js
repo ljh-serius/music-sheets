@@ -1,6 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import Meta from './ReferencesMeta';
 
 const References = ({ elements = [] }) => {
     const router = useRouter();
@@ -19,6 +20,7 @@ const References = ({ elements = [] }) => {
 
     return (
         <div>
+            <Meta title={'References'}></Meta>
             <nav aria-label="breadcrumb">
                 <ol className="breadcrumb">
                     {breadcrumb.map((crumb, index) => (

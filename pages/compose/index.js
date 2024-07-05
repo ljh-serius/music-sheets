@@ -1,10 +1,11 @@
 import React from 'react';
 import MusicApp from '../../components/MusicApp';
-import Head from 'next/head';
+import Meta from '../../components/ReferencesMeta';
 
 const ComposeAndShare = () => {
   return (
     <div>
+      <Meta title={'Compose And Share Music'}></Meta>
       <MusicApp 
         board="compose"
         showFretboardControls={false} 
