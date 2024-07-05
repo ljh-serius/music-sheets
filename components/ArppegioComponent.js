@@ -8,7 +8,6 @@ const Root = styled('div')({
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',
-  padding: '100px 0',
 });
 
 

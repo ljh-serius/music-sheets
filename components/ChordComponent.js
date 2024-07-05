@@ -9,7 +9,6 @@ const Root = styled('div')({
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',
-  padding: '100px 0',
 });
 
 const ChordComponent = ({ board, keyIndex, quality, shape, articleContent}) => {
