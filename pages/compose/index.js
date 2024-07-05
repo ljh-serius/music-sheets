@@ -11,7 +11,7 @@ const ComposeAndShare = () => {
         showFretboardControls={false} 
         showCircleOfFifths={false} 
         showFretboard={true} 
-        showChordComposer={false} 
+        showChordComposer={true} 
         showProgressor={false} />
     </div>
   );

@@ -35,12 +35,12 @@ const ChordComposer = ({ addChordToProgression, saveProgression, playProgression
   const [showInitial, setShowInitial] = useState(true);
 
   const handleNodeClick = (nodeId) => {
-    const chosenRoman = nodeId.split('-')[1];
+    const chosenRoman = nodeId.split('-')[0];
 
     const newNodes = initialRomanNumerals
       .filter((numeral) => numeral !== chosenRoman)
       .map((roman, index) => ({
-        id: `$${roman}-${nodes.length + index}-${chordPath.join('-')}`,
+        id: `${roman}-${nodes.length + index}-${chordPath.join('-')}`,
         label: roman,
         group: 'roman',
         x: Math.random() * 400,
