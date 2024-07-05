@@ -25,6 +25,7 @@ export const getStaticPaths = async () => {
 
 export const getStaticProps = async ({ params }) => {
   const { key, scale, mode, shape } = params;
+  const decodedKey = decodeURIComponent(key);
 
   const keyIndex = guitar.notes.sharps.indexOf(key);
   const scaleObj = guitar.scales[scale];
@@ -37,10 +38,10 @@ export const getStaticProps = async ({ params }) => {
   const validShape = shape || 'C';
 
   // Generate the title based on the params
-  const title = `Scale: ${scaleObj.name} in ${key} (Mode: ${scaleObj.modes[validMode].name}, Shape: ${validShape})`;
+  const title = `Scale ${scaleObj.name} in ${decodedKey} Mode ${scaleObj.modes[validMode].name}, Shape: ${validShape})`;
 
   // Define the path to the JSON file
-  const fileName = `article_${title.replace(/[^\w\s]/gi, '').replace(/\s/g, '_')}.json`;
+  const fileName = `article_${title.replace(/[^\w\s#]/gi, '').replace(/\s+/g, '_')}.json`;
   const filePath = path.join(process.cwd(), 'articles', fileName);
   
   // Read the content of the JSON file

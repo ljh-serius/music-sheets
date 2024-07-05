@@ -12,7 +12,7 @@ export const getStaticPaths = async () => {
             const scale = scales[scaleKey];
             if (!scale.isModal) {
                 shapes.names.forEach((shape) => {
-                    paths.push({ params: { key: key, scale: scaleKey, shape: shape } });
+                    paths.push({ params: { key: key, scale: scaleKey } });
                 });
             }
         });
@@ -22,16 +22,17 @@ export const getStaticPaths = async () => {
 };
 
 export const getStaticProps = async ({ params }) => {
-    const { key, scale, shape } = params;
+    const { key, scale } = params;
+    const decodedKey = decodeURIComponent(key);
 
     const keyIndex = guitar.notes.sharps.indexOf(key);
     const scaleObj = guitar.scales[scale];
 
     // Generate the title based on the params
-    const title = `Scale ${scaleObj.name} in ${key} (Single, Shape: ${shape})`;
+    const title = `Scale ${scaleObj.name} in ${decodedKey} Single`;
 
     // Define the path to the JSON file
-    const fileName = `article_${title.replace(/[^\w\s]/gi, '').replace(/\s/g, '_')}.json`;
+    const fileName = `article_${title.replace(/[^\w\s#]/gi, '').replace(/\s+/g, '_')}.json`;
     const filePath = path.join(process.cwd(), 'articles', fileName);
     
     // Read the content of the JSON file
@@ -48,7 +49,7 @@ export const getStaticProps = async ({ params }) => {
             keyIndex,
             scale: scale,
             modeIndex: -1,
-            shape: shape,
+            shape: '',
             board: 'references',
             articleContent,  // Pass the content of the article as props
         },

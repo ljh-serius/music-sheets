@@ -24,14 +24,15 @@ export const getStaticPaths = async () => {
 export const getStaticProps = async ({ params }) => {
     const { key, arppegio } = params;
     const decodedArppegio = decodeURIComponent(arppegio);
+    const decodedKey = decodeURIComponent(key);
 
     const keyIndex = guitar.notes.sharps.indexOf(key);
 
     // Generate the title based on the params
-    const title = `Arpeggio ${guitar.arppegios[decodedArppegio].name} in ${key}`;
+    const title = `Arpeggio ${guitar.arppegios[decodedArppegio].name} in ${decodedKey}`;
 
     // Define the path to the JSON file
-    const fileName = `article_${title.replace(/[^\w\s]/gi, '').replace(/\s/g, '_')}.json`;
+    const fileName = `article_${title.replace(/[^\w\s#]/gi, '').replace(/\s+/g, '_')}.json`;
     const filePath = path.join(process.cwd(), 'articles', fileName);
     
     // Read the content of the JSON file
@@ -49,7 +50,7 @@ export const getStaticProps = async ({ params }) => {
             quality: decodedArppegio,
             shape: '',
             board: 'references',
-            articleContent,  // Pass the content of the article as props
+            articleContent  // Pass the content of the article as props
         },
     };
 };

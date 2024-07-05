@@ -26,14 +26,15 @@ export const getStaticPaths = async () => {
 
 export const getStaticProps = async ({ params }) => {
     const { key, chord, shape} = params;
+    const decodedKey = decodeURIComponent(key);
 
     const keyIndex = guitar.notes.sharps.indexOf(key);
 
     // Generate the title based on the params
-    const title = `Chord: ${guitar.arppegios[chord].name} in ${key} (Shape: ${shape})`;
+    const title = `Chord: ${guitar.arppegios[chord].name} in ${decodedKey} (Shape: ${shape})`;
     
     // Define the path to the JSON file
-    const fileName = `article_${title.replace(/[^\w\s]/gi, '').replace(/\s/g, '_')}.json`;
+    const fileName = `article_${title.replace(/[^\w\s#]/gi, '').replace(/\s+/g, '_')}.json`;
     const filePath = path.join(process.cwd(), 'articles', fileName);
     
     // Read the content of the JSON file
