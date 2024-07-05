@@ -190,7 +190,7 @@ function App({ Component, pageProps }) {
                 </Hidden>
                 <ToolbarTitle variant="secondary" startIcon={<FavoriteIcon />}>
                   <Typography variant="h6" noWrap component="div">
-                    Fretty
+                    Strum.fun
                   </Typography>
                 </ToolbarTitle>
                 <Hidden mdDown>
