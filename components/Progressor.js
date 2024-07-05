@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { Button } from '@mui/material';
 import { styled } from '@mui/system';
 
-
 const ProgressionContainer = styled('div')({
 });
 
@@ -46,3 +45,4 @@ Progressor.propTypes = {
 };
 
 export default Progressor;
+

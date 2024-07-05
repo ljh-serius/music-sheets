@@ -214,18 +214,6 @@ const FretboardControls = ({
               Clean
             </FullWidthButton>
           </Grid>
-
-          <Grid item xs={6}>
-            <FullWidthButton
-              variant="contained"
-              color="primary"
-              onClick={addToProgression}
-              disabled={!selectedChord || (!selectedShape && !selectedFret)}
-            >
-              Add Chord
-            </FullWidthButton>
-          </Grid>
-
           <Grid item xs={6}>
             <FullWidthButton
               variant="contained"
@@ -234,16 +222,6 @@ const FretboardControls = ({
               disabled={progression && progression.length === 0}
             >
               Save
-            </FullWidthButton>
-          </Grid>
-
-          <Grid item xs={6}>
-            <FullWidthButton
-              variant="contained"
-              onClick={playProgression}
-              disabled={!progression || progression.length === 0}
-            >
-              Play
             </FullWidthButton>
           </Grid>
           <Grid item xs={6}>
