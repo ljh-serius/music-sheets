@@ -28,7 +28,7 @@ export const getStaticProps = async ({ params }) => {
     const keyIndex = guitar.notes.sharps.indexOf(key);
 
     // Generate the title based on the params
-    const title = `Arpeggio: ${guitar.arppegios[decodedArppegio].name} in ${key}`;
+    const title = `Arpeggio ${guitar.arppegios[decodedArppegio].name} in ${key}`;
 
     // Define the path to the JSON file
     const fileName = `article_${title.replace(/[^\w\s]/gi, '').replace(/\s/g, '_')}.json`;

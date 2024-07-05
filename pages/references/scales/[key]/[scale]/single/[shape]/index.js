@@ -30,7 +30,7 @@ export const getStaticProps = async ({ params }) => {
     const validShape = shape || 'C';
 
     // Generate the title based on the params
-    const title = `Scale ${scaleObj.name} in ${key} Single Shape: ${validShape}`;
+    const title = `Scale ${scaleObj.name} in ${key} Single Shape ${validShape}`;
 
     // Define the path to the JSON file
     const fileName = `article_${title.replace(/[^\w\s]/gi, '').replace(/\s/g, '_')}.json`;

@@ -31,7 +31,7 @@ export const getStaticProps = async ({ params }) => {
     const validShape = shape || 'C';
 
     // Generate the title based on the params
-    const title = `Arppegio: ${guitar.arppegios[arppegio].name} in ${key} (Shape: ${shape})`;
+    const title = `Arpeggio: ${guitar.arppegios[arppegio].name} in ${key} (Shape: ${shape})`;
 
     // Define the path to the JSON file
     const fileName = `article_${title.replace(/[^\w\s]/gi, '').replace(/\s/g, '_')}.json`;
