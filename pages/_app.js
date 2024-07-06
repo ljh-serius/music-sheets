@@ -151,6 +151,13 @@ function App({ Component, pageProps }) {
             </ListItemText>
           </ListItem>
         </Link>
+        <Link href="/generate" passHref>
+          <ListItem onClick={handleDrawerToggle}>
+            <ListItemText>
+              <Typography>Generate Tabs</Typography>
+            </ListItemText>
+          </ListItem>
+        </Link>
         <Link href="/references" passHref>
           <ListItem onClick={handleDrawerToggle}>
             <ListItemText>
@@ -159,6 +166,7 @@ function App({ Component, pageProps }) {
           </ListItem>
         </Link>
       </List>
+      
       <Divider />
     </DrawerContent>
   );
@@ -206,6 +214,9 @@ function App({ Component, pageProps }) {
                     </StyledLink>
                     <StyledLink href="/circle">
                       <Button color="inherit">The Circle Of Fifths</Button>
+                    </StyledLink>
+                    <StyledLink href="/generate">
+                      <Button color="inherit">Generate Tabs</Button>
                     </StyledLink>
                     <StyledLink href="/references">
                       <Button color="inherit">References</Button>

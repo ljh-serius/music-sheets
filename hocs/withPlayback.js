@@ -23,6 +23,11 @@ const withPlayback = (WrappedComponent) => {
             }
         }, [dispatch, progressions, selectedFretboard, selectedFretboardIndex]);
 
+        const playNote = async (note) => {
+            const guitarSound = await Soundfont.instrument(new AudioContext(), 'acoustic_guitar_nylon');
+            guitarSound.play(note);
+        }
+
         const playChordNotes = async () => {
             if (selectedFretboardIndex === -1) return;
             const guitarSound = await Soundfont.instrument(new AudioContext(), 'acoustic_guitar_nylon');
@@ -248,6 +253,7 @@ const withPlayback = (WrappedComponent) => {
                 playProgression={playProgression}
                 playChordNotes={playChordNotes}
                 playSelectedNotes={playSelectedNotes}
+                playNote={playNote}
             />
         );
     };

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import guitar from '../config/guitar';
 import * as Tone from 'tone';
@@ -82,10 +82,34 @@ const FretboardDisplay = ({
   boards,
   handleFretboardSelect,
   onElementChange,
+  onNoteClick,
+  playNote,
+  selectedFretboard
 }) => {
-  const playNote = (note, octave, stringIndex, fretIndex, fretboardIndex) => {
-    const synth = new Tone.Synth().toDestination();
-    synth.triggerAttackRelease(`${note}${octave}`, '8n');
+
+  const calculateOctave = (stringIndex, fretIndex) => {
+      const baseOctaves = selectedFretboard.generalSettings.baseOctaves;
+      let octave = baseOctaves[stringIndex];
+      const tuning = selectedFretboard.generalSettings.tuning;
+      const notes = guitar.notes.sharps;
+
+      // Calculate the number of half steps from the open string
+      let halfSteps = (tuning[stringIndex] + fretIndex) % 12;
+      let currentNoteIndex = tuning[stringIndex] % 12;
+
+      // Loop through each fret and determine if we pass a B note
+      for (let i = 0; i <= fretIndex; i++) {
+          const note = notes[(currentNoteIndex + i) % 12];
+          if (note === 'B') {
+              octave++;
+          }
+      }
+
+      return octave;
+  };
+
+  const makeSound = (note, octave, stringIndex, fretIndex, fretboardIndex) => {
+    playNote(`${note}${calculateOctave(stringIndex, fretIndex)}`);
 
     const noteElement = document.getElementById(`note-${fretboardIndex}-${stringIndex}-${fretIndex}`);
     if (noteElement) {
@@ -152,7 +176,7 @@ const FretboardDisplay = ({
           return (
             <TableData
               key={`note-${fretboardIndex}-${i}-${j}`}
-              onClick={() => playNote(displayedNote, octave, i, j, fretboardIndex)}
+              onClick={() => { onNoteClick(displayedNote + octave, i, j); makeSound(displayedNote, octave, i, j, fretboardIndex); }}
             >
               <Note
                 id={`note-${fretboardIndex}-${i}-${j}`}
@@ -225,6 +249,7 @@ FretboardDisplay.propTypes = {
   boards: PropTypes.array,
   handleFretboardSelect: PropTypes.func.isRequired,
   onElementChange: PropTypes.func.isRequired,
+  onNoteClick: PropTypes.func.isRequired,
 };
 
 export default FretboardDisplay;

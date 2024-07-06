@@ -10,13 +10,11 @@ import ChordComposer from '../components/ChordComposer';
 import withFretboardState from '../hocs/withFretboardState';
 import withChordProgression from '../hocs/withChordProgression';
 import withPlayback from '../hocs/withPlayback';
-import { useRouter } from 'next/router';
 import { connect } from 'react-redux';
 import { addFretboard, updateStateProperty, setProgression, setProgressionKey } from '../redux/actions';
 import guitar from '../config/guitar';
 import SongsSelector from '../components/SongsSelector';
 import { useDispatch } from 'react-redux';
-import { CoPresent } from '@mui/icons-material';
 
 const Root = styled('div')({
   display: 'flex',
@@ -94,6 +92,8 @@ const MusicApp = (props) => {
     shape,
     quality,
     display,
+    onNoteClick,
+    playNote
     } = props;
 
   const updateBoardsCallback = useCallback(() => {
@@ -191,9 +191,12 @@ const MusicApp = (props) => {
       {showFretboard && (
         <FretboardContainer>
           <FretboardDisplay
+            selectedFretboard={selectedFretboard}
+            playNote={playNote}
             boards={boards}
             handleFretboardSelect={handleFretboardSelect}
             onElementChange={onElementChange}
+            onNoteClick={onNoteClick}
           />
         </FretboardContainer>
       )}
