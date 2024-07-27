@@ -13,7 +13,7 @@ export const getStaticPaths = async () => {
       if (scale.isModal) {
         scale.modes.forEach((mode) => {
           shapes.names.forEach((shape) => {
-            paths.push({ params: { key: key, scale: scaleKey, mode: mode.name.toLowerCase().replace(' ', '-'), shape: shape } });
+            paths.push({ params: { key: key.replace("#", "sharp"), scale: scaleKey, mode: mode.name.toLowerCase().replace(' ', '-').replace('#', 'sharp'), shape: shape } });
           });
         });
       }
@@ -25,13 +25,16 @@ export const getStaticPaths = async () => {
 
 export const getStaticProps = async ({ params }) => {
   const { key, scale, mode, shape } = params;
-  const decodedKey = decodeURIComponent(key);
 
   const keyIndex = guitar.notes.sharps.indexOf(key);
   const scaleObj = guitar.scales[scale];
+  const decodedKey = key.replace("sharp", "#");
+  const decodedMode = mode.replace("sharp", "#");
+
   let modeIndex = -1;
+  
   if (scaleObj && scaleObj.isModal) {
-    modeIndex = scaleObj.modes.findIndex((m) => m.name.toLowerCase().replace(' ', '-') === mode);
+    modeIndex = scaleObj.modes.findIndex((m) => m.name.toLowerCase().replace(' ', '-') === decodedMode);
   }
 
   const validMode = modeIndex >= 0 ? modeIndex : 0;

@@ -12,7 +12,7 @@ export const getStaticPaths = async () => {
             Object.keys(arppegios).forEach((arppegioKey) => {
                 const arppegio = arppegios[arppegioKey];
                 if (arppegio) {
-                    paths.push({ params: { key: key, arppegio: arppegioKey } });
+                    paths.push({ params: { key: key.replace('#', 'sharp'), arppegio: arppegioKey.replace('#', 'sharp') } });
                 }
             });
         }
@@ -23,10 +23,10 @@ export const getStaticPaths = async () => {
 
 export const getStaticProps = async ({ params }) => {
     const { key, arppegio } = params;
-    const decodedArppegio = decodeURIComponent(arppegio);
-    const decodedKey = decodeURIComponent(key);
 
     const keyIndex = guitar.notes.sharps.indexOf(key);
+    const decodedKey = key.replace('sharp', '#');
+    const decodedArppegio = arppegio.replace('sharp', '#');
 
     // Generate the title based on the params
     const title = `Arpeggio ${guitar.arppegios[decodedArppegio].name} in ${decodedKey}`;

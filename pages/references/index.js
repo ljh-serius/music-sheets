@@ -40,7 +40,7 @@ export const getStaticProps = async (context) => {
                         const title = `Scale: ${guitar.scales[scaleKey].name} in ${key} (Mode: ${mode.name})`;
                         return {
                             label: title,
-                            href: `/references/scales/${encodeURIComponent(key)}/${scaleKey}/modal/${decodeURIComponent(mode.name.toLowerCase().replace(' ', '-')).replace('#', '%23')}`,
+                            href: `/references/scales/${key.replace('#', 'sharp')}/${scaleKey}/modal/${decodeURIComponent(mode.name.toLowerCase().replace(' ', '-')).replace('#', 'sharp')}`,
                         };
                     }),
                     ...guitar.scales[scaleKey].modes.flatMap((mode) => {
@@ -48,7 +48,7 @@ export const getStaticProps = async (context) => {
                             const title = `Scale: ${guitar.scales[scaleKey].name} in ${key} (Mode: ${mode.name}, Shape: ${shape})`;
                             return {
                                 label: title,
-                                href: `/references/scales/${encodeURIComponent(key)}/${scaleKey}/modal/${decodeURIComponent(mode.name.toLowerCase().replace(' ', '-')).replace('#', '%23')}/${shape}`,
+                                href: `/references/scales/${key.replace('#', 'sharp')}/${scaleKey}/modal/${decodeURIComponent(mode.name.toLowerCase().replace(' ', '-')).replace('#', 'sharp')}/${shape}`,
                             };
                         });
                     }),
@@ -58,13 +58,13 @@ export const getStaticProps = async (context) => {
                 return [
                     {
                         label: title,
-                        href: `/references/scales/${encodeURIComponent(key)}/${scaleKey}/single`,
+                        href: `/references/scales/${key.replace('#', 'sharp')}/${scaleKey}/single`,
                     },
                     ...guitar.shapes.names.map((shape) => {
                         const title = `Scale: ${guitar.scales[scaleKey].name} in ${key} (Single, Shape: ${shape})`;
                         return {
                             label: title,
-                            href: `/references/scales/${encodeURIComponent(key)}/${scaleKey}/single/${shape}`,
+                            href: `/references/scales/${key.replace('#', 'sharp')}/${scaleKey}/single/${shape}`,
                         };
                     }),
                 ];

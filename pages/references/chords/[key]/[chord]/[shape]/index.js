@@ -14,7 +14,7 @@ export const getStaticPaths = async () => {
                 const arppegio = arppegios[arppegioKey];
                 if (arppegio) {
                     shapes.names.forEach((shape) => {
-                        paths.push({ params: { key: key, chord: arppegioKey, shape: shape } });
+                        paths.push({ params: { key: key.replace('#', 'sharp'), chord: arppegioKey.replace('#', 'sharp'), shape: shape } });
                     });
                 }
             });
@@ -26,12 +26,12 @@ export const getStaticPaths = async () => {
 
 export const getStaticProps = async ({ params }) => {
     const { key, chord, shape} = params;
-    const decodedKey = decodeURIComponent(key);
 
     const keyIndex = guitar.notes.sharps.indexOf(key);
-
+    const decodedKey = key.replace('sharp', '#');
+    const decodedChord = chord.replace('sharp', '#');
     // Generate the title based on the params
-    const title = `Chord: ${guitar.arppegios[chord].name} in ${decodedKey} (Shape: ${shape})`;
+    const title = `Chord: ${guitar.arppegios[decodedChord].name} in ${decodedKey} (Shape: ${shape})`;
     
     // Define the path to the JSON file
     const fileName = `article_${title.replace(/[^\w\s#]/gi, '').replace(/\s+/g, '_')}.json`;
@@ -49,7 +49,7 @@ export const getStaticProps = async ({ params }) => {
     return {
         props: {
             keyIndex,
-            quality: chord,
+            quality: decodedChord,
             shape: shape,
             board: 'references',
             articleContent

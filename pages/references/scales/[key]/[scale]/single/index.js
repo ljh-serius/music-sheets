@@ -12,7 +12,7 @@ export const getStaticPaths = async () => {
             const scale = scales[scaleKey];
             if (!scale.isModal) {
                 shapes.names.forEach((shape) => {
-                    paths.push({ params: { key: key, scale: scaleKey } });
+                    paths.push({ params: { key: key.replace("#", "sharp"), scale: scaleKey } });
                 });
             }
         });
@@ -23,7 +23,7 @@ export const getStaticPaths = async () => {
 
 export const getStaticProps = async ({ params }) => {
     const { key, scale } = params;
-    const decodedKey = decodeURIComponent(key);
+    const decodedKey = key.replace("sharp", "#");
 
     const keyIndex = guitar.notes.sharps.indexOf(key);
     const scaleObj = guitar.scales[scale];
