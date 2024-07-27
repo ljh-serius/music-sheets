@@ -1,37 +1,40 @@
-/* Add this CSS to your styles */
-.note-playing {
+html {
+    -webkit-print-color-adjust: exact !important;;
+  }
+  
+  .note-playing {
     transform: scale(1.3);
     transition: transform 0.1s ease-in-out;
-}
-
-.circleOfFifthsTransition {
+  }
+  
+  .circleOfFifthsTransition {
     transition: transform 1s;
-}
-
-.circle-container {
+  }
+  
+  .circle-container {
     width: 80%;
     height: 100%;
     margin: 0 auto;
-}
-
-@media (max-width: 1024px) {
+  }
+  
+  @media (max-width: 1024px) {
     .circle-container {
-        width: 100%;
-        height: 100vw;
+      width: 100%;
+      height: 100vw;
     }
-}
-
-.partitions {
+  }
+  
+  .partitions {
     display: inline-block;
     width: 50%;
-}
-
-.partitions table {
+  }
+  
+  .partitions table {
     width: 100%;
     border-spacing: 10px;
-}
-
-.partitions .chord {
+  }
+  
+  .partitions .chord {
     width: 25%;
     height: 120px;
     border: 1px solid black;
@@ -43,70 +46,49 @@
     -o-transition: background-color ease-in-out 1s;
     transition: background-color ease-in-out 1s;
     cursor: pointer;
-}
-
-
-.partitions .highlighted-chord {
+  }
+  
+  .partitions .highlighted-chord {
     background-color: rgba(63, 165, 209, 0.3);
-}
-
-.partitions .context-menu {
+  }
+  
+  .partitions .context-menu {
     width: 48px;
     height: 48px;
     margin-left: auto;
-}
-
-
-.partitions .chord-container {
+  }
+  
+  .partitions .chord-container {
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: center;
-}
-
-.partitions .first-chord {
+  }
+  
+  .partitions .first-chord {
     margin-left: 25px;
-}
-
-.partitions .last-chord {
+  }
+  
+  .partitions .last-chord {
     margin-right: 25px;
-}
-
-.note {
+  }
+  
+  .note {
     width: 36px;
     height: 36px;
     border-radius: 50%;
     border: 1px solid black;
     background-color: lightblue;
     line-height: 33px;
-}
-
-.note-content {
+  }
+  
+  .note-content {
     font-size: 10px;
     font-weight: bold;
     text-align: center;
-}
-
-@media print {
-    .note {
-        width: 20px;
-        height: 20px;
-        border-radius: 50%;
-        border: 1px solid black;
-        background-color: lightblue;
-        line-height: 17px;
-    }
-    
-
-    .note-content {
-        font-size: 10px;
-        font-weight: bold;
-        text-align: center;
-    }
-}
-
-
-.note-line {
+  }
+  
+  .note-line {
     position: absolute;
     width: 100%;
     top: 50%;
@@ -116,26 +98,41 @@
     border: none;
     border-top: 1px solid black;
     transform: translateY(-50%);
-}
-
-.root-note {
+  }
+  
+  .root-note {
     background-color: purple;
-}
-
-.third-note {
+  }
+  
+  .third-note {
     background-color: lightsalmon;
-}
-
-.fifth-note {
+  }
+  
+  .fifth-note {
     background-color: lightgoldenrodyellow;
-}
-
-.seventh-note {
+  }
+  
+  .seventh-note {
     background-color: lightcoral;
-}
-
-.playing-note {
+  }
+  
+  .playing-note {
     transform: scale(1.3);
     /* Scale up the note when playing */
     background-color: yellow;
-}
+  }
+  
+  @media print {
+    .note {
+      width: 25px;
+      height: 25px;
+      line-height: 17px;
+    }
+  
+    .note-content {
+      font-size: 10px;
+      font-weight: bold;
+      text-align: center;
+    }
+  }
+  

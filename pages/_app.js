@@ -49,6 +49,7 @@ const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(({
   }),
 }));
 
+
 const AppBarStyled = styled(AppBar, {
   shouldForwardProp: (prop) => prop !== 'open',
 })(({ theme, open }) => ({
@@ -57,6 +58,9 @@ const AppBarStyled = styled(AppBar, {
     duration: theme.transitions.duration.leavingScreen,
   }),
   padding: '0 25px',
+  '@media print': {
+    display: 'none',
+  },
   ...(open && {
     width: '100%',
     marginLeft: `${drawerWidth}px`,

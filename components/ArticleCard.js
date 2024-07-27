@@ -13,12 +13,12 @@ const StyledCard = styled(Card)(({ theme }) => ({
 }));
 
 const headingStyles = {
-  h1: { fontSize: '52px' },
-  h2: { fontSize: '42px' },
-  h3: { fontSize: '36px' },
-  h4: { fontSize: '30px' },
-  h5: { fontSize: '24px' },
-  h6: { fontSize: '20px' },
+  h1: { fontSize: '52px', '@media print': { fontSize: '31.2px' } },
+  h2: { fontSize: '42px', '@media print': { fontSize: '25.2px' } },
+  h3: { fontSize: '36px', '@media print': { fontSize: '21.6px' } },
+  h4: { fontSize: '30px', '@media print': { fontSize: '18px' } },
+  h5: { fontSize: '24px', '@media print': { fontSize: '14.4px' } },
+  h6: { fontSize: '20px', '@media print': { fontSize: '12px' } },
 };
 
 const ArticleCard = ({ article }) => {

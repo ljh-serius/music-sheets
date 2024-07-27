@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import guitar from '../config/guitar';
-import * as Tone from 'tone';
 import { styled } from '@mui/system';
 import classNames from 'classnames';
 
@@ -17,28 +16,9 @@ const FretboardContainer = styled('div')({
     height: '100%',
     pageBreakAfter: 'always',
   },
-  '&::-webkit-scrollbar': {
-    width: '8px',
-    borderRadius: '10px',
-    height: '8px'
-  },
-  '&::-webkit-scrollbar-thumb': {
-    backgroundColor: 'darkgrey',
-    borderRadius: '10px',
-    height: '8px'
-  },
-  '&::-webkit-scrollbar-thumb:hover': {
-    backgroundColor: 'grey',
-    height: '8px'
-  },
 });
 
 const FretboardTable = styled('table')({
-  width: '100%',
-});
-
-const Table = styled('table')({
-  borderSpacing: 0,
   width: '100%',
 });
 
@@ -136,12 +116,13 @@ const FretboardDisplay = ({
   };
 
   const fretboardElements = boards.map((fretboard, fretboardIndex) => {
-    const numStrings = selectedFretboard.generalSettings.page === 'references' ? 6 : fretboard.generalSettings.nostrs;
+    const numStrings = Math.min(selectedFretboard.generalSettings.page === 'references' ? 6 : fretboard.generalSettings.nostrs, 12);
     const numFrets = selectedFretboard.generalSettings.page === 'references' ? 12 : fretboard.generalSettings.nofrets;
 
     const centeredFretboard = () => {
       return Array.from({ length: numFrets }, (_, i) => i);
     };
+    
 
     const fretNumbers = centeredFretboard();
 
@@ -165,7 +146,7 @@ const FretboardDisplay = ({
               textAlign: 'center',
               outline: 'none',
               boxShadow: '0 2px 5px rgba(0, 0, 0, 0.15)',
-              '@media print': {
+              '@media (minWidth: 1024px)': {
                 width: '36px', // Original width for larger screens
                 height: '36px', // Original height for larger screens
               },
