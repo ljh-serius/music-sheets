@@ -13,7 +13,7 @@ export const getStaticPaths = async () => {
       if (scale.isModal) {
         scale.modes.forEach((mode) => {
           shapes.names.forEach((shape) => {
-            paths.push({ params: { key: key.replace("#", "sharp"), scale: scaleKey, mode: mode.name.toLowerCase().replace(' ', '-').replace('#', 'sharp'), shape: shape } });
+            paths.push({ params: { key: key.replace("#", "sharp"), scale: scaleKey, mode: mode.name.toLowerCase().replace(' ', '-').replace('#', 'sharp') } });
           });
         });
       }
@@ -24,7 +24,7 @@ export const getStaticPaths = async () => {
 };
 
 export const getStaticProps = async ({ params }) => {
-  const { key, scale, mode, shape } = params;
+  const { key, scale, mode } = params;
 
   const keyIndex = guitar.notes.sharps.indexOf(key);
   const scaleObj = guitar.scales[scale];
@@ -38,10 +38,9 @@ export const getStaticProps = async ({ params }) => {
   }
 
   const validMode = modeIndex >= 0 ? modeIndex : 0;
-  const validShape = shape || 'C';
 
   // Generate the title based on the params
-  const title = `Scale ${scaleObj.name} in ${decodedKey} Mode ${scaleObj.modes[validMode].name}, Shape: ${validShape})`;
+  const title = `Scale ${scaleObj.name} in ${decodedKey} Mode ${scaleObj.modes[validMode].name}`;
 
   // Define the path to the JSON file
   const fileName = `article_${title.replace(/[^\w\s#]/gi, '').replace(/\s+/g, '_')}.json`;
@@ -61,7 +60,7 @@ export const getStaticProps = async ({ params }) => {
       keyIndex,
       scale: scale,
       modeIndex: validMode,
-      shape: validShape,
+      shape: '',
       board: 'references',
       articleContent,  // Pass the content of the article as props
     },

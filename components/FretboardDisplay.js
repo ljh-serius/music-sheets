@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import guitar from '../config/guitar';
 import * as Tone from 'tone';
@@ -7,8 +7,16 @@ import classNames from 'classnames';
 
 const FretboardContainer = styled('div')({
   width: '100%',
-  overflowX: 'auto',
   maxWidth: '100vw',
+  '@media (min-width: 1024px)': {
+    width: '100%',
+    height: '100%',
+  },
+  '@media print': {
+    width: '100%',
+    height: '100%',
+    pageBreakAfter: 'always',
+  },
   '&::-webkit-scrollbar': {
     width: '8px',
     borderRadius: '10px',
@@ -26,9 +34,7 @@ const FretboardContainer = styled('div')({
 });
 
 const FretboardTable = styled('table')({
-  maxWidth: '1240px',
-  width: '1240px',
-  minWidth: '1000px',
+  width: '100%',
 });
 
 const Table = styled('table')({
@@ -42,28 +48,40 @@ const TableRow = styled('tr')({
 });
 
 const TableData = styled('td')({
-  height: '50px',
+  height: '20px', // Reduced height
   padding: 0,
   borderRight: '1px solid black',
   verticalAlign: 'middle',
   position: 'relative',
   cursor: 'pointer',
   textAlign: 'center', // Center the content horizontally
+  '@media (min-width: 1024px)': {
+    height: '50px', // Original height for larger screens
+  },
 });
 
 const Note = styled('div')({
   display: 'inline-block',
   position: 'relative',
   cursor: 'pointer',
-  lineHeight: '36px',
+  lineHeight: '20px', // Reduced line height
   zIndex: 1000,
   transition: 'transform 0.1s ease-in-out', // Add transition for scaling effect
+  '@media (min-width: 1024px)': {
+    lineHeight: '25px', // Original line height for larger screens
+  },
 });
 
 const NoteContent = styled('span')({
-  fontSize: '20px',
+  fontSize: '10px', // Reduced font size
   fontWeight: 'bold',
   textAlign: 'center', // Center the text inside the note
+  '@media (min-width: 1024px)': {
+    fontSize: '20px', // Original font size for larger screens
+  },
+  '@media print': {
+    fontSize: '10px', // Reduced font size
+  },
 });
 
 const NoteLine = styled('hr')({
@@ -87,27 +105,24 @@ const FretboardDisplay = ({
 }) => {
 
   const calculateOctave = (stringIndex, fretIndex) => {
-    console.log("string index", stringIndex)
-      const baseOctaves = selectedFretboard.generalSettings.baseOctaves;
-      let octave = baseOctaves[stringIndex];
-      console.log(baseOctaves)
-      const tuning = selectedFretboard.generalSettings.tuning;
-      const notes = guitar.notes.sharps;
+    const baseOctaves = selectedFretboard?.generalSettings?.baseOctaves || [];
+    let octave = baseOctaves[stringIndex];
+    const tuning = selectedFretboard?.generalSettings?.tuning || [];
+    const notes = guitar.notes.sharps;
 
-      // Calculate the number of half steps from the open string
-      let halfSteps = (tuning[stringIndex] + fretIndex) % 12;
-      let currentNoteIndex = tuning[stringIndex] % 12;
+    // Calculate the number of half steps from the open string
+    let halfSteps = (tuning[stringIndex] + fretIndex) % 12;
+    let currentNoteIndex = tuning[stringIndex] % 12;
 
-      // Loop through each fret and determine if we pass a B note
-      for (let i = 0; i <= fretIndex; i++) {
-          const note = notes[(currentNoteIndex + i) % 12];
-          if (note === 'B') {
-              octave++;
-          }
-      }
+    // Loop through each fret and determine if we pass a B note
+    for (let i = 0; i <= fretIndex; i++) {
+        const note = notes[(currentNoteIndex + i) % 12];
+        if (note === 'B') {
+            octave++;
+        }
+    }
 
-      console.log(octave)
-      return octave;
+    return octave;
   };
 
   const makeSound = (note, octave, stringIndex, fretIndex, fretboardIndex) => {
@@ -121,9 +136,18 @@ const FretboardDisplay = ({
   };
 
   const fretboardElements = boards.map((fretboard, fretboardIndex) => {
-    const newRows = [...Array(fretboard.generalSettings.nostrs)].map((_, i) => (
+    const numStrings = selectedFretboard.generalSettings.page === 'references' ? 6 : fretboard.generalSettings.nostrs;
+    const numFrets = selectedFretboard.generalSettings.page === 'references' ? 12 : fretboard.generalSettings.nofrets;
+
+    const centeredFretboard = () => {
+      return Array.from({ length: numFrets }, (_, i) => i);
+    };
+
+    const fretNumbers = centeredFretboard();
+
+    const newRows = [...Array(numStrings)].map((_, i) => (
       <TableRow key={`row-${fretboardIndex}-${i}`}>
-        <TableData width="20px">
+        <TableData width="10px"> {/* Adjusted width */}
           <input
             value={guitar.notes.flats[fretboard.generalSettings.tuning[i]] || ''}
             onChange={(e) => {
@@ -134,28 +158,32 @@ const FretboardDisplay = ({
               }
             }}
             style={{
-              width: '36px',
-              height: '36px',
+              width: '36px', // Reduced width for print
+              height: '36px', // Reduced height for print
               borderRadius: '50%',
               border: '1px solid #ccc',
               textAlign: 'center',
               outline: 'none',
               boxShadow: '0 2px 5px rgba(0, 0, 0, 0.15)',
+              '@media print': {
+                width: '36px', // Original width for larger screens
+                height: '36px', // Original height for larger screens
+              },
             }}
           />
         </TableData>
 
-        {[...Array(fretboard.generalSettings.nofrets)].map((_, j) => {
-          const note = fretboard[fretboard.generalSettings.choice + 'Settings'].fretboard[i][j];
-          const displayedNoteIndex = (fretboard.generalSettings.tuning[i] + j) % 12;
+        {fretNumbers.map((fret, j) => {
+          const note = fretboard[fretboard.generalSettings.choice + 'Settings']?.fretboard[i]?.[fret] || {};
+          const displayedNoteIndex = (fretboard.generalSettings.tuning[i] + fret) % 12;
           const displayedNote = guitar.notes.sharps[displayedNoteIndex];
-          const octave = Math.floor((fretboard.generalSettings.tuning[i] + j) / 12) + 4;
+          const octave = Math.floor((fretboard.generalSettings.tuning[i] + fret) / 12) + 4;
 
           let newChoice = fretboard.generalSettings.choice;
           let noteIndex = '';
 
           if (fretboard.generalSettings.choice === 'scale' && fretboard.scaleSettings.scale) {
-            const isModalRequest = guitar.scales[fretboard.scaleSettings.scale].isModal;
+            const isModalRequest = guitar.scales[fretboard.scaleSettings.scale]?.isModal;
             newChoice = isModalRequest ? 'mode' : 'scale';
             noteIndex = fretboard[newChoice + 'Settings'].notes.indexOf(note.current);
           }
@@ -175,11 +203,11 @@ const FretboardDisplay = ({
 
           return (
             <TableData
-              key={`note-${fretboardIndex}-${i}-${j}`}
-              onClick={() => { onNoteClick(displayedNote +  calculateOctave(i, j), i, j);}}
+              key={`note-${fretboardIndex}-${i}-${fret}`}
+              onClick={() => { onNoteClick(displayedNote +  calculateOctave(i, fret), i, fret);}}
             >
               <Note
-                id={`note-${fretboardIndex}-${i}-${j}`}
+                id={`note-${fretboardIndex}-${i}-${fret}`}
                 className={noteClassNames}
               >
                 {note.show && <NoteContent>{displayedNote}</NoteContent>}
@@ -195,9 +223,9 @@ const FretboardDisplay = ({
       <th key="tuner">
         <span className="fretNumber">tuner</span>
       </th>,
-      [...Array(fretboard.generalSettings.nofrets)].map((_, i) => (
-        <th key={`head-${fretboardIndex}-${i}`} width={fretboard.generalSettings.nofrets - i + 30}>
-          <span className="fretNumber">{i}</span>
+      fretNumbers.map((fret, i) => (
+        <th key={`head-${fretboardIndex}-${i}`} width={numFrets - i + 30}>
+          <span className="fretNumber">{fret}</span>
         </th>
       )),
     ];
@@ -214,10 +242,10 @@ const FretboardDisplay = ({
             type="number"
             key="strings-changer"
             style={{ margin: '6px' }}
-            value={fretboard.generalSettings.nostrs}
+            value={numStrings}
             onChange={(e) => onElementChange(e.target.value, 'nostrs')}
             min="4"
-            max="7"
+            max="12"
           />
         </label>
         <label style={{ fontWeight: 'bold' }}>
@@ -226,7 +254,7 @@ const FretboardDisplay = ({
             type="number"
             key="frets-changer"
             style={{ margin: '6px' }}
-            value={fretboard.generalSettings.nofrets}
+            value={numFrets}
             onChange={(e) => onElementChange(e.target.value, 'nofrets')}
             min="12"
             max="24"
@@ -250,6 +278,7 @@ FretboardDisplay.propTypes = {
   handleFretboardSelect: PropTypes.func.isRequired,
   onElementChange: PropTypes.func.isRequired,
   onNoteClick: PropTypes.func.isRequired,
+  selectedFretboard: PropTypes.object.isRequired,
 };
 
 export default FretboardDisplay;

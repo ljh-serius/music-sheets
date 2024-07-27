@@ -28,8 +28,6 @@ const Root = styled('div')({
 
 const FretboardContainer = styled('div')({
   width: '100%',
-  overflowX: 'auto',
-  maxWidth: '100vw',
   marginTop: '20px',
   marginBottom: '20px',
 });

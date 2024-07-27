@@ -38,7 +38,7 @@ export const getStaticProps = async ({ params }) => {
   }
 
   const validMode = modeIndex >= 0 ? modeIndex : 0;
-  const validShape = shape || 'C';
+  const validShape = shape || null;
 
   // Generate the title based on the params
   const title = `Scale ${scaleObj.name} in ${decodedKey} Mode ${scaleObj.modes[validMode].name} Shape ${validShape})`;
