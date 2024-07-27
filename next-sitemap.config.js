@@ -1,11 +1,13 @@
-// next-sitemap.config.js
 module.exports = {
-    siteUrl: 'https://strum.fun', // Replace with your website URL
-    generateRobotsTxt: true, // (optional) Generate robots.txt file
+    siteUrl: 'https://strum.fun', // Replace with your actual site URL
+    generateRobotsTxt: true, // Generate a robots.txt file
+    outDir: './public', // Directory where the sitemap will be generated
+    sitemapName: 'sitemap.xml', // Name of the sitemap file
+    generateIndexSitemap: false, // Generate a single sitemap file instead of index sitemap
     robotsTxtOptions: {
-        additionalSitemaps: [
-          'https://strum.fun/sitemap.xml'
-        ],
-      },
+      additionalSitemaps: [
+        'https://strum.fun/sitemap.xml',
+      ],
+    },
   };
   
