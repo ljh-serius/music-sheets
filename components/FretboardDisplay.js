@@ -83,13 +83,14 @@ const FretboardDisplay = ({
   handleFretboardSelect,
   onElementChange,
   onNoteClick,
-  playNote,
   selectedFretboard
 }) => {
 
   const calculateOctave = (stringIndex, fretIndex) => {
+    console.log("string index", stringIndex)
       const baseOctaves = selectedFretboard.generalSettings.baseOctaves;
       let octave = baseOctaves[stringIndex];
+      console.log(baseOctaves)
       const tuning = selectedFretboard.generalSettings.tuning;
       const notes = guitar.notes.sharps;
 
@@ -105,12 +106,11 @@ const FretboardDisplay = ({
           }
       }
 
+      console.log(octave)
       return octave;
   };
 
   const makeSound = (note, octave, stringIndex, fretIndex, fretboardIndex) => {
-    playNote(`${note}${calculateOctave(stringIndex, fretIndex)}`);
-
     const noteElement = document.getElementById(`note-${fretboardIndex}-${stringIndex}-${fretIndex}`);
     if (noteElement) {
       noteElement.classList.add('playing');
@@ -176,7 +176,7 @@ const FretboardDisplay = ({
           return (
             <TableData
               key={`note-${fretboardIndex}-${i}-${j}`}
-              onClick={() => { onNoteClick(displayedNote + octave, i, j); makeSound(displayedNote, octave, i, j, fretboardIndex); }}
+              onClick={() => { onNoteClick(displayedNote +  calculateOctave(i, j), i, j);}}
             >
               <Note
                 id={`note-${fretboardIndex}-${i}-${j}`}

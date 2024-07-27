@@ -253,7 +253,7 @@ const withPlayback = (WrappedComponent) => {
                 playProgression={playProgression}
                 playChordNotes={playChordNotes}
                 playSelectedNotes={playSelectedNotes}
-                playNote={playNote}
+                onNoteClick={playNote}
             />
         );
     };

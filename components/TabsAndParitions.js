@@ -180,7 +180,7 @@ const TabsAndPartitions = () => {
                 Partitions
             </FixedWidthButton>
         </ButtonGroup>
-        <MusicApp showFretboard={true} board="generate" onNoteClick={handleNoteClick} />
+        <MusicApp showFretboard={true} board="generate"/>
       </FretboardContainer>
       <Root>
         {displayMode === 'tabs' ? renderTabsDisplay() : renderPartitionsDisplay()}

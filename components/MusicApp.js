@@ -92,8 +92,7 @@ const MusicApp = (props) => {
     shape,
     quality,
     display,
-    onNoteClick,
-    playNote
+    onNoteClick
     } = props;
 
   const updateBoardsCallback = useCallback(() => {
@@ -192,7 +191,6 @@ const MusicApp = (props) => {
         <FretboardContainer>
           <FretboardDisplay
             selectedFretboard={selectedFretboard}
-            playNote={playNote}
             boards={boards}
             handleFretboardSelect={handleFretboardSelect}
             onElementChange={onElementChange}
