@@ -1,6 +1,1 @@
-# *
-User-agent: *
-Allow: /
-
-# Sitemaps
 Sitemap: https://strum.fun/sitemap.xml
