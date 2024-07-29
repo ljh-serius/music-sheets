@@ -76,14 +76,24 @@ const NoteLine = styled('hr')({
   transform: 'translateY(-50%)',
 });
 
+const getNoteStyle = (note) => {
+  if (!note.show) return {};
+  let backgroundColor = 'lightblue';
+  if (note.interval === '1' || note.interval === 'root') backgroundColor = 'purple';
+  if (note.interval === '3' || note.interval === 'b3') backgroundColor = 'lightsalmon';
+  if (note.interval === '5') backgroundColor = 'lightgoldenrodyellow';
+  if (note.interval === '7' || note.interval === 'b7') backgroundColor = 'lightcoral';
+
+  return { backgroundColor };
+};
+
 const FretboardDisplay = ({
   boards,
   handleFretboardSelect,
   onElementChange,
   onNoteClick,
-  selectedFretboard
+  selectedFretboard,
 }) => {
-
   const calculateOctave = (stringIndex, fretIndex) => {
     const baseOctaves = selectedFretboard?.generalSettings?.baseOctaves || [];
     let octave = baseOctaves[stringIndex];
@@ -96,10 +106,10 @@ const FretboardDisplay = ({
 
     // Loop through each fret and determine if we pass a B note
     for (let i = 0; i <= fretIndex; i++) {
-        const note = notes[(currentNoteIndex + i) % 12];
-        if (note === 'B') {
-            octave++;
-        }
+      const note = notes[(currentNoteIndex + i) % 12];
+      if (note === 'B') {
+        octave++;
+      }
     }
 
     return octave;
@@ -116,13 +126,15 @@ const FretboardDisplay = ({
   };
 
   const fretboardElements = boards.map((fretboard, fretboardIndex) => {
-    const numStrings = Math.min(selectedFretboard.generalSettings.page === 'references' ? 6 : fretboard.generalSettings.nostrs, 12);
+    const numStrings = Math.min(
+      selectedFretboard.generalSettings.page === 'references' ? 6 : fretboard.generalSettings.nostrs,
+      12
+    );
     const numFrets = selectedFretboard.generalSettings.page === 'references' ? 12 : fretboard.generalSettings.nofrets;
 
     const centeredFretboard = () => {
       return Array.from({ length: numFrets }, (_, i) => i);
     };
-    
 
     const fretNumbers = centeredFretboard();
 
@@ -139,14 +151,14 @@ const FretboardDisplay = ({
               }
             }}
             style={{
-              width: '36px', // Reduced width for print
-              height: '36px', // Reduced height for print
+              width: '25px', // Reduced width for print
+              height: '25px', // Reduced height for print
               borderRadius: '50%',
               border: '1px solid #ccc',
               textAlign: 'center',
               outline: 'none',
               boxShadow: '0 2px 5px rgba(0, 0, 0, 0.15)',
-              '@media (minWidth: 1024px)': {
+              '@media (minWidth: 1024px)?': {
                 width: '36px', // Original width for larger screens
                 height: '36px', // Original height for larger screens
               },
@@ -169,7 +181,7 @@ const FretboardDisplay = ({
             noteIndex = fretboard[newChoice + 'Settings'].notes.indexOf(note.current);
           }
 
-          const rootNote = note.show && (noteIndex === 0 || note.interval === '1') ? 'root-note': '';
+          const rootNote = note.show && (noteIndex === 0 || note.interval === '1') ? 'root-note' : '';
           const thirdNote = note.show && (noteIndex === 2 || ['3', 'b3'].includes(note.interval)) ? 'third-note' : '';
           const fifthNote = note.show && (noteIndex === 4 || note.interval === '5') ? 'fifth-note' : '';
           const seventhNote = note.show && (noteIndex === 6 || ['7', 'b7'].includes(note.interval)) ? 'seventh-note' : '';
@@ -182,15 +194,11 @@ const FretboardDisplay = ({
             'seventh-note': seventhNote,
           });
 
+          const noteStyle = getNoteStyle(note);
+
           return (
-            <TableData
-              key={`note-${fretboardIndex}-${i}-${fret}`}
-              onClick={() => { onNoteClick(displayedNote +  calculateOctave(i, fret), i, fret);}}
-            >
-              <Note
-                id={`note-${fretboardIndex}-${i}-${fret}`}
-                className={noteClassNames}
-              >
+            <TableData key={`note-${fretboardIndex}-${i}-${fret}`} onClick={() => { onNoteClick(displayedNote + calculateOctave(i, fret), i, fret); }}>
+              <Note id={`note-${fretboardIndex}-${i}-${fret}`} className={noteClassNames} style={noteStyle}>
                 {note.show && <NoteContent>{displayedNote}</NoteContent>}
               </Note>
               <NoteLine />
@@ -212,34 +220,14 @@ const FretboardDisplay = ({
     ];
 
     return (
-      <FretboardContainer
-        key={`fretboard-${fretboardIndex}`}
-        onFocus={() => handleFretboardSelect(fretboardIndex)}
-        onClick={() => handleFretboardSelect(fretboardIndex)}
-      >
+      <FretboardContainer key={`fretboard-${fretboardIndex}`} onFocus={() => handleFretboardSelect(fretboardIndex)} onClick={() => handleFretboardSelect(fretboardIndex)}>
         <label style={{ fontWeight: 'bold' }}>
           #Strings:
-          <input
-            type="number"
-            key="strings-changer"
-            style={{ margin: '6px' }}
-            value={numStrings}
-            onChange={(e) => onElementChange(e.target.value, 'nostrs')}
-            min="4"
-            max="12"
-          />
+          <input type="number" key="strings-changer" style={{ margin: '6px' }} value={numStrings} onChange={(e) => onElementChange(e.target.value, 'nostrs')} min="4" max="12" />
         </label>
         <label style={{ fontWeight: 'bold' }}>
           #Frets:
-          <input
-            type="number"
-            key="frets-changer"
-            style={{ margin: '6px' }}
-            value={numFrets}
-            onChange={(e) => onElementChange(e.target.value, 'nofrets')}
-            min="12"
-            max="24"
-          />
+          <input type="number" key="frets-changer" style={{ margin: '6px' }} value={numFrets} onChange={(e) => onElementChange(e.target.value, 'nofrets')} min="12" max="24" />
         </label>
         <FretboardTable>
           <tbody>{newRows}</tbody>

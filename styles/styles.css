@@ -1,5 +1,5 @@
 html {
-    -webkit-print-color-adjust: exact !important;;
+    -webkit-print-color-adjust: exact !important;
   }
   
   .note-playing {
@@ -101,25 +101,25 @@ html {
   }
   
   .root-note {
-    background-color: purple;
+    background-color: purple !important;
   }
   
   .third-note {
-    background-color: lightsalmon;
+    background-color: lightsalmon !important;
   }
   
   .fifth-note {
-    background-color: lightgoldenrodyellow;
+    background-color: lightgoldenrodyellow !important;
   }
   
   .seventh-note {
-    background-color: lightcoral;
+    background-color: lightcoral !important;
   }
   
   .playing-note {
     transform: scale(1.3);
     /* Scale up the note when playing */
-    background-color: yellow;
+    background-color: yellow !important;
   }
   
   @media print {

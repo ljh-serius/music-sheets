@@ -15,6 +15,7 @@ const ChordComponent = ({ board, keyIndex, quality, shape, articleContent}) => {
   return (
     <Root>
       <Meta title={articleContent.title}></Meta>
+      <ArticleCard article={articleContent}></ArticleCard>
       <MusicApp
         display="chord"
         board={board}
@@ -28,7 +29,6 @@ const ChordComponent = ({ board, keyIndex, quality, shape, articleContent}) => {
         showProgressor={false}
         showSongsSelector={false}
       />
-      <ArticleCard article={articleContent}></ArticleCard>
     </Root>
   );
 };

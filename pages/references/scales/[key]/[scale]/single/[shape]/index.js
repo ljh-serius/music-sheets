@@ -23,10 +23,10 @@ export const getStaticPaths = async () => {
 
 export const getStaticProps = async ({ params }) => {
     const { key, scale, shape } = params;
-
-    const keyIndex = guitar.notes.sharps.indexOf(key);
-    const scaleObj = guitar.scales[scale];
     const decodedKey = key.replace("sharp", "#");
+
+    const keyIndex = guitar.notes.sharps.indexOf(decodedKey);
+    const scaleObj = guitar.scales[scale];
 
     const validShape = shape || 'C';
 

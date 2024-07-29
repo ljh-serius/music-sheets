@@ -25,7 +25,7 @@ export const getStaticProps = async ({ params }) => {
     const { key, scale } = params;
     const decodedKey = key.replace("sharp", "#");
 
-    const keyIndex = guitar.notes.sharps.indexOf(key);
+    const keyIndex = guitar.notes.sharps.indexOf(decodedKey);
     const scaleObj = guitar.scales[scale];
 
     // Generate the title based on the params

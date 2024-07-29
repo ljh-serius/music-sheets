@@ -26,11 +26,10 @@ export const getStaticPaths = async () => {
 
 export const getStaticProps = async ({ params }) => {
   const { key, scale, mode, shape } = params;
-  const keyIndex = guitar.notes.sharps.indexOf(key);
-  const scaleObj = guitar.scales[scale];
-
   const decodedKey = key.replace('sharp', '#');
   const decodedMode = mode.replace('sharp', '#');
+  const keyIndex = guitar.notes.sharps.indexOf(decodedKey);
+  const scaleObj = guitar.scales[scale];
 
   let modeIndex = -1;
   if (scaleObj && scaleObj.isModal) {

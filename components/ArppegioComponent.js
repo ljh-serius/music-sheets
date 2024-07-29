@@ -14,8 +14,9 @@ const Root = styled('div')({
 const ArppegioComponent = ({ board, keyIndex, quality, shape, articleContent}) => {
   return (
     <Root>
-        <Meta title={articleContent.title}></Meta>
-        <MusicApp
+      <Meta title={articleContent.title}></Meta>
+      <ArticleCard article={articleContent}></ArticleCard>
+      <MusicApp
         display="arppegio"
         board={board}
         keyIndex={keyIndex}
@@ -28,7 +29,6 @@ const ArppegioComponent = ({ board, keyIndex, quality, shape, articleContent}) =
         showProgressor={false}
         showSongsSelector={false}
       />
-      <ArticleCard article={articleContent}></ArticleCard>
     </Root>
   );
 };

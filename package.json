@@ -20,6 +20,7 @@
     "@mui/material": "^5.15.20",
     "@mui/system": "^5.15.20",
     "@reduxjs/toolkit": "^2.2.5",
+    "async": "^3.2.5",
     "classnames": "^2.5.1",
     "gh-pages": "^6.1.1",
     "immer": "^10.1.1",

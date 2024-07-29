@@ -29,7 +29,7 @@ export const getStaticProps = async ({ params }) => {
     const decodedKey = key.replace('sharp', '#');
     const decodedArppegio = arppegio.replace('sharp', '#');
     
-    const keyIndex = guitar.notes.sharps.indexOf(key);
+    const keyIndex = guitar.notes.sharps.indexOf(decodedKey);
     const validShape = shape || 'C';
 
     // Generate the title based on the params

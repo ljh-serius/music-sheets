@@ -77,10 +77,30 @@ const withFretboardState = (WrappedComponent) => {
                 return generalSettings.page === 'references' && fretIndex > 11 ? fretIndex - 12 : fretIndex;
             };
         
-            console.log(shape)
+            const adjustShapeInterval = (interval, page) => {
+                if (page === 'references') {
+                    if (interval > 12) {
+                        interval -= 12;
+                    }
+                    if (interval < 0) {
+                        interval = 0;
+                    }
+                }
+                return interval;
+            };
+        
+            const ensureStartEndOrder = (start, end, page) => {
+                if (start > end) {
+                    start = adjustShapeInterval(start, page);
+                    end = adjustShapeInterval(end, page);
+                }
+                return { start, end };
+            };
+        
             if (shape !== '' && notes.length && intervals.length) {
                 const shapeIndex = guitar.shapes.names.indexOf(shape);
                 const rootNoteIndex = keySettings[choice];
+        
                 let shapeIntervals = null;
         
                 if (choice === 'arppegio') {
@@ -95,7 +115,20 @@ const withFretboardState = (WrappedComponent) => {
                         const currentNote = getNoteFromFretboard(stringIndex, adjustedFretIndex, fretboardClone.generalSettings.tuning);
                         if (notes.includes(currentNote)) {
                             const fretPosition = adjustedFretIndex;
-                            if (fretPosition >= (shapeIntervals.start + rootNoteIndex) && fretPosition <= (shapeIntervals.end + rootNoteIndex)) {
+                            let startInterval = shapeIntervals.start + rootNoteIndex;
+                            let endInterval = shapeIntervals.end + rootNoteIndex;
+        
+                            if (generalSettings.page === 'references' && endInterval > 12) {
+                                endInterval -= 12;
+                                startInterval -= 12;
+                                if (startInterval < 0) {
+                                    startInterval = 0;
+                                }
+                            }
+        
+                            ({ start: startInterval, end: endInterval } = ensureStartEndOrder(startInterval, endInterval, generalSettings.page));
+        
+                            if (fretPosition >= startInterval && fretPosition <= endInterval) {
                                 const noteData = fretboardClone[`${choice}Settings`].fretboard[stringIndex][adjustedFretIndex];
                                 noteData.show = true;
                                 noteData.current = generalSettings.notesDisplay ? currentNote : intervals[notes.indexOf(currentNote)];
@@ -123,7 +156,6 @@ const withFretboardState = (WrappedComponent) => {
                 dispatch(updateStateProperty(selectedFretboard.id, `${choice}Settings.fretboard`, fretboardClone[`${choice}Settings`].fretboard));
             }
         }, [selectedFretboard]);
-        
         const displayChordPortion = (chordObject) => {
             const { key, chord, shape } = chordObject;
             const cagedShape = guitar.arppegios[chord]?.cagedShapes[shape];
@@ -153,6 +185,26 @@ const withFretboardState = (WrappedComponent) => {
                 return selectedFretboard.generalSettings.page === 'references' && fretIndex > 11 ? fretIndex - 12 : fretIndex;
             };
         
+            const adjustShapeInterval = (interval, page) => {
+                if (page === 'references') {
+                    if (interval > 12) {
+                        interval -= 12;
+                    }
+                    if (interval < 0) {
+                        interval = 0;
+                    }
+                }
+                return interval;
+            };
+        
+            const ensureStartEndOrder = (start, end, page) => {
+                if (start > end) {
+                    start = adjustShapeInterval(start, page);
+                    end = adjustShapeInterval(end, page);
+                }
+                return { start, end };
+            };
+        
             newBoard.forEach((string, stringIndex) => {
                 string.forEach((note, fretIndex) => {
                     const adjustedFretIndex = adjustFretIndex(fretIndex);
@@ -161,7 +213,20 @@ const withFretboardState = (WrappedComponent) => {
                     const noteIndex = (selectedFretboard.generalSettings.tuning[stringIndex] + adjustedFretIndex) % 12;
                     const noteName = guitar.notes.sharps[noteIndex];
         
-                    if (chordNotes.includes(noteName) && adjustedFretIndex <= shapeIntervals.end + key && adjustedFretIndex >= shapeIntervals.start + key) {
+                    let startInterval = shapeIntervals.start + key;
+                    let endInterval = shapeIntervals.end + key;
+        
+                    if (selectedFretboard.generalSettings.page === 'references' && endInterval > 12) {
+                        endInterval -= 12;
+                        startInterval -= 12;
+                        if (startInterval < 0) {
+                            startInterval = 0;
+                        }
+                    }
+        
+                    ({ start: startInterval, end: endInterval } = ensureStartEndOrder(startInterval, endInterval, selectedFretboard.generalSettings.page));
+        
+                    if (chordNotes.includes(noteName) && adjustedFretIndex <= endInterval && adjustedFretIndex >= startInterval) {
                         newBoard[stringIndex][adjustedFretIndex].show = true;
                         newBoard[stringIndex][adjustedFretIndex].interval = chordIntervals[chordNotes.indexOf(noteName)];
                     }
