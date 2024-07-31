@@ -156,6 +156,7 @@ const withFretboardState = (WrappedComponent) => {
                 dispatch(updateStateProperty(selectedFretboard.id, `${choice}Settings.fretboard`, fretboardClone[`${choice}Settings`].fretboard));
             }
         }, [selectedFretboard]);
+        
         const displayChordPortion = (chordObject) => {
             const { key, chord, shape } = chordObject;
             const cagedShape = guitar.arppegios[chord]?.cagedShapes[shape];
@@ -206,7 +207,11 @@ const withFretboardState = (WrappedComponent) => {
             };
         
             newBoard.forEach((string, stringIndex) => {
+                let firstNoteFound = false;
+        
                 string.forEach((note, fretIndex) => {
+                    if (firstNoteFound) return;
+        
                     const adjustedFretIndex = adjustFretIndex(fretIndex);
                     const shapeIndex = guitar.shapes.names.indexOf(shape);
                     const shapeIntervals = guitar.shapes.indexes[shapeIndex];
@@ -229,6 +234,7 @@ const withFretboardState = (WrappedComponent) => {
                     if (chordNotes.includes(noteName) && adjustedFretIndex <= endInterval && adjustedFretIndex >= startInterval) {
                         newBoard[stringIndex][adjustedFretIndex].show = true;
                         newBoard[stringIndex][adjustedFretIndex].interval = chordIntervals[chordNotes.indexOf(noteName)];
+                        firstNoteFound = true; // Mark that the first note has been found for this string
                     }
                 });
             });
