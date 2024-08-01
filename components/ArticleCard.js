@@ -2,15 +2,23 @@ import React from 'react';
 import { Card, CardContent, Typography } from '@mui/material';
 import { styled } from '@mui/material/styles';
 
+
 const StyledCard = styled(Card)(({ theme }) => ({
   margin: '16px',
+  width: '100%',
   [theme.breakpoints.up('md')]: {
     maxWidth: '65%',
   },
   [theme.breakpoints.down('md')]: {
     maxWidth: '80%',
   },
+  '@media print': {
+    margin: '0',
+    width: '100%',
+    maxWidth: '100%',
+  },
 }));
+
 
 const headingStyles = {
   h1: { fontSize: '31.2px' },

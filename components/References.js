@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import Meta from './ReferencesMeta';
+import ArticleCard from './ArticleCard';
+import { styled } from '@mui/material/styles';
 
 const References = ({ elements = [] }) => {
     const router = useRouter();
@@ -20,7 +22,7 @@ const References = ({ elements = [] }) => {
 
     return (
         <div>
-            <Meta title={'References'}></Meta>
+            <Meta title="References" />
             <nav aria-label="breadcrumb">
                 <ol className="breadcrumb">
                     {breadcrumb.map((crumb, index) => (
