@@ -3,6 +3,7 @@ import MusicApp from './MusicApp'; // Adjust the path if needed
 import { styled } from '@mui/system';
 import ArticleCard from './ArticleCard'; // Adjust the path if needed
 import Meta from './ReferencesMeta';
+import { Typography } from '@mui/material';
 
 const Root = styled('div')({
   display: 'flex',
@@ -15,7 +16,9 @@ const ArppegioComponent = ({ board, keyIndex, quality, shape, articleContent}) =
   return (
     <Root>
       <Meta title={articleContent.title}></Meta>
-      <ArticleCard article={articleContent}></ArticleCard>
+      <Typography variant="h3">
+        {articleContent.title}
+      </Typography>
       <MusicApp
         display="arppegio"
         board={board}
@@ -29,6 +32,7 @@ const ArppegioComponent = ({ board, keyIndex, quality, shape, articleContent}) =
         showProgressor={false}
         showSongsSelector={false}
       />
+      <ArticleCard article={articleContent}></ArticleCard>
     </Root>
   );
 };

@@ -15,7 +15,6 @@ const ScaleComponent = ({ board, keyIndex, scale, modeIndex, shape, articleConte
   return (
     <Root>
       <Meta title={articleContent.title}></Meta>
-      <ArticleCard article={articleContent}></ArticleCard>
       <MusicApp
         display="scale"
         board={board}
@@ -30,6 +29,7 @@ const ScaleComponent = ({ board, keyIndex, scale, modeIndex, shape, articleConte
         showProgressor={false}
         showSongsSelector={false}
       />
+      <ArticleCard article={articleContent}></ArticleCard>
     </Root>
   );
 };
