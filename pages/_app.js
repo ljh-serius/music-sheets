@@ -187,7 +187,7 @@ function App({ Component, pageProps }) {
         <ThemeProvider theme={theme}>
           <Box sx={{ display: 'flex' }}>
             <CssBaseline />
-            {/* <AppBarStyled position="fixed" open={drawerOpen}>
+            {<AppBarStyled position="fixed" open={drawerOpen}>
               <ToolbarContent>
               <Hidden mdUp>
                 <IconButton
@@ -228,7 +228,7 @@ function App({ Component, pageProps }) {
                   </NavLinks>
                 </Hidden>
               </ToolbarContent>
-            </AppBarStyled> */}
+            </AppBarStyled>}
             <nav>
               <Hidden mdUp>
                 <Drawer
