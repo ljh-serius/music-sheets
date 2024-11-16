@@ -13,7 +13,7 @@ const LearnSongs = () => {
         showCircleOfFifths={false} 
         showFretboard={true} 
         showChordComposer={false} 
-        showProgressor={true} 
+        showProgressor={false} 
         showSongsSelector={true} />
     </div>
   );

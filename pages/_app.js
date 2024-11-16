@@ -210,18 +210,18 @@ function App({ Component, pageProps }) {
                     <StyledLink href="/">
                       <Button color="inherit">Play and Visualize</Button>
                     </StyledLink>
-                    <StyledLink href="/compose">
+                    {/* <StyledLink href="/compose">
                       <Button color="inherit">Compose and Share</Button>
-                    </StyledLink>
+                    </StyledLink> */}
                     <StyledLink href="/learn">
                       <Button color="inherit">Learn Songs</Button>
                     </StyledLink>
                     <StyledLink href="/circle">
                       <Button color="inherit">The Circle Of Fifths</Button>
                     </StyledLink>
-                    <StyledLink href="/generate">
+                    {/* <StyledLink href="/generate">
                       <Button color="inherit">Generate Tabs</Button>
-                    </StyledLink>
+                    </StyledLink> */}
                     <StyledLink href="/references">
                       <Button color="inherit">References</Button>
                     </StyledLink>

@@ -9,7 +9,7 @@ const PlayAndVisualize = () => {
       <MusicApp 
           board="home"
           showFretboardControls={true} 
-          showCircleOfFifths={false} 
+          showCircleOfFifths={true} 
           showFretboard={true} 
           showChordComposer={false} 
           showProgressor={false} 
