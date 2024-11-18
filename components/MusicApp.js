@@ -235,6 +235,9 @@ const MusicApp = (props) => {
             addChordToProgression={addChordToProgression}
             playProgression={playProgression}
             saveProgression={saveProgression}
+            onElementChange={onElementChange}
+            selectedArppegio={selectedArppegio}
+            selectedKey={selectedKey}
           />
         )}
         {showProgressor && (

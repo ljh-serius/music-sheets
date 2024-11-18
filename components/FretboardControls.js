@@ -238,7 +238,7 @@ const FretboardControls = ({
   );
 };
 
-const KeySelector = ({ choice, selectedKey, onElementChange }) => {
+export const KeySelector = ({ choice, selectedKey, onElementChange }) => {
   return (
     choice && (
       <SelectContainer>

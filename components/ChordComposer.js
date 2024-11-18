@@ -1,8 +1,14 @@
 import React, { useState } from 'react';
-import { FormControl, Button, Grid } from '@mui/material';
+import { FormControl, Button, Grid, Select, MenuItem, InputLabel, Card, Typography } from '@mui/material';
 import { styled } from '@mui/system';
 import ChordGraph from './ChordGraph';
 import PropTypes from 'prop-types';
+import guitar from '../config/guitar';
+import { KeySelector } from './FretboardControls';
+
+function isLowerCase(str) {
+  return str === str.toLowerCase();
+}
 
 const Root = styled('div')({
   display: 'flex',
@@ -11,7 +17,7 @@ const Root = styled('div')({
 });
 
 const StyledFormControl = styled(FormControl)({
-  width: '100%', // For mobile screens
+  width: '100%',
 });
 
 const GraphContainer = styled('div')({
@@ -21,22 +27,31 @@ const GraphContainer = styled('div')({
 });
 
 const ProgressionContainer = styled('div')({
+  marginTop: '1rem',
+  padding: '0.5rem',
+  border: '1px solid rgba(0, 0, 0, 0.3)',
+  overflowX: 'auto',
+  display: 'flex',
+  alignItems: 'center',
 });
 
 const initialRomanNumerals = [
   'I', 'ii', 'iii', 'IV', 'V', 'vi', 'vii°',
-  'i', 'ii°', 'III', 'iv', 'V', 'VI', 'VII'
+  'i', 'ii°', 'III', 'iv', 'V', 'VI', 'VII',
 ];
 
-const ChordComposer = ({ addChordToProgression, saveProgression, playProgression }) => {
+const ChordComposer = ({ addChordToProgression, saveProgression, playProgression, selectedArppegio, onElementChange, selectedKey }) => {
   const [chordPath, setChordPath] = useState([]);
+  const [chordProgression, setChordProgression] = useState([]);
   const [nodes, setNodes] = useState([]);
   const [edges, setEdges] = useState([]);
   const [showInitial, setShowInitial] = useState(true);
+  const [selectedChord, setSelectedChord] = useState('');
 
   const handleNodeClick = (nodeId) => {
     const chosenRoman = nodeId.split('-')[0];
 
+    // Generate new nodes excluding the chosen one
     const newNodes = initialRomanNumerals
       .filter((numeral) => numeral !== chosenRoman)
       .map((roman, index) => ({
@@ -53,10 +68,18 @@ const ChordComposer = ({ addChordToProgression, saveProgression, playProgression
       to: node.id,
     }));
 
-    setNodes([...nodes.filter((n) => n.group !== 'roman'), { id: nodeId, label: chosenRoman, group: 'chosen' }, ...newNodes]);
+    setNodes([
+      ...nodes.filter((n) => n.group !== 'roman'),
+      { id: nodeId, label: chosenRoman, group: 'chosen' },
+      ...newNodes,
+    ]);
     setEdges([...edges, ...newEdges]);
     setChordPath([...chordPath, { id: nodeId, label: chosenRoman }]);
     setShowInitial(false);
+  };
+
+  const handleSelectChange = (event) => {
+    setChordProgression(event.target.value);
   };
 
   const initialNodes = initialRomanNumerals.map((roman, index) => ({
@@ -67,21 +90,119 @@ const ChordComposer = ({ addChordToProgression, saveProgression, playProgression
     y: Math.random() * 400,
   }));
 
+  const arppegiosNames = Object.keys(guitar.arppegios);
+
+
+  // Arrays to hold major and minor arpeggios
+  const majorArpeggios = [];
+  const minorArpeggios = [];
+
+  // Loop through the arppegios object
+  for (const key in guitar.arppegios) {
+    const arp = guitar.arppegios[key];
+
+    // Check if degree is Major or Minor and push the name to the corresponding array
+    if (arp.degree === "Major") {
+      majorArpeggios.push(arp.name);
+    } else if (arp.degree === "Minor") {
+      minorArpeggios.push(arp.name);
+    }
+  }
   return (
-      <Root>
-        <Grid container spacing={2}>
-          <Grid item xs={12}>
-            <ProgressionContainer>
-              {chordPath.map((chord, index) => (
-                <span key={index}>{chord.label} {index < chordPath.length - 1 ? '→' : ''} </span>
-              ))}
-            </ProgressionContainer>
-          </Grid>
+    <Root>
+      <Grid container spacing={2}>
+        <Grid item xs={12}>
+          <KeySelector choice="key" selectedKey={selectedKey} onElementChange={onElementChange} />
         </Grid>
-        <GraphContainer>
-          <ChordGraph nodesData={showInitial ? initialNodes : nodes} edgesData={edges} onNodeClick={handleNodeClick} />
-        </GraphContainer>
-      </Root>
+        <Grid item xs={12}>
+          <ProgressionContainer>
+            {chordPath.length === 0 && (
+              <Typography variant="h6">Selected Chord Progression Should Appear</Typography>
+            )}
+            {chordPath.length > 0 && chordPath.map((chord, index) => (
+              <React.Fragment key={index}>
+                <Card
+                  style={{
+                    height: '48px',
+                    backgroundColor: 'beige',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    whiteSpace: 'nowrap',
+                    border: '1px solid rgba(0, 0, 0, 0.3)', // Optional: add a border for distinction
+                    boxShadow: '2px 2px 4px rgba(0, 0, 0, 0.1)', // Optional: slight shadow for aesthetics
+                  }}
+                >
+                  <Typography variant="h6" sx={{ m: 4 }}>
+                    {chord.label}
+                  </Typography>
+                  <Select
+                    labelId="arppegio-name-label"
+                    id="arppegio-name-select"
+                    fullWidth
+                    value={selectedArppegio}
+                    onChange={(e) => onElementChange(e.target.value, 'choice')}
+                    displayEmpty
+                  >
+                    {isLowerCase(chord.label[0]) && minorArpeggios.map((arppegioName, index) => (
+                      <MenuItem key={index} value={arppegioName}>
+                        {arppegioName}
+                      </MenuItem>
+                    ))}
+
+                    {!isLowerCase(chord.label[0]) && majorArpeggios.map((arppegioName, index) => (
+                      <MenuItem key={index} value={arppegioName}>
+                        {arppegioName}
+                      </MenuItem>
+                    ))}
+                  </Select>
+                </Card>
+                {index < chordPath.length - 1 && (
+                  <span style={{ margin: '0 0.5rem', fontSize: '1.5rem' }}>→</span>
+                )}
+              </React.Fragment>
+            ))}
+          </ProgressionContainer>
+        </Grid>
+
+        <Grid item xs={12}>
+          <StyledFormControl>
+            <InputLabel id="select-roman-label">Selected Roman Numeral</InputLabel>
+            <Select
+              labelId="select-roman-label"
+              value={chordProgression}
+              onChange={handleSelectChange}
+              sx={{ border: "none" }}
+            >
+              {initialRomanNumerals.map((chord, index) => (
+                <MenuItem key={index} value={chord.label}>
+                  {chord.label}
+                </MenuItem>
+              ))}
+            </Select>
+          </StyledFormControl>
+        </Grid>
+      </Grid>
+
+      <GraphContainer>
+        <ChordGraph
+          nodesData={showInitial ? initialNodes : nodes}
+          edgesData={edges}
+          onNodeClick={handleNodeClick}
+        />
+      </GraphContainer>
+
+      <Grid container spacing={2} style={{ marginTop: '1rem' }}>
+        <Grid item xs={12} style={{ textAlign: 'center' }}>
+          <Button variant="contained" color="primary" onClick={saveProgression}>
+            Save Progression
+          </Button>
+          <Button variant="contained" color="secondary" onClick={playProgression} style={{ marginLeft: '1rem' }}>
+            Play Progression
+          </Button>
+        </Grid>
+      </Grid>
+    </Root>
   );
 };
 

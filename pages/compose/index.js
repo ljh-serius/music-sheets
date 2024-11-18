@@ -9,7 +9,7 @@ const ComposeAndShare = () => {
       <MusicApp 
         board="compose"
         showFretboardControls={false} 
-        showCircleOfFifths={false} 
+        showCircleOfFifths={true} 
         showFretboard={true} 
         showChordComposer={true} 
         showProgressor={false} />
