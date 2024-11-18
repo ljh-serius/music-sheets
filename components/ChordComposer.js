@@ -89,7 +89,7 @@ const ChordComposer = ({ addChordToProgression, saveProgression, playProgression
 
     switch (romanNumeral) {
       case 'I':
-        chordName = `${guitar.notes.sharps[(guitar.notes.sharps.indexOf(rootNote)) % 12]} Major`;
+        chordName = `${guitar.notes.sharps[(guitar.notes.sharps.indexOf(rootNote)) + 1 % 12]} Major`;
         break;
       case 'ii':
         chordName = `${guitar.notes.sharps[(guitar.notes.sharps.indexOf(rootNote) + 2) % 12]} minor`;
@@ -234,7 +234,7 @@ const ChordComposer = ({ addChordToProgression, saveProgression, playProgression
             <InputLabel id="select-roman-label">Selected Roman Numeral</InputLabel>
             <Select
               labelId="select-roman-label"
-              value={chordProgression}
+              value={''}
               onChange={handleSelectChange}
               sx={{ border: "none" }}
             >
