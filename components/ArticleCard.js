@@ -6,6 +6,7 @@ import { styled } from '@mui/material/styles';
 const StyledCard = styled(Card)(({ theme }) => ({
   margin: '16px',
   width: '100%',
+  margin: '0 auto', 
   [theme.breakpoints.up('md')]: {
     maxWidth: '65%',
   },

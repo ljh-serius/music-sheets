@@ -5,6 +5,8 @@
     const rootNote = config.notes.sharps[rootIndex];
     const chord = config.arppegios[quality];
 
+    console.log("DEBUG ", [rootIndex, quality, shapeIndex]);
+
     if (!chord) return null;
 
     const shapeName = config.shapes.names[shapeIndex];
@@ -117,7 +119,6 @@
         { title: "Just the Way You Are", artist: "Billy Joel", genre: "Pop", originalKey: "D" },
         { title: "Wonderful Tonight", artist: "Eric Clapton", genre: "Pop", originalKey: "G" },
         // Jazz
-        { title: "Autumn Leaves", artist: "Joseph Kosma", genre: "Jazz", originalKey: "G" },
         { title: "Blue Bossa", artist: "Kenny Dorham", genre: "Jazz", originalKey: "Cm" },
         { title: "All the Things You Are", artist: "Jerome Kern", genre: "Jazz", originalKey: "F#" },
         { title: "Someday My Prince Will Come", artist: "Frank Churchill", genre: "Jazz", originalKey: "Bb" },

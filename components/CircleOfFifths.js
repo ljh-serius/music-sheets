@@ -12,7 +12,7 @@ const CircleOfFifths = ({
     useEffect(() => {
         setSelectedTone(tone);
         setSelectedQuality(quality);
-    }, [tone, quality])
+    }, [tone, quality]);
 
     const majorRadius = 150; // Radius of the circle for major tones
     const minorRadius = 110; // Radius for the inner circle of minor tones
@@ -96,8 +96,20 @@ const CircleOfFifths = ({
                         const isHighlighted = shouldBeHighlighted(index, true);
 
                         return (
-                            <g key={tone} transform={`translate(${position.x}, ${position.y})`}>
-                                <circle cx="0" cy="0" r="20" fill={isHighlighted ? "#D04848" : "white"} stroke="black" />
+                            <g
+                                key={tone}
+                                transform={`translate(${position.x}, ${position.y})`}
+                                className="hover-group"
+                                onClick={() => selectKey(tone, "Major")}
+                            >
+                                <circle
+                                    cx="0"
+                                    cy="0"
+                                    r="20"
+                                    fill={isHighlighted ? "#D04848" : "white"}
+                                    stroke="black"
+                                    className="circle-hover"
+                                />
                                 <text
                                     x="0"
                                     y="0"
@@ -105,7 +117,6 @@ const CircleOfFifths = ({
                                     textAnchor="middle"
                                     alignmentBaseline="middle"
                                     transform={`rotate(${counterRotationAngle})`}
-                                    onClick={() => selectKey(tone, "Major")}
                                 >
                                     {tone}
                                 </text>
@@ -118,8 +129,20 @@ const CircleOfFifths = ({
                         const isHighlighted = shouldBeHighlighted(index, false);
 
                         return (
-                            <g key={`minor-${tone}-${index}`} transform={`translate(${position.x}, ${position.y})`}>
-                                <circle cx="0" cy="0" r="15" fill={isHighlighted ? "#1E90FF" : "white"} stroke="black" />
+                            <g
+                                key={`minor-${tone}-${index}`}
+                                transform={`translate(${position.x}, ${position.y})`}
+                                className="hover-group"
+                                onClick={() => selectKey(tone.replace('m', ''), "Minor")}
+                            >
+                                <circle
+                                    cx="0"
+                                    cy="0"
+                                    r="15"
+                                    fill={isHighlighted ? "#1E90FF" : "white"}
+                                    stroke="black"
+                                    className="circle-hover"
+                                />
                                 <text
                                     x="0"
                                     y="0"
@@ -127,7 +150,6 @@ const CircleOfFifths = ({
                                     textAnchor="middle"
                                     alignmentBaseline="middle"
                                     transform={`rotate(${counterRotationAngle})`}
-                                    onClick={() => selectKey(tone.replace('m', ''), "Minor")} // Strip 'm' when selecting key
                                     fill="black"
                                 >
                                     {tone}

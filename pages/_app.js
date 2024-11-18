@@ -22,6 +22,7 @@ import { Open_Sans } from 'next/font/google';
 import { Provider } from 'react-redux';
 import store from '../redux/store';
 import '../styles/styles.css';
+import '../styles/CircleOfFifths.css';
 
 const inter = Open_Sans({ subsets: ['latin'], weight: ['300', '400', '500', '700'] });
 
