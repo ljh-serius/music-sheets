@@ -89,49 +89,49 @@ const ChordComposer = ({ addChordToProgression, saveProgression, playProgression
 
     switch (romanNumeral) {
       case 'I':
-        chordName = `${guitar.notes.sharps[(guitar.notes.sharps.indexOf(rootNote) + 1) % 12]} Major`;
+        chordName = `${guitar.notes.sharps[(guitar.notes.sharps.indexOf(rootNote)) % 12]} Major`;
         break;
       case 'ii':
-        chordName = `${guitar.notes.sharps[(guitar.notes.sharps.indexOf(rootNote) + 3) % 12]} minor`;
+        chordName = `${guitar.notes.sharps[(guitar.notes.sharps.indexOf(rootNote) + 2) % 12]} minor`;
         break;
       case 'iii':
-        chordName = `${guitar.notes.sharps[(guitar.notes.sharps.indexOf(rootNote) + 5) % 12]} minor`;
+        chordName = `${guitar.notes.sharps[(guitar.notes.sharps.indexOf(rootNote) + 4) % 12]} minor`;
         break;
       case 'IV':
-        chordName = `${guitar.notes.sharps[(guitar.notes.sharps.indexOf(rootNote) + 6) % 12]} Major`;
+        chordName = `${guitar.notes.sharps[(guitar.notes.sharps.indexOf(rootNote) + 5) % 12]} Major`;
         break;
       case 'V':
-        chordName = `${guitar.notes.sharps[(guitar.notes.sharps.indexOf(rootNote) + 8) % 12]} Major`;
+        chordName = `${guitar.notes.sharps[(guitar.notes.sharps.indexOf(rootNote) + 7) % 12]} Major`;
         break;
       case 'vi':
-        chordName = `${guitar.notes.sharps[(guitar.notes.sharps.indexOf(rootNote) + 10) % 12]} minor`;
+        chordName = `${guitar.notes.sharps[(guitar.notes.sharps.indexOf(rootNote) + 9) % 12]} minor`;
         break;
       case 'vii°':
-        chordName = `${guitar.notes.sharps[(guitar.notes.sharps.indexOf(rootNote) + 12) % 12]} diminished`;
+        chordName = `${guitar.notes.sharps[(guitar.notes.sharps.indexOf(rootNote) + 11) % 12]} diminished`;
         break;
       case 'i':
-        chordName = `${guitar.notes.sharps[(guitar.notes.sharps.indexOf(rootNote) + 10) % 12]} minor`;
+        chordName = `${guitar.notes.sharps[(guitar.notes.sharps.indexOf(rootNote) + 9) % 12]} minor`;
         break;
       case 'ii°':
-        chordName = `${guitar.notes.sharps[(guitar.notes.sharps.indexOf(rootNote) + 12) % 12]} diminished`;
+        chordName = `${guitar.notes.sharps[(guitar.notes.sharps.indexOf(rootNote) + 11) % 12]} diminished`;
         break;
       case 'III':
-        chordName = `${guitar.notes.sharps[(guitar.notes.sharps.indexOf(rootNote) + 1) % 12]} Major`;
+        chordName = `${guitar.notes.sharps[(guitar.notes.sharps.indexOf(rootNote) + 12) % 12]} Major`;
         break;
       case 'iv':
-        chordName = `${guitar.notes.sharps[(guitar.notes.sharps.indexOf(rootNote) + 3) % 12]} minor`;
+        chordName = `${guitar.notes.sharps[(guitar.notes.sharps.indexOf(rootNote) + 2) % 12]} minor`;
         break;
       case 'v':
-        chordName = `${guitar.notes.sharps[(guitar.notes.sharps.indexOf(rootNote) + 5) % 12]} minor`;
+        chordName = `${guitar.notes.sharps[(guitar.notes.sharps.indexOf(rootNote) + 4) % 12]} minor`;
         break;
       case 'VI':
-        chordName = `${guitar.notes.sharps[(guitar.notes.sharps.indexOf(rootNote) + 6) % 12]} Major`;
+        chordName = `${guitar.notes.sharps[(guitar.notes.sharps.indexOf(rootNote) + 5) % 12]} Major`;
         break;
       case 'VII':
-        chordName = `${guitar.notes.sharps[(guitar.notes.sharps.indexOf(rootNote) + 8) % 12]} Major`;
+        chordName = `${guitar.notes.sharps[(guitar.notes.sharps.indexOf(rootNote) + 7) % 12]} Major`;
         break;
       default:
-        chordName = "Select a block";
+        chordName = `Select a block`;
     }
     return chordName;
   };
@@ -164,17 +164,14 @@ const ChordComposer = ({ addChordToProgression, saveProgression, playProgression
 
   useEffect(() => {
     // Dynamically generate the chord names based on the selected key
-    const generatedChordNames = initialRomanNumerals.map(roman => getChordName(roman, selectedKey));
-    
-    console.log("Chord names ",chordNames)
-    setChordNames(generatedChordNames ||  [""]);
-    
-    // Set the default chord progression to the first element
-    if (generatedChordNames.length > 0) {
-      setChordProgression(generatedChordNames[0]);
-    }
-  }, [selectedKey]); // Re-run when selectedKey changes
-  
+    const generatedChordNames = initialRomanNumerals.map(roman => {
+      return `${roman} - ${getChordName(roman, guitar.notes.sharps[selectedKey])}`;
+    });
+
+    console.log(generatedChordNames)
+    setChordNames(generatedChordNames);
+  }, [selectedKey]);
+
   return (
     <Root>
       <Grid container spacing={2}>
@@ -237,7 +234,7 @@ const ChordComposer = ({ addChordToProgression, saveProgression, playProgression
             <InputLabel id="select-roman-label">Selected Roman Numeral</InputLabel>
             <Select
               labelId="select-roman-label"
-              value={""}
+              value={chordProgression}
               onChange={handleSelectChange}
               sx={{ border: "none" }}
             >
