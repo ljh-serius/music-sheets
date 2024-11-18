@@ -82,7 +82,6 @@ const ChordComposer = ({ addChordToProgression, saveProgression, playProgression
     setChordProgression(event.target.value);
   };
 
-
   const getChordName = (romanNumeral, selectedKey) => {
     const rootNote = guitar.notes.sharps[guitar.notes.sharps.indexOf(selectedKey)]; // Find root note
     const isMajor = !romanNumeral.includes('i') && !romanNumeral.includes('ii');
