@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { FormControl, Button, Grid, Select, MenuItem, InputLabel, Card, Typography } from '@mui/material';
 import { styled } from '@mui/system';
 import ChordGraph from './ChordGraph';
@@ -37,7 +37,7 @@ const ProgressionContainer = styled('div')({
 
 const initialRomanNumerals = [
   'I', 'ii', 'iii', 'IV', 'V', 'vi', 'vii°',
-  'i', 'ii°', 'III', 'iv', 'V', 'VI', 'VII',
+  'i', 'ii°', 'III', 'iv', 'v', 'VI', 'VII',
 ];
 
 const ChordComposer = ({ addChordToProgression, saveProgression, playProgression, selectedArppegio, onElementChange, selectedKey }) => {
@@ -46,7 +46,7 @@ const ChordComposer = ({ addChordToProgression, saveProgression, playProgression
   const [nodes, setNodes] = useState([]);
   const [edges, setEdges] = useState([]);
   const [showInitial, setShowInitial] = useState(true);
-  const [selectedChord, setSelectedChord] = useState('');
+  const [chordNames, setChordNames] = useState([]); // To store the dynamically generated chord names
 
   const handleNodeClick = (nodeId) => {
     const chosenRoman = nodeId.split('-')[0];
@@ -82,6 +82,61 @@ const ChordComposer = ({ addChordToProgression, saveProgression, playProgression
     setChordProgression(event.target.value);
   };
 
+
+  const getChordName = (romanNumeral, selectedKey) => {
+    const rootNote = guitar.notes.sharps[guitar.notes.sharps.indexOf(selectedKey)]; // Find root note
+    const isMajor = !romanNumeral.includes('i') && !romanNumeral.includes('ii');
+    let chordName = '';
+
+    switch (romanNumeral) {
+      case 'I':
+        chordName = `${guitar.notes.sharps[(guitar.notes.sharps.indexOf(rootNote) + 1) % 12]} Major`;
+        break;
+      case 'ii':
+        chordName = `${guitar.notes.sharps[(guitar.notes.sharps.indexOf(rootNote) + 3) % 12]} minor`;
+        break;
+      case 'iii':
+        chordName = `${guitar.notes.sharps[(guitar.notes.sharps.indexOf(rootNote) + 5) % 12]} minor`;
+        break;
+      case 'IV':
+        chordName = `${guitar.notes.sharps[(guitar.notes.sharps.indexOf(rootNote) + 6) % 12]} Major`;
+        break;
+      case 'V':
+        chordName = `${guitar.notes.sharps[(guitar.notes.sharps.indexOf(rootNote) + 8) % 12]} Major`;
+        break;
+      case 'vi':
+        chordName = `${guitar.notes.sharps[(guitar.notes.sharps.indexOf(rootNote) + 10) % 12]} minor`;
+        break;
+      case 'vii°':
+        chordName = `${guitar.notes.sharps[(guitar.notes.sharps.indexOf(rootNote) + 12) % 12]} diminished`;
+        break;
+      case 'i':
+        chordName = `${guitar.notes.sharps[(guitar.notes.sharps.indexOf(rootNote) + 10) % 12]} minor`;
+        break;
+      case 'ii°':
+        chordName = `${guitar.notes.sharps[(guitar.notes.sharps.indexOf(rootNote) + 12) % 12]} diminished`;
+        break;
+      case 'III':
+        chordName = `${guitar.notes.sharps[(guitar.notes.sharps.indexOf(rootNote) + 1) % 12]} Major`;
+        break;
+      case 'iv':
+        chordName = `${guitar.notes.sharps[(guitar.notes.sharps.indexOf(rootNote) + 3) % 12]} minor`;
+        break;
+      case 'v':
+        chordName = `${guitar.notes.sharps[(guitar.notes.sharps.indexOf(rootNote) + 5) % 12]} minor`;
+        break;
+      case 'VI':
+        chordName = `${guitar.notes.sharps[(guitar.notes.sharps.indexOf(rootNote) + 6) % 12]} Major`;
+        break;
+      case 'VII':
+        chordName = `${guitar.notes.sharps[(guitar.notes.sharps.indexOf(rootNote) + 8) % 12]} Major`;
+        break;
+      default:
+        chordName = `${rootNote} Major`;
+    }
+    return chordName;
+  };
+
   const initialNodes = initialRomanNumerals.map((roman, index) => ({
     id: `${roman}-${index}`,
     label: roman,
@@ -91,7 +146,6 @@ const ChordComposer = ({ addChordToProgression, saveProgression, playProgression
   }));
 
   const arppegiosNames = Object.keys(guitar.arppegios);
-
 
   // Arrays to hold major and minor arpeggios
   const majorArpeggios = [];
@@ -108,6 +162,15 @@ const ChordComposer = ({ addChordToProgression, saveProgression, playProgression
       minorArpeggios.push(arp.name);
     }
   }
+
+  useEffect(() => {
+    // Dynamically generate the chord names based on the selected key
+    const generatedChordNames = initialRomanNumerals.map(roman => {
+      return `${roman} - ${getChordName(roman, selectedKey)}`;
+    });
+    setChordNames(generatedChordNames);
+  }, [selectedKey]);
+
   return (
     <Root>
       <Grid container spacing={2}>
@@ -129,8 +192,8 @@ const ChordComposer = ({ addChordToProgression, saveProgression, playProgression
                     alignItems: 'center',
                     justifyContent: 'center',
                     whiteSpace: 'nowrap',
-                    border: '1px solid rgba(0, 0, 0, 0.3)', // Optional: add a border for distinction
-                    boxShadow: '2px 2px 4px rgba(0, 0, 0, 0.1)', // Optional: slight shadow for aesthetics
+                    border: '1px solid rgba(0, 0, 0, 0.3)',
+                    boxShadow: '2px 2px 4px rgba(0, 0, 0, 0.1)',
                   }}
                 >
                   <Typography variant="h6" sx={{ m: 4 }}>
@@ -174,9 +237,9 @@ const ChordComposer = ({ addChordToProgression, saveProgression, playProgression
               onChange={handleSelectChange}
               sx={{ border: "none" }}
             >
-              {initialRomanNumerals.map((chord, index) => (
-                <MenuItem key={index} value={chord.label}>
-                  {chord.label}
+              {chordNames.map((chord, index) => (
+                <MenuItem key={index} value={chord}>
+                  {chord}
                 </MenuItem>
               ))}
             </Select>
@@ -194,10 +257,20 @@ const ChordComposer = ({ addChordToProgression, saveProgression, playProgression
 
       <Grid container spacing={2} style={{ marginTop: '1rem' }}>
         <Grid item xs={12} style={{ textAlign: 'center' }}>
-          <Button variant="contained" color="primary" onClick={saveProgression}>
+          <Button
+            variant="outlined"
+            size="large"
+            onClick={() => saveProgression(chordProgression)}
+          >
             Save Progression
           </Button>
-          <Button variant="contained" color="secondary" onClick={playProgression} style={{ marginLeft: '1rem' }}>
+        </Grid>
+        <Grid item xs={12} style={{ textAlign: 'center' }}>
+          <Button
+            variant="outlined"
+            size="large"
+            onClick={() => playProgression(chordProgression)}
+          >
             Play Progression
           </Button>
         </Grid>
@@ -208,8 +281,11 @@ const ChordComposer = ({ addChordToProgression, saveProgression, playProgression
 
 ChordComposer.propTypes = {
   addChordToProgression: PropTypes.func.isRequired,
-  playProgression: PropTypes.func.isRequired,
   saveProgression: PropTypes.func.isRequired,
+  playProgression: PropTypes.func.isRequired,
+  selectedArppegio: PropTypes.string,
+  onElementChange: PropTypes.func.isRequired,
+  selectedKey: PropTypes.string.isRequired,
 };
 
 export default ChordComposer;
