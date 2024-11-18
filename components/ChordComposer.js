@@ -131,7 +131,7 @@ const ChordComposer = ({ addChordToProgression, saveProgression, playProgression
         chordName = `${guitar.notes.sharps[(guitar.notes.sharps.indexOf(rootNote) + 8) % 12]} Major`;
         break;
       default:
-        chordName = `${rootNote} Major`;
+        chordName = "Select a block";
     }
     return chordName;
   };
@@ -164,12 +164,17 @@ const ChordComposer = ({ addChordToProgression, saveProgression, playProgression
 
   useEffect(() => {
     // Dynamically generate the chord names based on the selected key
-    const generatedChordNames = initialRomanNumerals.map(roman => {
-      return `${roman} - ${getChordName(roman, selectedKey)}`;
-    });
-    setChordNames(generatedChordNames);
-  }, [selectedKey]);
-
+    const generatedChordNames = initialRomanNumerals.map(roman => getChordName(roman, selectedKey));
+    
+    console.log("Chord names ",chordNames)
+    setChordNames(generatedChordNames ||  [""]);
+    
+    // Set the default chord progression to the first element
+    if (generatedChordNames.length > 0) {
+      setChordProgression(generatedChordNames[0]);
+    }
+  }, [selectedKey]); // Re-run when selectedKey changes
+  
   return (
     <Root>
       <Grid container spacing={2}>
@@ -232,7 +237,7 @@ const ChordComposer = ({ addChordToProgression, saveProgression, playProgression
             <InputLabel id="select-roman-label">Selected Roman Numeral</InputLabel>
             <Select
               labelId="select-roman-label"
-              value={chordProgression}
+              value={""}
               onChange={handleSelectChange}
               sx={{ border: "none" }}
             >
