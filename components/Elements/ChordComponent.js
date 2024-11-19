@@ -19,7 +19,6 @@ const ChordComponent = ({ board, keyIndex, quality, shape, articleContent}) => {
         {articleContent.title}
       </Typography>
       <MusicApp
-        display="chord"
         board={board}
         keyIndex={keyIndex}
         quality={quality}

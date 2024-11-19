@@ -17,7 +17,7 @@ import SongsSelector from '../Pages/LearnSongs/SongsSelector';
 import { useDispatch } from 'react-redux';
 import Meta from '../Partials/Head';
 import TopOfMusicApp from '../AdSense/TopOfMusicApp';
-import MiddleOfMusicApp from '../AdSense/BottomOfMusicApp';
+import MiddleOfMusicApp from '../AdSense/MiddleOfMusicApp';
 import BottomOfMusicApp from '../AdSense/BottomOfMusicApp';
 
 const Root = styled('div')({

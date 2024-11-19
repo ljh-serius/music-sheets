@@ -66,6 +66,7 @@ const StyledCard = styled(Card)(({ theme }) => ({
   margin: '16px',
   width: '100%',
   margin: '0 auto', 
+  padding: '20px',
   [theme.breakpoints.up('md')]: {
     maxWidth: '65%',
   },
@@ -103,6 +104,9 @@ const References = ({ elements = [] }) => {
             }}></ArticleCard>
             <TopOfReferences></TopOfReferences>
             <StyledCard>
+                <Typography variant="h3">
+                    Site Pages :
+                </Typography>
                 <CardContent>
                     <nav aria-label="breadcrumb">
                         <ol className="breadcrumb">

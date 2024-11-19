@@ -74,11 +74,11 @@ const withFretboardState = (WrappedComponent) => {
             });
         
             const adjustFretIndex = (fretIndex) => {
-                return generalSettings.page === 'references' && fretIndex > 11 ? fretIndex - 12 : fretIndex;
+                return generalSettings.page.includes('references') && fretIndex > 11 ? fretIndex - 12 : fretIndex;
             };
         
             const adjustShapeInterval = (interval, page) => {
-                if (page === 'references') {
+                if (page.includes('references')) {
                     if (interval > 12) {
                         interval -= 12;
                     }
@@ -118,7 +118,7 @@ const withFretboardState = (WrappedComponent) => {
                             let startInterval = shapeIntervals.start + rootNoteIndex;
                             let endInterval = shapeIntervals.end + rootNoteIndex;
         
-                            if (generalSettings.page === 'references' && endInterval > 12) {
+                            if (generalSettings.page.includes('references') && endInterval > 12) {
                                 endInterval -= 12;
                                 startInterval -= 12;
                                 if (startInterval < 0) {
@@ -183,11 +183,11 @@ const withFretboardState = (WrappedComponent) => {
             }));
         
             const adjustFretIndex = (fretIndex) => {
-                return selectedFretboard.generalSettings.page === 'references' && fretIndex > 11 ? fretIndex - 12 : fretIndex;
+                return selectedFretboard.generalSettings.page.includes('references') && fretIndex > 11 ? fretIndex - 12 : fretIndex;
             };
         
             const adjustShapeInterval = (interval, page) => {
-                if (page === 'references') {
+                if (page.includes('references')) {
                     if (interval > 12) {
                         interval -= 12;
                     }
@@ -221,7 +221,7 @@ const withFretboardState = (WrappedComponent) => {
                     let startInterval = shapeIntervals.start + key;
                     let endInterval = shapeIntervals.end + key;
         
-                    if (selectedFretboard.generalSettings.page === 'references' && endInterval > 12) {
+                    if (selectedFretboard.generalSettings.page.includes('references') && endInterval > 12) {
                         endInterval -= 12;
                         startInterval -= 12;
                         if (startInterval < 0) {
