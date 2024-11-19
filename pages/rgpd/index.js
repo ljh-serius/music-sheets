@@ -41,8 +41,7 @@ We may update this Privacy Policy from time to time. Any changes will be posted 
 ## Contact Us
 If you have any questions or concerns about this Privacy Policy or how we handle your personal data, please contact us at:
 
-Strum.fun  
-hamza.eljaouhari.1995@gmail.com
+Strum.fun
 
 Thank you for visiting Strum.fun! We value your privacy and are committed to protecting your personal data.`;
 
