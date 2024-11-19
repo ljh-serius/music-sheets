@@ -50,7 +50,7 @@ export const getStaticProps = async ({ params }) => {
             scale: scale,
             modeIndex: -1,
             shape: '',
-            board: 'references',
+            board: 'references2',
             articleContent,  // Pass the content of the article as props
         },
     };

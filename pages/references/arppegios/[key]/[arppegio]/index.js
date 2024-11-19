@@ -49,7 +49,7 @@ export const getStaticProps = async ({ params }) => {
             keyIndex,
             quality: decodedArppegio,
             shape: '',
-            board: 'references',
+            board: 'references3',
             articleContent  // Pass the content of the article as props
         },
     };

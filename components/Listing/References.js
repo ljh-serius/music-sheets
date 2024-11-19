@@ -5,6 +5,8 @@ import Meta from '../Partials/Head';
 import ArticleCard from './ArticleCard';
 import TopOfReferences from '../AdSense/TopOfReferences';
 import BottomOfReferences from '../AdSense/BottomOfReferences';
+import { Card, CardContent, Typography } from '@mui/material';
+import { styled } from '@mui/material/styles';
 
 const content = `# Preface
 
@@ -60,13 +62,31 @@ Embarking on the journey to master guitar music theory and technique is a reward
 
 Happy playing!`;
 
+const StyledCard = styled(Card)(({ theme }) => ({
+  margin: '16px',
+  width: '100%',
+  margin: '0 auto', 
+  [theme.breakpoints.up('md')]: {
+    maxWidth: '65%',
+  },
+  [theme.breakpoints.down('md')]: {
+    maxWidth: '80%',
+  },
+  '@media print': {
+    margin: '0',
+    width: '100%',
+    maxWidth: '100%',
+  },
+}));
+
 const References = ({ elements = [] }) => {
     const router = useRouter();
     const { key, type, subType, quality, shape, mode } = router.query;
 
     const breadcrumb = [
-        { label: 'Home', href: '/' },
-        { label: 'References', href: '/references' },
+        { label: 'Play And Visualize', href: '/' },
+        { label: 'Learn Songs', href: '/learn' },
+        { label: 'The Circle Of Fifths', href: '/circle' },
         key && { label: key, href: `/references/${key}` },
         type && { label: type, href: `/references/${key}/${type}` },
         subType && { label: subType, href: `/references/${key}/${type}/${subType}` },
@@ -78,30 +98,38 @@ const References = ({ elements = [] }) => {
     return (
         <div>
             <Meta title="References" />
-            <TopOfReferences></TopOfReferences>
             <ArticleCard article={{
                 content: content
             }}></ArticleCard>
-            <nav aria-label="breadcrumb">
-                <ol className="breadcrumb">
-                    {breadcrumb.map((crumb, index) => (
-                        <li key={index} className="breadcrumb-item">
-                            <Link href={crumb.href}>
-                                {crumb.label}
-                            </Link>
-                        </li>
-                    ))}
-                </ol>
-            </nav>
-            <ul>
-                {elements.map((element, index) => (
-                    <li key={index}>
-                        <Link href={element.href}>
-                            {element.label}
-                        </Link>
-                    </li>
-                ))}
-            </ul>
+            <TopOfReferences></TopOfReferences>
+            <StyledCard>
+                <CardContent>
+                    <nav aria-label="breadcrumb">
+                        <ol className="breadcrumb">
+                            {breadcrumb.map((crumb, index) => (
+                                <li key={index} className="breadcrumb-item">
+                                    <Link href={crumb.href}>
+                                        {crumb.label}
+                                    </Link>
+                                </li>
+                            ))}
+                        </ol>
+                    </nav>
+                </CardContent>
+            </StyledCard>
+            <StyledCard>
+                <CardContent>
+                    <ol>
+                        {elements.map((element, index) => (
+                            <li key={index}>
+                                <Link href={element.href}>
+                                    {element.label}
+                                </Link>
+                            </li>
+                        ))}
+                    </ol>
+                </CardContent>
+            </StyledCard>
             <BottomOfReferences></BottomOfReferences>
         </div>
     );

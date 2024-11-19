@@ -53,7 +53,7 @@ export const getStaticProps = async ({ params }) => {
             keyIndex,
             quality: decodedArppegio,
             shape: validShape,
-            board: 'references',
+            board: 'references3',
             articleContent
         },
     };

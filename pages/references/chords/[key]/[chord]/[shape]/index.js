@@ -51,7 +51,7 @@ export const getStaticProps = async ({ params }) => {
             keyIndex,
             quality: decodedChord,
             shape: shape,
-            board: 'references',
+            board: 'references1',
             articleContent
         }
     };

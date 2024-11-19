@@ -1,4 +1,3 @@
-// components/ArppegioComponent.js
 import React from 'react';
 import MusicApp from '../Containers/MusicApp'; // Adjust the path if needed
 import ArticleCard from '../Listing/ArticleCard'; // Adjust the path if needed
@@ -26,7 +25,7 @@ const ChordComponent = ({ board, keyIndex, quality, shape, articleContent}) => {
         quality={quality}
         shape={shape}
         showFretboardControls={false}
-        showCircleOfFifths={false}
+        showCircleOfFifths={true}
         showFretboard={true}
         showChordComposer={false}
         showProgressor={false}

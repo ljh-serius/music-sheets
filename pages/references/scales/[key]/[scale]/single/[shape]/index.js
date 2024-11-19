@@ -52,7 +52,7 @@ export const getStaticProps = async ({ params }) => {
             scale: scale,
             modeIndex: -1,  // Since it's a single scale, modeIndex is -1
             shape: validShape,
-            board: 'references',
+            board: 'references2',
             articleContent,  // Pass the content of the article as props
         },
     };

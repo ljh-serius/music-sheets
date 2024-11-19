@@ -11,8 +11,9 @@ const Root = styled('div')({
   alignItems: 'center',
 });
 
-
 const ArppegioComponent = ({ board, keyIndex, quality, shape, articleContent}) => {
+
+  console.log("BOARD VALUE ", board)
   return (
     <Root>
       <Meta title={articleContent.title}></Meta>
@@ -26,7 +27,7 @@ const ArppegioComponent = ({ board, keyIndex, quality, shape, articleContent}) =
         quality={quality}
         shape={shape}
         showFretboardControls={false}
-        showCircleOfFifths={false}
+        showCircleOfFifths={true}
         showFretboard={true}
         showChordComposer={false}
         showProgressor={false}

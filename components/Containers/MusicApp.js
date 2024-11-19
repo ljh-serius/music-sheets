@@ -16,8 +16,9 @@ import guitar from '../../config/guitar';
 import SongsSelector from '../Pages/LearnSongs/SongsSelector';
 import { useDispatch } from 'react-redux';
 import Meta from '../Partials/Head';
-import BottomOfHomePage from '../AdSense/BottomOfHomePage';
-import TopOfHomePage from '../AdSense/TopOfHomePage';
+import TopOfMusicApp from '../AdSense/TopOfMusicApp';
+import MiddleOfMusicApp from '../AdSense/BottomOfMusicApp';
+import BottomOfMusicApp from '../AdSense/BottomOfMusicApp';
 
 const Root = styled('div')({
   display: 'flex',
@@ -74,7 +75,7 @@ const MusicApp = (props) => {
     shape,
     quality,
     display,
-    onNoteClick
+    onNoteClick,
   } = props;
 
   const updateBoardsCallback = useCallback(() => {
@@ -165,7 +166,7 @@ const MusicApp = (props) => {
   const components = (
     <Root>
       <Meta title="References" />
-      <TopOfHomePage></TopOfHomePage>
+      <TopOfMusicApp></TopOfMusicApp>
       {showAddMoreFretboardsButton && (
         <IconButton onClick={createNewBoardDisplay}>
           <AddCircleOutlineIcon />
@@ -208,6 +209,7 @@ const MusicApp = (props) => {
             />
           )}
         </section>
+        <MiddleOfMusicApp></MiddleOfMusicApp>
         {showCircleOfFifths && (
           <CircleOfFifths
             tone={circleData.tone}
@@ -244,7 +246,7 @@ const MusicApp = (props) => {
           />
         )}
       </div>
-      <BottomOfHomePage></BottomOfHomePage>
+      <BottomOfMusicApp></BottomOfMusicApp>
     </Root>
   );
 

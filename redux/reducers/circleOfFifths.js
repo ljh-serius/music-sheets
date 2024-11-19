@@ -3,7 +3,6 @@ import {
   SET_DASHED_CIRCLE_ROTATION
 } from "../actionTypes";
 
-
 const initialState = {
   circleOfFifthsRotation: 226,
   dashedCircleRotation: 14

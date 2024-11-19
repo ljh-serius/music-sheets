@@ -60,7 +60,7 @@ export const getStaticProps = async ({ params }) => {
       scale: scale,
       modeIndex: validMode,
       shape: validShape,
-      board: 'references',
+      board: 'references2',
       articleContent
     },
   };

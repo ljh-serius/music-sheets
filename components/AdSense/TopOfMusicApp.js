@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import Script from 'next/script';
 
-const TopOfHomePage = () => {
+const TopOfMusicApp = () => {
     useEffect(() => {
         // Ensure `adsbygoogle` is initialized after the component mounts
         try {
@@ -32,4 +32,4 @@ const TopOfHomePage = () => {
     );
 };
 
-export default TopOfHomePage;
+export default TopOfMusicApp;
