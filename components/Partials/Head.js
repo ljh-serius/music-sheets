@@ -4,8 +4,8 @@ import Script from 'next/script';
 export default function Meta({ title }) {
     return (
         <Head>
-            <Script>
-                {`
+            <script>
+                
                     (function(w, d, s, l, i) { 
                         w[l] = w[l] || []; 
                         w[l].push({ 
@@ -19,8 +19,8 @@ export default function Meta({ title }) {
                         j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl; 
                         f.parentNode.insertBefore(j, f);
                     })(window, document, 'script', 'dataLayer', 'GTM-PBX6GPRP');
-                `}
-            </Script>
+                
+            </script>
             <title>{title}</title>
             <meta
                 name="format-detection"
@@ -34,11 +34,11 @@ export default function Meta({ title }) {
                 name="description"
                 content="Explore comprehensive references for musical keys, scales, modes, and arpeggios. Find detailed information and resources for all keys, sharps, scales, modes, and arpeggios to enhance your musical knowledge."
             />
-            <Script
+            <script
                 async
                 src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3419259043892692"
                 crossOrigin="anonymous"
-            ></Script>
+            ></script>
         </Head>
     );
 }
