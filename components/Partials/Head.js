@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import Script from 'next/script';
+// import Script from 'next/script';
 
 export default function Meta({ title }) {
     return (
@@ -17,19 +17,19 @@ export default function Meta({ title }) {
                 name="description"
                 content="Explore comprehensive references for musical keys, scales, modes, and arpeggios. Find detailed information and resources for all keys, sharps, scales, modes, and arpeggios to enhance your musical knowledge."
             />
-            <Script async src="https://www.googletagmanager.com/gtag/js?id=G-5FJXJGLWWH"></Script>
-            <Script>
+            <script async src="https://www.googletagmanager.com/gtag/js?id=G-5FJXJGLWWH"></script>
+            <script>
                 window.dataLayer = window.dataLayer || [];
                 function gtag(){ dataLayer.push(arguments) }
                 gtag('js', new Date());
 
                 gtag('config', 'G-5FJXJGLWWH');
-            </Script>
-            <Script
+            </script>
+            <script
                 async
                 src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3419259043892692"
                 crossOrigin="anonymous"
-            ></Script>
+            ></script>
         </Head>
     );
 }
