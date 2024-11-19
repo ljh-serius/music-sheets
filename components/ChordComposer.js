@@ -51,8 +51,9 @@ const ChordComposer = ({ addChordToProgression, saveProgression, playProgression
   const handleNodeClick = (nodeId) => {
     const chosenRoman = nodeId.split('-')[0];
 
+    console.log("CN ", chordNames)
     // Generate new nodes excluding the chosen one
-    const newNodes = initialRomanNumerals
+    const newNodes = chordNames
       .filter((numeral) => numeral !== chosenRoman)
       .map((roman, index) => ({
         id: `${roman}-${nodes.length + index}-${chordPath.join('-')}`,
@@ -84,12 +85,11 @@ const ChordComposer = ({ addChordToProgression, saveProgression, playProgression
 
   const getChordName = (romanNumeral, selectedKey) => {
     const rootNote = guitar.notes.sharps[guitar.notes.sharps.indexOf(selectedKey)]; // Find root note
-    const isMajor = !romanNumeral.includes('i') && !romanNumeral.includes('ii');
     let chordName = '';
 
     switch (romanNumeral) {
       case 'I':
-        chordName = `${guitar.notes.sharps[(guitar.notes.sharps.indexOf(rootNote)) + 1 % 12]} Major`;
+        chordName = `${guitar.notes.sharps[(guitar.notes.sharps.indexOf(rootNote)) % 12]} Major`;
         break;
       case 'ii':
         chordName = `${guitar.notes.sharps[(guitar.notes.sharps.indexOf(rootNote) + 2) % 12]} minor`;
@@ -138,13 +138,11 @@ const ChordComposer = ({ addChordToProgression, saveProgression, playProgression
 
   const initialNodes = initialRomanNumerals.map((roman, index) => ({
     id: `${roman}-${index}`,
-    label: roman,
+    label: `${roman} - ${getChordName(roman, guitar.notes.sharps[selectedKey])}`,
     group: 'roman',
     x: Math.random() * 400,
     y: Math.random() * 400,
   }));
-
-  const arppegiosNames = Object.keys(guitar.arppegios);
 
   // Arrays to hold major and minor arpeggios
   const majorArpeggios = [];
@@ -162,14 +160,15 @@ const ChordComposer = ({ addChordToProgression, saveProgression, playProgression
     }
   }
 
-  useEffect(() => {
-    // Dynamically generate the chord names based on the selected key
-    const generatedChordNames = initialRomanNumerals.map(roman => {
+  const generateChordNames = (selectedKey) => {
+    return initialRomanNumerals.map(roman => {
       return `${roman} - ${getChordName(roman, guitar.notes.sharps[selectedKey])}`;
     });
+  }
 
-    console.log(generatedChordNames)
-    setChordNames(generatedChordNames);
+  useEffect(() => {
+    // Dynamically generate the chord names based on the selected key
+    setChordNames(generateChordNames(selectedKey));
   }, [selectedKey]);
 
   return (
@@ -234,7 +233,7 @@ const ChordComposer = ({ addChordToProgression, saveProgression, playProgression
             <InputLabel id="select-roman-label">Selected Roman Numeral</InputLabel>
             <Select
               labelId="select-roman-label"
-              value={''}
+              value={chordNames[0] || ''}
               onChange={handleSelectChange}
               sx={{ border: "none" }}
             >
