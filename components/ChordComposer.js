@@ -160,16 +160,13 @@ const ChordComposer = ({ addChordToProgression, saveProgression, playProgression
     }
   }
 
-  const generateChordNames = (selectedKey) => {
-    return initialRomanNumerals.map(roman => {
+  useEffect(() => {
+   const chordNames = initialRomanNumerals.map(roman => {
       return `${roman} - ${getChordName(roman, guitar.notes.sharps[selectedKey])}`;
     });
-  }
-
-  useEffect(() => {
     // Dynamically generate tupdateBoardshe chord names based on the selected key
-    setChordNames(generateChordNames(selectedKey || 0));
-  }, [selectedKey,generateChordNames]);
+    setChordNames(chordNames);
+  }, [selectedKey,]);
 
   return (
     <Root>
