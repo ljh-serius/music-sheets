@@ -253,6 +253,7 @@ function App({ Component, pageProps }) {
               </Hidden>
             </nav>
             <Main open={drawerOpen}>
+              <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PBX6GPRP" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
               <DrawerHeader />
               <Container>
                 <Component {...pageProps} />
