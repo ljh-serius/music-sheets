@@ -17,19 +17,19 @@ export default function Meta({ title }) {
                 name="description"
                 content="Explore comprehensive references for musical keys, scales, modes, and arpeggios. Find detailed information and resources for all keys, sharps, scales, modes, and arpeggios to enhance your musical knowledge."
             />
-            <script async src="https://www.googletagmanager.com/gtag/js?id=G-5FJXJGLWWH"></script>
-            <script>
+            <Script async src="https://www.googletagmanager.com/gtag/js?id=G-5FJXJGLWWH"></Script>
+            <Script>
                 window.dataLayer = window.dataLayer || [];
                 function gtag(){ dataLayer.push(arguments) }
                 gtag('js', new Date());
 
                 gtag('config', 'G-5FJXJGLWWH');
-            </script>
-            <script
+            </Script>
+            <Script
                 async
                 src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3419259043892692"
                 crossOrigin="anonymous"
-            ></script>
+            ></Script>
         </Head>
     );
 }
