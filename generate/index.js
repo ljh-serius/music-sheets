@@ -1,6 +1,6 @@
-import Meta from '../../components/ReferencesMeta';
+import Meta from '../components/ReferencesMeta';
 import React from 'react';
-import TabsAndParitions from '../../components/TabsAndParitions';
+import TabsAndParitions from '../components/TabsAndParitions';
 
 const ComposeAndShare = () => {
   return (

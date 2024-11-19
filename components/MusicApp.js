@@ -15,6 +15,9 @@ import { addFretboard, updateStateProperty, setProgression, setProgressionKey } 
 import guitar from '../config/guitar';
 import SongsSelector from '../components/SongsSelector';
 import { useDispatch } from 'react-redux';
+import Meta from './ReferencesMeta';
+import BottomOfHomePage from './AdSense/BottomOfHomePage';
+import TopOfHomePage from './AdSense/TopOfHomePage';
 
 const Root = styled('div')({
   display: 'flex',
@@ -28,25 +31,6 @@ const Root = styled('div')({
 
 const FretboardContainer = styled('div')({
   width: '100%',
-  marginTop: '20px',
-  marginBottom: '20px',
-});
-
-const ShadowyContainer = styled('div')({
-  backgroundColor: '#ffffff',
-  boxShadow: '0 -2px 10px rgba(0,0,0,0.2)',
-  display: 'flex',
-  justifyContent: 'space-around',
-  alignItems: 'center',
-  zIndex: 1000,
-  marginTop: '20px',
-  marginBottom: '20px',
-});
-
-const ButtonGroup = styled('div')({
-  display: 'flex',
-  justifyContent: 'center',
-  gap: '8px',
   marginTop: '20px',
   marginBottom: '20px',
 });
@@ -180,17 +164,8 @@ const MusicApp = (props) => {
 
   const components = (
     <Root>
-      <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3419259043892692"
-        crossorigin="anonymous"></script>
-      <ins class="adsbygoogle"
-        style="display:block"
-        data-ad-client="ca-pub-3419259043892692"
-        data-ad-slot="3450860730"
-        data-ad-format="auto"
-        data-full-width-responsive="true"></ins>
-      <script>
-        (adsbygoogle = window.adsbygoogle || []).push({ });
-      </script>
+      <Meta title="References" />
+      <TopOfHomePage></TopOfHomePage>
       {showAddMoreFretboardsButton && (
         <IconButton onClick={createNewBoardDisplay}>
           <AddCircleOutlineIcon />
@@ -269,17 +244,7 @@ const MusicApp = (props) => {
           />
         )}
       </div>
-      <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3419259043892692"
-        crossorigin="anonymous"></script>
-      <ins class="adsbygoogle"
-        style="display:block"
-        data-ad-client="ca-pub-3419259043892692"
-        data-ad-slot="3450860730"
-        data-ad-format="auto"
-        data-full-width-responsive="true"></ins>
-      <script>
-        (adsbygoogle = window.adsbygoogle || []).push({ });
-      </script>
+      <BottomOfHomePage></BottomOfHomePage>
     </Root>
   );
 
