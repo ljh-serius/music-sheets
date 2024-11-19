@@ -1,5 +1,5 @@
 // pages\references\[key]\scales\[scale]\modal\[mode]\[shape]\index.js
-import ScaleComponent from '../../../../../../../../components/ScaleComponent';
+import ScaleComponent from '../../../../../../../../components/Elements/ScaleComponent';
 import guitar from '../../../../../../../../config/guitar';
 import fs from 'fs';
 import path from 'path';

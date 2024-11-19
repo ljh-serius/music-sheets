@@ -118,7 +118,6 @@ export const mostCommonSongs = {
         { "title": "Sweet Home Chicago", "artist": "Robert Johnson", "chords": "I-IV-V", "key": "E", "tempo": 120, "genre": "Delta Blues" },
         { "title": "Hoochie Coochie Man", "artist": "Muddy Waters", "chords": "I-IV-V", "key": "E", "tempo": 90, "genre": "Chicago Blues" },
         { "title": "Red House", "artist": "Jimi Hendrix", "chords": "I-IV-V", "key": "B", "tempo": 80, "genre": "Blues Rock" },
-        { "title": "The Thrill is Gone", "artist": "B.B. King", "chords": "I-bVII-IV-I", "key": "Bb", "tempo": 75, "genre": "Electric Blues" },
         { "title": "Born Under a Bad Sign", "artist": "Albert King", "chords": "I-IV-I-V", "key": "C", "tempo": 110, "genre": "Blues Rock" },
         { "title": "Stormy Monday", "artist": "T-Bone Walker", "chords": "I-IV-I-V", "key": "G", "tempo": 65, "genre": "Blues" },
         { "title": "I'm Tore Down", "artist": "Freddie King", "chords": "I-IV-V", "key": "A", "tempo": 120, "genre": "Electric Blues" },

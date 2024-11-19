@@ -187,6 +187,7 @@ const SongsSelector = ({ playProgression, getScaleNotes }) => {
     const isMajorScale = selectedKey.includes('m') === false;
     const scaleNotes = getScaleNotes(isMajorScale ? 'major' : 'minor', keyIndex)
 
+    console.log(progressionString.split('-'))
     return progressionString.split('-').map(chordSymbol => {
       const chordType = chordMap[chordSymbol].chord;
       const chordCaged = chordMap[chordSymbol].caged;

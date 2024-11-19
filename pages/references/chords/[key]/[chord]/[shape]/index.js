@@ -1,5 +1,5 @@
 // pages/references/[key]/arppegios/[arppegio]/[quality]/[shape]/index.js
-import ChordComponent from '../../../../../../components/ChordComponent';
+import ChordComponent from '../../../../../../components/Elements/ScaleComponent';
 import guitar from '../../../../../../config/guitar';
 import fs from 'fs';
 import path from 'path';

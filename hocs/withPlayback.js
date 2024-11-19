@@ -10,6 +10,9 @@ const withPlayback = (WrappedComponent) => {
         const { selectedFretboard, progressions, selectedFretboardIndex } = props;
 
         const playProgression = useCallback(async (progression) => {
+
+            console.log("PROGRESSION : ", progression);
+
             for (let i = 0; i < progression.length; i++) {
                 const { chord, shape, key, notes } = progression[i];
                 dispatch(updateStateProperty(selectedFretboard.id, 'generalSettings.choice', 'chord'));
@@ -197,13 +200,16 @@ const withPlayback = (WrappedComponent) => {
         };
 
         const displayChordPortion = (chordObject, player) => {
+
+            console.log("CHORD OBJECT : ", chordObject);
+
             const { key, chord, shape, notes } = chordObject;
             const { choice } = selectedFretboard.generalSettings;
-            const cagedShape = JSON.parse(JSON.stringify(guitar.arppegios[chord]?.cagedShapes[shape]));
+            const cagedShape = JSON.parse(JSON.stringify(guitar.arppegios[chord === 'm' ? 'min' : chord]?.cagedShapes[shape]));
     
             if (!cagedShape) return;
     
-            const { formula } = guitar.arppegios[chord];
+            const { formula } = guitar.arppegios[chord === 'm' ? 'min' : chord];
     
             // Calculate chord notes
             let currentNoteIndex = key;
@@ -216,7 +222,7 @@ const withPlayback = (WrappedComponent) => {
     
             chordNotes.pop(); // Remove the last note which is a duplicate of the first
     
-            const chordIntervals = guitar.arppegios[chord].intervals;
+            const chordIntervals = guitar.arppegios[chord === 'm' ? 'min' : chord].intervals;
             const newComponent = JSON.parse(JSON.stringify(selectedFretboard));
             const newBoard = newComponent[(player ? 'chord' : choice) + 'Settings'].fretboard;
     

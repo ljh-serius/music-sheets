@@ -1,6 +1,6 @@
 import fs from 'fs';
 import path from 'path';
-import ScaleComponent from '../../../../../../../components/ScaleComponent';
+import ScaleComponent from '../../../../../../../components/Elements/ScaleComponent';
 import guitar from '../../../../../../../config/guitar';
 
 export const getStaticPaths = async () => {
