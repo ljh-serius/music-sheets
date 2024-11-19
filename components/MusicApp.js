@@ -91,7 +91,7 @@ const MusicApp = (props) => {
     quality,
     display,
     onNoteClick
-    } = props;
+  } = props;
 
   const updateBoardsCallback = useCallback(() => {
     if (selectedFretboard?.id) {
@@ -180,6 +180,17 @@ const MusicApp = (props) => {
 
   const components = (
     <Root>
+      <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3419259043892692"
+        crossorigin="anonymous"></script>
+      <ins class="adsbygoogle"
+        style="display:block"
+        data-ad-client="ca-pub-3419259043892692"
+        data-ad-slot="3450860730"
+        data-ad-format="auto"
+        data-full-width-responsive="true"></ins>
+      <script>
+        (adsbygoogle = window.adsbygoogle || []).push({ });
+      </script>
       {showAddMoreFretboardsButton && (
         <IconButton onClick={createNewBoardDisplay}>
           <AddCircleOutlineIcon />
@@ -252,12 +263,23 @@ const MusicApp = (props) => {
           />
         )}
         {showSongsSelector && (
-          <SongsSelector 
+          <SongsSelector
             playProgression={playProgression}
             getScaleNotes={getScaleNotes}
           />
         )}
       </div>
+      <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3419259043892692"
+        crossorigin="anonymous"></script>
+      <ins class="adsbygoogle"
+        style="display:block"
+        data-ad-client="ca-pub-3419259043892692"
+        data-ad-slot="3450860730"
+        data-ad-format="auto"
+        data-full-width-responsive="true"></ins>
+      <script>
+        (adsbygoogle = window.adsbygoogle || []).push({ });
+      </script>
     </Root>
   );
 
