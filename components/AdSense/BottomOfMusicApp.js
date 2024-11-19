@@ -17,7 +17,7 @@ const BottomOfMusicApp = () => {
         <div>
             <ins
                 className="adsbygoogle"
-                style={{ display: 'block' }}
+                styles={{ display: 'block' }}
                 data-ad-client="ca-pub-3419259043892692"
                 data-ad-slot="7916719356"
                 data-ad-format="auto"

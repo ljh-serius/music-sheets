@@ -44,14 +44,14 @@ export const getStaticProps = async ({ params }) => {
   // Define the path to the JSON file
   const fileName = `article_${title.replace(/[^\w\s#]/gi, '').replace(/\s+/g, '_')}.json`;
   const filePath = path.join(process.cwd(), 'articles', fileName);
-  
+
   // Read the content of the JSON file
   let articleContent = {};
   try {
-      const fileContent = await fs.promises.readFile(filePath, 'utf-8');
-      articleContent = JSON.parse(fileContent);
+    const fileContent = await fs.promises.readFile(filePath, 'utf-8');
+    articleContent = JSON.parse(fileContent);
   } catch (error) {
-      console.error(`Error reading file ${filePath}:`, error);
+    console.error(`Error reading file ${filePath}:`, error);
   }
 
   return {

@@ -15,14 +15,13 @@ const TopOfMusicApp = () => {
 
     return (
         <div>
-            <ins
+            <ins 
                 className="adsbygoogle"
                 styles={{ display: 'block' }}
                 data-ad-client="ca-pub-3419259043892692"
-                data-ad-slot="3450860730"
+                data-ad-slot="5604322727"
                 data-ad-format="auto"
-                data-full-width-responsive="true"
-            ></ins>
+                data-full-width-responsive="true"></ins>
             <Script
                 id="adsbygoogle-script"
                 src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"

@@ -21,7 +21,7 @@ const MiddleOfMusicApp = () => {
                 data-ad-slot="5316548113"
                 data-ad-format="auto"
                 data-full-width-responsive="true"></ins>
-            <Script
+                <Script
                 id="adsbygoogle-script-bottom"
                 src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
                 strategy="afterInteractive" // Ensures script loads only on the client side

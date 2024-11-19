@@ -17,7 +17,7 @@ const TopOfReferences = () => {
         <div>
             <ins
                 className="adsbygoogle"
-                style={{ display: 'block' }}
+                styles={{ display: 'block' }}
                 data-ad-client="ca-pub-3419259043892692"
                 data-ad-slot="9230908241"
                 data-ad-format="auto"
