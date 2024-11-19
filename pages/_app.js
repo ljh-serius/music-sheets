@@ -24,7 +24,7 @@ import store from '../redux/store';
 import '../styles/styles.css';
 import '../styles/CircleOfFifths.css';
 import { GoogleAnalytics } from '@next/third-parties/google'
-
+  
 const inter = Open_Sans({ subsets: ['latin'], weight: ['300', '400', '500', '700'] });
 
 const theme = createTheme({
@@ -254,7 +254,7 @@ function App({ Component, pageProps }) {
               </Hidden>
             </nav>
             <Main open={drawerOpen}>
-              <GoogleAnalytics gaId="G-5FJXJGLWWH" />
+              <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PBX6GPRP" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
               <DrawerHeader />
               <Container>
                 <Component {...pageProps} />
