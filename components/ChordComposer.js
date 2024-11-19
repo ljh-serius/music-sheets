@@ -68,6 +68,7 @@ const ChordComposer = ({ addChordToProgression, saveProgression, playProgression
       to: node.id,
     }));
 
+    console.log("CHOSEN ROMAN ", chosenRoman)
     setNodes([
       ...nodes.filter((n) => n.group !== 'roman'),
       { id: nodeId, label: `${chosenRoman} - ${getChordName(chosenRoman, guitar.notes.sharps[selectedKey || 0])}`, group: 'chosen' },
@@ -84,7 +85,9 @@ const ChordComposer = ({ addChordToProgression, saveProgression, playProgression
   };
 
   const getChordName = (romanNumeral, selectedKey) => {
-    const rootNote = guitar.notes.sharps[guitar.notes.sharps.indexOf(selectedKey)]; // Find root note
+
+    console.log("PARAMS :" [romanNumeral, selectedKey])
+    const rootNote = selectedKey; // Find root note
     let chordName = '';
 
     switch (romanNumeral) {
@@ -131,6 +134,7 @@ const ChordComposer = ({ addChordToProgression, saveProgression, playProgression
         chordName = `${guitar.notes.sharps[(guitar.notes.sharps.indexOf(rootNote) + 7) % 12]} Major`;
         break;
     }
+
     return chordName;
   };
 
@@ -141,6 +145,8 @@ const ChordComposer = ({ addChordToProgression, saveProgression, playProgression
     x: Math.random() * 400, 
     y: Math.random() * 400,
   }));
+
+  console.log("INITIAL NODES ", initialNodes)
 
   // Arrays to hold major and minor arpeggios
   const majorArpeggios = [];
@@ -206,16 +212,18 @@ const ChordComposer = ({ addChordToProgression, saveProgression, playProgression
                     onChange={(e) => onElementChange(e.target.value, 'choice')}
                     displayEmpty
                   >
-                    {isLowerCase(chord.label[0]) && minorArpeggios.map((arppegioName, index) => (
-                      <MenuItem key={index} value={arppegioName}>
-                        {arppegioName}
-                      </MenuItem>
+                    {isLowerCase(chord.label[0]) && 
+                      minorArpeggios.map((arppegioName, index) => (
+                        <MenuItem key={index} value={arppegioName}>
+                          {arppegioName}
+                        </MenuItem>
                     ))}
 
-                    {!isLowerCase(chord.label[0]) && majorArpeggios.map((arppegioName, index) => (
-                      <MenuItem key={index} value={arppegioName}>
-                        {arppegioName}
-                      </MenuItem>
+                    {!isLowerCase(chord.label[0]) &&
+                      majorArpeggios.map((arppegioName, index) => (
+                        <MenuItem key={index} value={arppegioName}>
+                          {arppegioName}
+                        </MenuItem>
                     ))}
                   </Select>
                 </Card>
@@ -283,7 +291,7 @@ ChordComposer.propTypes = {
   playProgression: PropTypes.func.isRequired,
   selectedArppegio: PropTypes.string,
   onElementChange: PropTypes.func.isRequired,
-  selectedKey: PropTypes.string.isRequired,
+  selectedKey: PropTypes.number.isRequired,
 };
 
 export default ChordComposer;
