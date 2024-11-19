@@ -23,7 +23,7 @@ const StyledFormControl = styled(FormControl)({
 const GraphContainer = styled('div')({
   height: 400,
   width: '100%',
-  border: '1px solid black',
+  border: '1px solid rgba(0, 0, 0, 0.3)',
 });
 
 const ProgressionContainer = styled('div')({
@@ -51,13 +51,12 @@ const ChordComposer = ({ addChordToProgression, saveProgression, playProgression
   const handleNodeClick = (nodeId) => {
     const chosenRoman = nodeId.split('-')[0];
 
-    console.log("CN ", chordNames)
     // Generate new nodes excluding the chosen one
     const newNodes = chordNames
       .filter((numeral) => numeral !== chosenRoman)
       .map((roman, index) => ({
         id: `${roman}-${nodes.length + index}-${chordPath.join('-')}`,
-        label: roman,
+        label: `${roman} - ${getChordName(roman, guitar.notes.sharps[selectedKey || 0])}`,
         group: 'roman',
         x: Math.random() * 400,
         y: Math.random() * 400,
@@ -71,11 +70,12 @@ const ChordComposer = ({ addChordToProgression, saveProgression, playProgression
 
     setNodes([
       ...nodes.filter((n) => n.group !== 'roman'),
-      { id: nodeId, label: chosenRoman, group: 'chosen' },
+      { id: nodeId, label: `${chosenRoman} - ${getChordName(chosenRoman, guitar.notes.sharps[selectedKey || 0])}`, group: 'chosen' },
       ...newNodes,
     ]);
+    
     setEdges([...edges, ...newEdges]);
-    setChordPath([...chordPath, { id: nodeId, label: chosenRoman }]);
+    setChordPath([...chordPath, { id: nodeId, label: `${chosenRoman} - ${getChordName(chosenRoman, guitar.notes.sharps[selectedKey || 0])}` }]);
     setShowInitial(false);
   };
 
@@ -130,17 +130,15 @@ const ChordComposer = ({ addChordToProgression, saveProgression, playProgression
       case 'VII':
         chordName = `${guitar.notes.sharps[(guitar.notes.sharps.indexOf(rootNote) + 7) % 12]} Major`;
         break;
-      default:
-        chordName = `Select a block`;
     }
     return chordName;
   };
 
   const initialNodes = initialRomanNumerals.map((roman, index) => ({
     id: `${roman}-${index}`,
-    label: `${roman} - ${getChordName(roman, guitar.notes.sharps[selectedKey])}`,
+    label: `${roman} - ${getChordName(roman, guitar.notes.sharps[selectedKey || 0])}`,
     group: 'roman',
-    x: Math.random() * 400,
+    x: Math.random() * 400, 
     y: Math.random() * 400,
   }));
 
@@ -168,19 +166,20 @@ const ChordComposer = ({ addChordToProgression, saveProgression, playProgression
 
   useEffect(() => {
     // Dynamically generate the chord names based on the selected key
-    setChordNames(generateChordNames(selectedKey));
+    setChordNames(generateChordNames(selectedKey || 0));
   }, [selectedKey]);
 
   return (
     <Root>
       <Grid container spacing={2}>
         <Grid item xs={12}>
-          <KeySelector choice="key" selectedKey={selectedKey} onElementChange={onElementChange} />
+          <Typography variant="h6">Please, chose a key to begin</Typography>
+          <KeySelector choice="key" selectedKey={selectedKey || 0} onElementChange={onElementChange} />
         </Grid>
         <Grid item xs={12}>
           <ProgressionContainer>
             {chordPath.length === 0 && (
-              <Typography variant="h6">Selected Chord Progression Should Appear</Typography>
+              <Typography variant="h6">Selected Chord Progression Should Appear Here...</Typography>
             )}
             {chordPath.length > 0 && chordPath.map((chord, index) => (
               <React.Fragment key={index}>
@@ -227,7 +226,6 @@ const ChordComposer = ({ addChordToProgression, saveProgression, playProgression
             ))}
           </ProgressionContainer>
         </Grid>
-
         <Grid item xs={12}>
           <StyledFormControl>
             <InputLabel id="select-roman-label">Selected Roman Numeral</InputLabel>
@@ -237,7 +235,7 @@ const ChordComposer = ({ addChordToProgression, saveProgression, playProgression
               onChange={handleSelectChange}
               sx={{ border: "none" }}
             >
-              {chordNames.map((chord, index) => (
+              {chordNames.length > 0 && chordNames.map((chord, index) => (
                 <MenuItem key={index} value={chord}>
                   {chord}
                 </MenuItem>
