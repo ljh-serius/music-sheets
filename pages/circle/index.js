@@ -1,6 +1,6 @@
 import React from 'react';
-import MusicApp from '../../components/MusicApp';
-import Meta from '../../components/ReferencesMeta';
+import MusicApp from '../../components/Containers/MusicApp';
+import Meta from '../../components/Partials/Head';
 
 const TheCircleOfFifths = () => {
 

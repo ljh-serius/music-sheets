@@ -1,9 +1,9 @@
-// components/ScaleComponent.js
 import React from 'react';
-import MusicApp from './MusicApp'; // Adjust the path if needed
+import MusicApp from '../Containers/MusicApp'; // Adjust the path if needed
 import { styled } from '@mui/system';
-import ArticleCard from './ArticleCard'; // Adjust the path if needed
-import Meta from './ReferencesMeta';
+import ArticleCard from '../Listing/ArticleCard'; // Adjust the path if needed
+import Meta from '../Partials/Head';
+import { Typography } from '@mui/material';
 
 const Root = styled('div')({
   display: 'flex',
@@ -11,16 +11,19 @@ const Root = styled('div')({
   alignItems: 'center',
 });
 
-const ScaleComponent = ({ board, keyIndex, scale, modeIndex, shape, articleContent }) => {
+
+const ArppegioComponent = ({ board, keyIndex, quality, shape, articleContent}) => {
   return (
     <Root>
       <Meta title={articleContent.title}></Meta>
+      <Typography variant="h3">
+        {articleContent.title}
+      </Typography>
       <MusicApp
-        display="scale"
+        display="arppegio"
         board={board}
         keyIndex={keyIndex}
-        scale={scale}
-        modeIndex={modeIndex}
+        quality={quality}
         shape={shape}
         showFretboardControls={false}
         showCircleOfFifths={false}
@@ -34,4 +37,4 @@ const ScaleComponent = ({ board, keyIndex, scale, modeIndex, shape, articleConte
   );
 };
 
-export default ScaleComponent;
+export default ArppegioComponent;

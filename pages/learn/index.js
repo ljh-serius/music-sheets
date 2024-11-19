@@ -1,7 +1,7 @@
 import React from 'react';
-import MusicApp from '../../components/MusicApp';
-import Meta from '../../components/ReferencesMeta';
-import ArticleCard from '../../components/ArticleCard';
+import MusicApp from '../../components/Containers/MusicApp';
+import Meta from '../../components/Partials/Head';
+import ArticleCard from '../../components/Listing/ArticleCard';
 
 const secondPage = `
 ### Practice Tips

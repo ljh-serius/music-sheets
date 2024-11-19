@@ -2,22 +2,22 @@ import { IconButton } from '@mui/material';
 import { styled } from '@mui/system';
 import { useCallback, useEffect } from 'react';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
-import FretboardControls from '../components/FretboardControls';
-import Progressor from '../components/Progressor';
-import CircleOfFifths from '../components/CircleOfFifths';
-import FretboardDisplay from '../components/FretboardDisplay';
-import ChordComposer from '../components/ChordComposer';
-import withFretboardState from '../hocs/withFretboardState';
-import withChordProgression from '../hocs/withChordProgression';
-import withPlayback from '../hocs/withPlayback';
+import FretboardControls from '../Pages/Fretboard/FretboardControls';
+import Progressor from '../UpComingPages/Page.ChordProgressionsComposer/OldVersion.Trialed.NotSucceeded/Progressor';
+import CircleOfFifths from '../Pages/CircleOfFifths/CircleOfFifths';
+import FretboardDisplay from '../Pages/Fretboard/FretboardDisplay';
+import ChordComposer from '../UpComingPages/Page.ChordProgressionsComposer/ChordComposer';
+import withFretboardState from '../../hocs/withFretboardState';
+import withChordProgression from '../../hocs/withChordProgression';
+import withPlayback from '../../hocs/withPlayback';
 import { connect } from 'react-redux';
-import { addFretboard, updateStateProperty, setProgression, setProgressionKey } from '../redux/actions';
-import guitar from '../config/guitar';
-import SongsSelector from '../components/SongsSelector';
+import { addFretboard, updateStateProperty, setProgression, setProgressionKey } from '../../redux/actions';
+import guitar from '../../config/guitar';
+import SongsSelector from '../Pages/LearnSongs/SongsSelector';
 import { useDispatch } from 'react-redux';
-import Meta from './ReferencesMeta';
-import BottomOfHomePage from './AdSense/BottomOfHomePage';
-import TopOfHomePage from './AdSense/TopOfHomePage';
+import Meta from '../Partials/Head';
+import BottomOfHomePage from '../AdSense/BottomOfHomePage';
+import TopOfHomePage from '../AdSense/TopOfHomePage';
 
 const Root = styled('div')({
   display: 'flex',

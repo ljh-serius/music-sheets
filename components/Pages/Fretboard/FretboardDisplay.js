@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import guitar from '../config/guitar';
+import guitar from '../../../config/guitar';
 import { styled } from '@mui/system';
 import classNames from 'classnames';
 

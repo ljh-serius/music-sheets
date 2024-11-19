@@ -1,8 +1,9 @@
+// components/ArppegioComponent.js
 import React from 'react';
-import MusicApp from './MusicApp'; // Adjust the path if needed
+import MusicApp from '../Containers/MusicApp'; // Adjust the path if needed
+import ArticleCard from '../Listing/ArticleCard'; // Adjust the path if needed
 import { styled } from '@mui/system';
-import ArticleCard from './ArticleCard'; // Adjust the path if needed
-import Meta from './ReferencesMeta';
+import Meta from '../Partials/Head';
 import { Typography } from '@mui/material';
 
 const Root = styled('div')({
@@ -11,8 +12,7 @@ const Root = styled('div')({
   alignItems: 'center',
 });
 
-
-const ArppegioComponent = ({ board, keyIndex, quality, shape, articleContent}) => {
+const ChordComponent = ({ board, keyIndex, quality, shape, articleContent}) => {
   return (
     <Root>
       <Meta title={articleContent.title}></Meta>
@@ -20,7 +20,7 @@ const ArppegioComponent = ({ board, keyIndex, quality, shape, articleContent}) =
         {articleContent.title}
       </Typography>
       <MusicApp
-        display="arppegio"
+        display="chord"
         board={board}
         keyIndex={keyIndex}
         quality={quality}
@@ -37,4 +37,4 @@ const ArppegioComponent = ({ board, keyIndex, quality, shape, articleContent}) =
   );
 };
 
-export default ArppegioComponent;
+export default ChordComponent;

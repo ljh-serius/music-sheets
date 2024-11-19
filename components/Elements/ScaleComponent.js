@@ -1,10 +1,9 @@
-// components/ArppegioComponent.js
+// components/ScaleComponent.js
 import React from 'react';
-import MusicApp from './MusicApp'; // Adjust the path if needed
-import ArticleCard from './ArticleCard'; // Adjust the path if needed
+import MusicApp from '../Containers/MusicApp'; // Adjust the path if needed
 import { styled } from '@mui/system';
-import Meta from './ReferencesMeta';
-import { Typography } from '@mui/material';
+import ArticleCard from '../Listing/ArticleCard'; // Adjust the path if needed
+import Meta from '../Partials/Head';
 
 const Root = styled('div')({
   display: 'flex',
@@ -12,18 +11,16 @@ const Root = styled('div')({
   alignItems: 'center',
 });
 
-const ChordComponent = ({ board, keyIndex, quality, shape, articleContent}) => {
+const ScaleComponent = ({ board, keyIndex, scale, modeIndex, shape, articleContent }) => {
   return (
     <Root>
       <Meta title={articleContent.title}></Meta>
-      <Typography variant="h3">
-        {articleContent.title}
-      </Typography>
       <MusicApp
-        display="chord"
+        display="scale"
         board={board}
         keyIndex={keyIndex}
-        quality={quality}
+        scale={scale}
+        modeIndex={modeIndex}
         shape={shape}
         showFretboardControls={false}
         showCircleOfFifths={false}
@@ -37,4 +34,4 @@ const ChordComponent = ({ board, keyIndex, quality, shape, articleContent}) => {
   );
 };
 
-export default ChordComponent;
+export default ScaleComponent;

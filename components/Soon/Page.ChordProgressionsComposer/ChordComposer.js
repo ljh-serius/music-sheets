@@ -3,8 +3,8 @@ import { FormControl, Button, Grid, Select, MenuItem, InputLabel, Card, Typograp
 import { styled } from '@mui/system';
 import ChordGraph from './ChordGraph';
 import PropTypes from 'prop-types';
-import guitar from '../config/guitar';
-import { KeySelector } from './FretboardControls';
+import guitar from '../../../config/guitar';
+import { KeySelector } from '../../Pages/Fretboard/FretboardControls';
 
 function isLowerCase(str) {
   return str === str.toLowerCase();

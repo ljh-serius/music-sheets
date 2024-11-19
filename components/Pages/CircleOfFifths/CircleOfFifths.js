@@ -1,4 +1,4 @@
-import guitar from '../config/guitar';
+import guitar from '../../../config/guitar';
 import React, { useState, useEffect } from 'react';
 
 const CircleOfFifths = ({

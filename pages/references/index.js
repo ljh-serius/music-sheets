@@ -1,4 +1,4 @@
-import References from '../../components/References';
+import References from '../../components/Listing/References';
 import guitar from '../../config/guitar';
 
 export const getStaticProps = async (context) => {

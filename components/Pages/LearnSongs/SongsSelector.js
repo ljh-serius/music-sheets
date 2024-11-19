@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { Button, Card, CardContent, Typography, Grid } from '@mui/material';
 import { styled } from '@mui/system';
-import { keys, mostCommonSongs } from '../config/mostCommonSongs';
-import guitar from '../config/guitar';
+import { keys, mostCommonSongs } from '../../../config/mostCommonSongs';
+import guitar from '../../../config/guitar';
 
 function generateRandomCagedSystem() {
   const systems = ['C', 'A', 'G', 'E', 'D'];

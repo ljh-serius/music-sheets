@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import Meta from './ReferencesMeta';
+import Meta from '../Partials/Head';
 import ArticleCard from './ArticleCard';
-import TopOfReferences from './AdSense/TopOfReferences';
-import BottomOfReferences from './AdSense/BottomOfReferences';
+import TopOfReferences from '../AdSense/TopOfReferences';
+import BottomOfReferences from '../AdSense/BottomOfReferences';
 
 const content = `# Preface
 

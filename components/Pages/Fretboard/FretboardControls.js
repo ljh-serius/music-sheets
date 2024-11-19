@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button, Select, MenuItem, FormControl, InputLabel, Grid } from '@mui/material';
-import guitar from '../config/guitar.js';
+import guitar from '../../../config/guitar.js';
 import PropTypes from 'prop-types';
 import { styled} from '@mui/system';
 
