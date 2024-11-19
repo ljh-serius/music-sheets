@@ -133,7 +133,7 @@ const MusicApp = (props) => {
         }
       }
     }
-  }, [dispatch, display, selectedFretboard, keyIndex, modeIndex, scale, shape, quality]);
+  }, [dispatch, display, selectedFretboard, keyIndex, modeIndex, scale, shape, quality, updateBoards]);
 
   useEffect(() => {
     updateBoardsCallback();

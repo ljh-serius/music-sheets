@@ -68,7 +68,6 @@ const ChordComposer = ({ addChordToProgression, saveProgression, playProgression
       to: node.id,
     }));
 
-    console.log("CHOSEN ROMAN ", chosenRoman)
     setNodes([
       ...nodes.filter((n) => n.group !== 'roman'),
       { id: nodeId, label: `${chosenRoman} - ${getChordName(chosenRoman, guitar.notes.sharps[selectedKey || 0])}`, group: 'chosen' },
@@ -86,7 +85,6 @@ const ChordComposer = ({ addChordToProgression, saveProgression, playProgression
 
   const getChordName = (romanNumeral, selectedKey) => {
 
-    console.log("PARAMS :" [romanNumeral, selectedKey])
     const rootNote = selectedKey; // Find root note
     let chordName = '';
 
@@ -146,8 +144,6 @@ const ChordComposer = ({ addChordToProgression, saveProgression, playProgression
     y: Math.random() * 400,
   }));
 
-  console.log("INITIAL NODES ", initialNodes)
-
   // Arrays to hold major and minor arpeggios
   const majorArpeggios = [];
   const minorArpeggios = [];
@@ -171,9 +167,9 @@ const ChordComposer = ({ addChordToProgression, saveProgression, playProgression
   }
 
   useEffect(() => {
-    // Dynamically generate the chord names based on the selected key
+    // Dynamically generate tupdateBoardshe chord names based on the selected key
     setChordNames(generateChordNames(selectedKey || 0));
-  }, [selectedKey]);
+  }, [selectedKey,generateChordNames]);
 
   return (
     <Root>
