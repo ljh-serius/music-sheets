@@ -1,5 +1,5 @@
 import React from 'react';
-import ArticleCard from '../../components/ArticleCard';
+import ArticleCard from '../../components/Listing/ArticleCard';
 
 const firstPage = `# Privacy Policy (RGPD) for Strum.fun
 
