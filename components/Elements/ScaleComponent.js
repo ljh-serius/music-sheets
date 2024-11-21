@@ -15,6 +15,9 @@ const ScaleComponent = ({ board, keyIndex, scale, modeIndex, shape, articleConte
   return (
     <Root>
       <Meta title={articleContent.title}></Meta>
+      <Typography variant="h3">
+        {articleContent.title}
+      </Typography>
       <MusicApp
         display="scale"
         board={board}
