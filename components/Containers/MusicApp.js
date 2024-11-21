@@ -166,7 +166,6 @@ const MusicApp = (props) => {
   const components = (
     <Root>
       <Meta title="References" />
-      <TopOfMusicApp></TopOfMusicApp>
       {showAddMoreFretboardsButton && (
         <IconButton onClick={createNewBoardDisplay}>
           <AddCircleOutlineIcon />
@@ -209,7 +208,6 @@ const MusicApp = (props) => {
             />
           )}
         </section>
-        <MiddleOfMusicApp></MiddleOfMusicApp>
         {showCircleOfFifths && (
           <CircleOfFifths
             tone={circleData.tone}
@@ -246,7 +244,6 @@ const MusicApp = (props) => {
           />
         )}
       </div>
-      <BottomOfMusicApp></BottomOfMusicApp>
     </Root>
   );
 

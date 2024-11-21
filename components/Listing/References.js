@@ -102,7 +102,6 @@ const References = ({ elements = [] }) => {
             <ArticleCard article={{
                 content: content
             }}></ArticleCard>
-            <TopOfReferences></TopOfReferences>
             <StyledCard>
                 <Typography variant="h3">
                     Site Pages :
@@ -134,7 +133,6 @@ const References = ({ elements = [] }) => {
                     </ol>
                 </CardContent>
             </StyledCard>
-            <BottomOfReferences></BottomOfReferences>
         </div>
     );
 };
