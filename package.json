@@ -10,7 +10,6 @@
     "lint": "next lint",
     "deploy": "gh-pages -d out",
     "postbuild": "next-sitemap",
-    "export": "next export",
     "buildAndDeploy": "next build && gh-pages -d out"
   },
   "dependencies": {
