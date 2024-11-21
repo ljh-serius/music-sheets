@@ -3,8 +3,6 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import Meta from '../Partials/Head';
 import ArticleCard from './ArticleCard';
-import TopOfReferences from '../AdSense/TopOfReferences';
-import BottomOfReferences from '../AdSense/BottomOfReferences';
 import { Card, CardContent, Typography } from '@mui/material';
 import { styled } from '@mui/material/styles';
 
