@@ -158,6 +158,7 @@ const withFretboardState = (WrappedComponent) => {
         }, [selectedFretboard]);
         
         const displayChordPortion = (chordObject) => {
+            console.log("CHORD OBJECT : ", chordObject)
             const { key, chord, shape } = chordObject;
             const cagedShape = guitar.arppegios[chord]?.cagedShapes[shape];
         

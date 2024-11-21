@@ -16,9 +16,6 @@ import guitar from '../../config/guitar';
 import SongsSelector from '../Pages/LearnSongs/SongsSelector';
 import { useDispatch } from 'react-redux';
 import Meta from '../Partials/Head';
-import TopOfMusicApp from '../AdSense/TopOfMusicApp';
-import MiddleOfMusicApp from '../AdSense/MiddleOfMusicApp';
-import BottomOfMusicApp from '../AdSense/BottomOfMusicApp';
 
 const Root = styled('div')({
   display: 'flex',
@@ -79,6 +76,10 @@ const MusicApp = (props) => {
   } = props;
 
   const updateBoardsCallback = useCallback(() => {
+
+    console.log("SELECTED FRETBOARD ", selectedFretboard);
+    console.log("DISPLAY ", display);
+    
     if (selectedFretboard?.id) {
       if (!isNaN(keyIndex)) {
         dispatch(updateBoards(selectedFretboard.id, 'keySettings.' + display, keyIndex));

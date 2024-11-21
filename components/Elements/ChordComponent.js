@@ -23,6 +23,8 @@ const ChordComponent = ({ board, keyIndex, quality, shape, articleContent}) => {
         keyIndex={keyIndex}
         quality={quality}
         shape={shape}
+        display="chord"
+
         showFretboardControls={false}
         showCircleOfFifths={true}
         showFretboard={true}
