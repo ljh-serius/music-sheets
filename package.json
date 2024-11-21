@@ -8,10 +8,10 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "buildAndDeploy": "next build && gh-pages -d out",
     "deploy": "gh-pages -d out",
     "postbuild": "next-sitemap",
-    "export": "next export"
+    "export": "next export",
+    "buildAndDeploy": "next build && gh-pages -d out"
   },
   "dependencies": {
     "@emotion/react": "^11.11.4",

@@ -13,7 +13,6 @@ const Root = styled('div')({
 
 const ArppegioComponent = ({ board, keyIndex, quality, shape, articleContent}) => {
 
-  console.log("BOARD VALUE ", board)
   return (
     <Root>
       <Meta title={articleContent.title}></Meta>
