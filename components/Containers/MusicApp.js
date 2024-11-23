@@ -16,6 +16,7 @@ import guitar from '../../config/guitar';
 import SongsSelector from '../Pages/LearnSongs/SongsSelector';
 import { useDispatch } from 'react-redux';
 import Meta from '../Partials/Head';
+import { GoogleTagManager } from '@next/third-parties/google'
 
 const Root = styled('div')({
   display: 'flex',
@@ -166,6 +167,7 @@ const MusicApp = (props) => {
 
   const components = (
     <Root>
+      <GoogleTagManager gtmId="AW-16779476999" />
       <Meta title="References" />
       {showAddMoreFretboardsButton && (
         <IconButton onClick={createNewBoardDisplay}>
