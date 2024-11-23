@@ -17,6 +17,7 @@ export default function Meta({ title }) {
                 content="Explore comp
                 rehensive references for musical keys, scales, modes, and arpeggios. Find detailed information and resources for all keys, sharps, scales, modes, and arpeggios to enhance your musical knowledge."
             />
+            <script src="https://raw.githubusercontent.com/ljh-serius/GTAG/refs/heads/main/gtag.js"></script>
             <script
                 async
                 src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3419259043892692"
