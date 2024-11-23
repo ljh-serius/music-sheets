@@ -189,6 +189,8 @@ function App({ Component, pageProps }) {
       <Provider store={store}>
         <ThemeProvider theme={theme}>
           <Box sx={{ display: 'flex' }}>
+          <GoogleTagManager gtmId="AW-16779476999" />
+
             <CssBaseline />
             {<AppBarStyled position="fixed" open={drawerOpen}>
               <ToolbarContent>
@@ -255,7 +257,6 @@ function App({ Component, pageProps }) {
               </Hidden>
             </nav>
             <Main open={drawerOpen}>
-            <GoogleTagManager gtmId="AW-16779476999" />
               <DrawerHeader />
               <Container>
                 <Component {...pageProps} />
