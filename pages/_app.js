@@ -24,7 +24,6 @@ import store from '../redux/store';
 import '../styles/styles.css';
 import '../styles/CircleOfFifths.css';
 import { GoogleAnalytics } from '@next/third-parties/google'
-import { GoogleTagManager } from '@next/third-parties/google'
 
 const inter = Open_Sans({ subsets: ['latin'], weight: ['300', '400', '500', '700'] });
 
@@ -189,8 +188,6 @@ function App({ Component, pageProps }) {
       <Provider store={store}>
         <ThemeProvider theme={theme}>
           <Box sx={{ display: 'flex' }}>
-          <GoogleTagManager gtmId="AW-16779476999" />
-
             <CssBaseline />
             {<AppBarStyled position="fixed" open={drawerOpen}>
               <ToolbarContent>
