@@ -9,7 +9,7 @@ export const getStaticProps = async (context) => {
                     const title = `Chord: ${guitar.arppegios[chordKey].name} in ${key} (Shape: ${shape})`;
                     return {
                         label: title,
-                        href: `/references/chords/${key.replace('#', 'sharp')}/${chordKey.replace('#', '%23')}/${shape}`,
+                        href: `/references/chords/${key.replace('#', 'sharp')}/${chordKey.replace('#', 'sharp')}/${shape}`,
                     };
                 })
             ];
@@ -20,14 +20,14 @@ export const getStaticProps = async (context) => {
             return [
                 {
                     label: title,
-                    href: `/references/arppegios/${key.replace('#', 'sharp')}/${arppegioKey.replace('#', '%23')}`,
+                    href: `/references/arppegios/${key.replace('#', 'sharp')}/${arppegioKey.replace('#', 'sharp')}`,
                 },
                 ...guitar.shapes.names.map((shape) => {
                     const title = `Arpeggio: ${guitar.arppegios[arppegioKey].name} in ${key} (Shape: ${shape})`;
                     return {
                         title: title,
                         label: `Arpeggio: ${guitar.arppegios[arppegioKey].name} in ${key} (Shape: ${shape})`,
-                        href: `/references/arppegios/${key.replace('#', 'sharp')}/${arppegioKey.replace('#', '%23')}/${shape}`,
+                        href: `/references/arppegios/${key.replace('#', 'sharp')}/${arppegioKey.replace('#', 'sharp')}/${shape}`,
                     };
                 }),
             ];
