@@ -5,7 +5,10 @@ import Meta from '../../components/Partials/Head';
 const ComposeAndShare = () => {
   return (
     <div>
-      <Meta title={'Compose And Share Music'}></Meta>
+      <Meta 
+        title="Compose And Share Music"
+        description="Compose And Play Guitar Songs ON ALL KEYS, CHORDS, SHAPES, SCALES, MODES, ARPPEGIONS DERIVED FROM A COMPLETE MUSICAL LIBRARY."
+      ></Meta>
       <MusicApp 
         board="compose"
         showFretboardControls={false} 

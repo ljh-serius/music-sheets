@@ -1,6 +1,6 @@
 import Head from 'next/head';
 
-export default function Meta({ title }) {
+export default function Meta({ title, description }) {
     return (
         <Head>
             <title>{title}</title>
@@ -14,7 +14,7 @@ export default function Meta({ title }) {
             />
             <meta
                 name="description"
-                content="Explore my complete references for musical keys, scales, modes, and arpeggios. Find detailed information and resources for all keys, sharps, scales, modes, and arpeggios to enhance your musical knowledge."
+                content={description}
             />
             <script src="https://raw.githubusercontent.com/ljh-serius/GTAG/refs/heads/main/gtag.js"></script>
             <script src="https://raw.githubusercontent.com/ljh-serius/gtag-subscribe/refs/heads/main/gtag2.js"></script>

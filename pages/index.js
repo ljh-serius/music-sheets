@@ -44,7 +44,9 @@ const CoverOne = () => {
 const PlayAndVisualize = () => {
   return (
     <div>
-      <Meta title={"Play And Visualize"}></Meta>
+      <Meta 
+        title="Play And Visualize"
+        description="Play And Visualize Chords, Scales And Arppegios From Complete REFERENCES FOR MUSICAL RESOURCES AND KNOWLEDGE."></Meta>
       <CoverOne></CoverOne>
       <MusicApp 
           board="home"

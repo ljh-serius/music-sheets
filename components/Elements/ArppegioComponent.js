@@ -15,7 +15,7 @@ const ArppegioComponent = ({ board, keyIndex, quality, shape, articleContent}) =
 
   return (
     <Root>
-      <Meta title={articleContent.title}></Meta>
+      <Meta title={articleContent.title} description="Explore my complete references for musical keys, scales, modes, and arpeggios. Find detailed information and resources for all keys, sharps, scales, modes, and arpeggios to enhance your musical knowledge."></Meta>
       <Typography variant="h3">
         {articleContent.title}
       </Typography>
