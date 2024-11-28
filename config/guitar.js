@@ -376,7 +376,7 @@ export default {
       "name": "Major 7b5",
       "formula": [4, 2, 5, 1],
       "intervals": ["1", "3", "b5", "7"],
-      "quality": "Other",
+      "quality": "Major",
       "degree": "Major",
       "matchingScale": "Ionian augmented",
       "cagedShapes": {

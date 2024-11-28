@@ -14,6 +14,8 @@ const CircleOfFifths = ({
         setSelectedQuality(quality);
     }, [tone, quality]);
 
+    console.log(quality)
+
     const majorRadius = 150; // Radius of the circle for major tones
     const minorRadius = 110; // Radius for the inner circle of minor tones
     const majorTones = guitar.circleOfFifths.map((key) => key.key);
@@ -36,7 +38,7 @@ const CircleOfFifths = ({
     let selectedMajorTone = selectedTone;
     let selectedMinorTone = selectedTone;
 
-    if (selectedQuality === "Major") {
+    if (selectedQuality === "Major" || selectedQuality === "Dominant") {
         const majorIndex = majorTones.indexOf(selectedTone);
         if (majorIndex !== -1) {
             rotationAngle = -30 * majorIndex;
@@ -53,36 +55,30 @@ const CircleOfFifths = ({
     const shouldBeHighlighted = (index, isMajor) => {
         const majorIndex = majorTones.indexOf(selectedMajorTone);
         const minorIndex = minorTones.indexOf(selectedMinorTone + 'm');
-
-        const selectedIndex = isMajor ? majorIndex : minorIndex;
-
-        if (selectedIndex === -1) return false;
-
-        const highlightedIndices = [];
-        for (let i = -1; i <= 5; i++) {
-            highlightedIndices.push((selectedIndex + i + majorTones.length) % majorTones.length);
-            highlightedIndices.push((selectedIndex + i + minorTones.length) % minorTones.length);
-        }
-
-        // Highlight the relative tones
-        if (quality === "Major") {
-            const relativeMinorIndex = minorTones.indexOf(selectedMinorTone + 'm');
-            if (relativeMinorIndex !== -1) {
-                for (let i = -1; i <= 5; i++) {
-                    highlightedIndices.push((relativeMinorIndex + i + minorTones.length) % minorTones.length);
-                }
+    
+        // Highlight logic for Major tones
+        if (isMajor) {
+            if (majorIndex === -1) return false;
+            const highlightedIndices = [];
+            for (let i = -1; i <= 5; i++) {
+                highlightedIndices.push((majorIndex + i + majorTones.length) % majorTones.length);
             }
-        } else {
-            const relativeMajorIndex = majorTones.indexOf(selectedMajorTone);
-            if (relativeMajorIndex !== -1) {
-                for (let i = -1; i <= 5; i++) {
-                    highlightedIndices.push((relativeMajorIndex + i + majorTones.length) % majorTones.length);
-                }
-            }
+            return highlightedIndices.includes(index);
         }
-
-        return highlightedIndices.includes(index);
+    
+        // Highlight logic for Minor tones
+        if (!isMajor) {
+            if (minorIndex === -1) return false;
+            const highlightedIndices = [];
+            for (let i = -1; i <= 5; i++) {
+                highlightedIndices.push((minorIndex + i + minorTones.length) % minorTones.length);
+            }
+            return highlightedIndices.includes(index);
+        }
+    
+        return false;
     };
+    
 
     return (
         <div className="circle-container">
