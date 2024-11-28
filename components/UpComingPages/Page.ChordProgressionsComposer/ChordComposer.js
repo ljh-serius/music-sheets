@@ -74,8 +74,10 @@ const ChordComposer = ({ addChordToProgression, saveProgression, playProgression
       ...newNodes,
     ]);
     
+    console.log("Chosen Roman And Sharp :", getChordName(chosenRoman, guitar.notes.sharps[selectedKey || 0]))
+    console.log("Selected Key : ", guitar.notes.sharps[selectedKey || 0])
     setEdges([...edges, ...newEdges]);
-    setChordPath([...chordPath, { id: nodeId, label: `${chosenRoman} - ${getChordName(chosenRoman, guitar.notes.sharps[selectedKey || 0])}` }]);
+    setChordPath([...chordPath, { id: nodeId, label: `${chosenRoman} - ${getChordName(chosenRoman, guitar.notes.sharps[selectedKey || 0])}`}]);
     setShowInitial(false);
   };
 
@@ -84,9 +86,10 @@ const ChordComposer = ({ addChordToProgression, saveProgression, playProgression
   };
 
   const getChordName = (romanNumeral, selectedKey) => {
-
     const rootNote = selectedKey; // Find root note
     let chordName = '';
+
+    console.log("Test : ", (guitar.notes.sharps.indexOf(rootNote)) % 12);
 
     switch (romanNumeral) {
       case 'I':
@@ -162,7 +165,7 @@ const ChordComposer = ({ addChordToProgression, saveProgression, playProgression
 
   useEffect(() => {
    const chordNames = initialRomanNumerals.map(roman => {
-      return `${roman} - ${getChordName(roman, guitar.notes.sharps[selectedKey])}`;
+      return `${roman} - ${getChordName(roman, guitar.notes.sharps[selectedKey || 0])}`;
     });
     // Dynamically generate tupdateBoardshe chord names based on the selected key
     setChordNames(chordNames);
