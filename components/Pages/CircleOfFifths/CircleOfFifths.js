@@ -14,8 +14,6 @@ const CircleOfFifths = ({
         setSelectedQuality(quality);
     }, [tone, quality]);
 
-    console.log(quality)
-
     const majorRadius = 150; // Radius of the circle for major tones
     const minorRadius = 110; // Radius for the inner circle of minor tones
     const majorTones = guitar.circleOfFifths.map((key) => key.key);

@@ -11,8 +11,6 @@ const withPlayback = (WrappedComponent) => {
 
         const playProgression = useCallback(async (progression) => {
 
-            console.log("PROGRESSION : ", progression);
-
             for (let i = 0; i < progression.length; i++) {
                 const { chord, shape, key, notes } = progression[i];
                 dispatch(updateStateProperty(selectedFretboard.id, 'generalSettings.choice', 'chord'));
@@ -200,8 +198,6 @@ const withPlayback = (WrappedComponent) => {
         };
 
         const displayChordPortion = (chordObject, player) => {
-
-            console.log("CHORD OBJECT : ", chordObject);
 
             const { key, chord, shape, notes } = chordObject;
             const { choice } = selectedFretboard.generalSettings;

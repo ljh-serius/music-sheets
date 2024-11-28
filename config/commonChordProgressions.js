@@ -5,8 +5,6 @@
     const rootNote = config.notes.sharps[rootIndex];
     const chord = config.arppegios[quality];
 
-    console.log("DEBUG ", [rootIndex, quality, shapeIndex]);
-
     if (!chord) return null;
 
     const shapeName = config.shapes.names[shapeIndex];

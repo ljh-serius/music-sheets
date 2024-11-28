@@ -78,9 +78,6 @@ const MusicApp = (props) => {
 
   const updateBoardsCallback = useCallback(() => {
 
-    console.log("SELECTED FRETBOARD ", selectedFretboard);
-    console.log("DISPLAY ", display);
-    
     if (selectedFretboard?.id) {
       if (!isNaN(keyIndex)) {
         dispatch(updateBoards(selectedFretboard.id, 'keySettings.' + display, keyIndex));
@@ -199,7 +196,7 @@ const MusicApp = (props) => {
               choice={choice}
               onCleanFretboard={cleanFretboard}
               selectedKey={isNaN(selectedKey) ? '' : selectedKey}
-              onCopyLink={() => console.log('aaa')}
+              onCopyLink={() => console.log('onCopyLink')}
               selectedMode={mode || ''}
               selectedScale={selectedScale || ''}
               selectedChord={selectedChord || ''}
