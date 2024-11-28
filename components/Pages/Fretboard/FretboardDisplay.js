@@ -127,10 +127,10 @@ const FretboardDisplay = ({
 
   const fretboardElements = boards.map((fretboard, fretboardIndex) => {
     const numStrings = Math.min(
-      selectedFretboard.generalSettings.page === 'references' ? 6 : fretboard.generalSettings.nostrs,
+      selectedFretboard.generalSettings.page.includes('references') ? 6 : fretboard.generalSettings.nostrs,
       12
     );
-    const numFrets = selectedFretboard.generalSettings.page === 'references' ? 12 : fretboard.generalSettings.nofrets;
+    const numFrets = selectedFretboard.generalSettings.page.includes('references') ? 12 : fretboard.generalSettings.nofrets;
 
     const centeredFretboard = () => {
       return Array.from({ length: numFrets }, (_, i) => i);
