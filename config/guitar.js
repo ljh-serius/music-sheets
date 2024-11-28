@@ -165,7 +165,7 @@ export default {
       "name": "Blues minor",
       "degree": "Minor",
       "isModal": false,
-      "intervals": ["1", "b3", "4", "b5", "5", "b7"],
+      "intervals": ["1", "b3", "4", "b5", "5"],
       "formula": [3, 2, 2, 3, 2],
       "indexes": [
         { "start": 0, "end": 3 },  // C shape
@@ -180,7 +180,7 @@ export default {
       "degree": "Major",
       "formula": [2, 2, 3, 2, 3],
       "isModal": false,
-      "intervals": ["1", "2", "b3", "3", "5", "6"],
+      "intervals": ["1", "2", "b3", "3", "5"],
       "indexes": [
         { "start": 0, "end": 3 },  // C shape
         { "start": 2, "end": 5 },  // A shape
@@ -240,7 +240,7 @@ export default {
     "dim": {
       "name": "Diminished",
       "intervals": ["1", "b3", "b5"],
-      "formula": [3, 3, 3],
+      "formula": [3, 3],
       "quality": "Diminished",
       "degree": "Minor",
       "matchingScale": "Ultra locrian",
@@ -435,7 +435,7 @@ export default {
     "9": {
       "name": "9th",
       "intervals": ["1", "3", "5", "b7", "9"],
-      "formula": [4, 3, 3, 2, 4],
+      "formula": [4, 3, 3, 3, 2, 4],
       "quality": "Dominant",
       "degree": "Major",
       "matchingScale": "Mixolydian",

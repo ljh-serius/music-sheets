@@ -136,13 +136,13 @@ function App({ Component, pageProps }) {
             </ListItemText>
           </ListItem>
         </Link>
-        <Link href="/compose" passHref>
+        {/* <Link href="/compose" passHref>
           <ListItem onClick={handleDrawerToggle}>
             <ListItemText>
               <Typography>Compose and Share</Typography>
             </ListItemText>
           </ListItem>
-        </Link>
+        </Link> */}
         <Link href="/learn" passHref>
           <ListItem onClick={handleDrawerToggle}>
             <ListItemText>
@@ -157,13 +157,13 @@ function App({ Component, pageProps }) {
             </ListItemText>
           </ListItem>
         </Link>
-        <Link href="/generate" passHref>
+        {/* <Link href="/generate" passHref>
           <ListItem onClick={handleDrawerToggle}>
             <ListItemText>
               <Typography>Generate Tabs</Typography>
             </ListItemText>
           </ListItem>
-        </Link>
+        </Link> */}
         <Link href="/references" passHref>
           <ListItem onClick={handleDrawerToggle}>
             <ListItemText>
