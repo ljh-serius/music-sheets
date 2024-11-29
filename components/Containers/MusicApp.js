@@ -143,7 +143,8 @@ const MusicApp = (props) => {
       return scale ? scale.degree : defaultDegree;
     } else if (choice === 'chord' || choice === 'arppegio') {
       const chord = guitar.arppegios[selectedFretboard[choice + 'Settings'][choice]];
-      return chord ? chord.quality : defaultDegree;
+      console.log(chord)
+      return chord ? chord.degree : defaultDegree;
     }
     return defaultDegree;
   };

@@ -1,29 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { FormControl, Button, Grid, Select, MenuItem, InputLabel, Card, Typography } from '@mui/material';
+import { Grid, Typography, Card } from '@mui/material';
 import { styled } from '@mui/system';
 import ChordGraph from './ChordGraph';
-import PropTypes from 'prop-types';
 import guitar from '../../../config/guitar';
 import { KeySelector } from '../../Pages/Fretboard/FretboardControls';
-
-function isLowerCase(str) {
-  return str === str.toLowerCase();
-}
 
 const Root = styled('div')({
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',
-});
-
-const StyledFormControl = styled(FormControl)({
-  width: '100%',
-});
-
-const GraphContainer = styled('div')({
-  height: 400,
-  width: '100%',
-  border: '1px solid rgba(0, 0, 0, 0.3)',
 });
 
 const ProgressionContainer = styled('div')({
@@ -35,23 +20,31 @@ const ProgressionContainer = styled('div')({
   alignItems: 'center',
 });
 
-const initialRomanNumerals = [
-  'I', 'ii', 'iii', 'IV', 'V', 'vi', 'vii°',
-  'i', 'ii°', 'III', 'iv', 'v', 'VI', 'VII',
-];
+const initialRomanNumerals = new Map([
+  [0, 'I'],
+  [1, 'ii'],
+  [2, 'iii'],
+  [3, 'IV'],
+  [4, 'V'],
+  [5, 'vi'],
+  [6, 'vii°'],
+  [7, 'i'],
+  [8, 'ii°'],
+  [9, 'III'],
+  [10, 'iv'],
+  [11, 'v'],
+  [12, 'VI'],
+  [13, 'VII'],
+]);
 
-const ChordComposer = ({ addChordToProgression, saveProgression, playProgression, selectedArppegio, onElementChange, selectedKey }) => {
+const ChordComposer = ({ selectedKey, onElementChange }) => {
   const [chordPath, setChordPath] = useState([]);
-  const [chordProgression, setChordProgression] = useState([]);
   const [nodes, setNodes] = useState([]);
   const [edges, setEdges] = useState([]);
-  const [showInitial, setShowInitial] = useState(true);
-  const [chordNames, setChordNames] = useState([]); // To store the dynamically generated chord names
+  const [chordNames, setChordNames] = useState([]);
 
   const handleNodeClick = (nodeId) => {
     const chosenRoman = nodeId.split('-')[0];
-
-    // Generate new nodes excluding the chosen one
     const newNodes = chordNames
       .filter((numeral) => numeral !== chosenRoman)
       .map((roman, index) => ({
@@ -61,129 +54,115 @@ const ChordComposer = ({ addChordToProgression, saveProgression, playProgression
         x: Math.random() * 400,
         y: Math.random() * 400,
       }));
-
+  
     const newEdges = newNodes.map((node) => ({
       id: `edge-${nodeId}-${node.id}`,
       from: nodeId,
       to: node.id,
     }));
-
+  
     setNodes([
       ...nodes.filter((n) => n.group !== 'roman'),
-      { id: nodeId, label: `${chosenRoman} - ${getChordName(chosenRoman, guitar.notes.sharps[selectedKey || 0])}`, group: 'chosen' },
+      {
+        id: nodeId,
+        label: `${chosenRoman} - ${getChordName(chosenRoman, guitar.notes.sharps[selectedKey || 0])}`,
+        group: 'chosen',
+      },
       ...newNodes,
     ]);
-    
-    console.log("Chosen Roman And Sharp :", getChordName(chosenRoman, guitar.notes.sharps[selectedKey || 0]))
-    console.log("Selected Key : ", guitar.notes.sharps[selectedKey || 0])
+  
     setEdges([...edges, ...newEdges]);
-    setChordPath([...chordPath, { id: nodeId, label: `${chosenRoman} - ${getChordName(chosenRoman, guitar.notes.sharps[selectedKey || 0])}`}]);
-    setShowInitial(false);
-  };
-
-  const handleSelectChange = (event) => {
-    setChordProgression(event.target.value);
+  
+    // Add only the chord name (not the Roman numeral) to the chordPath
+    setChordPath([
+      ...chordPath,
+      { id: nodeId, label: getChordName(chosenRoman, guitar.notes.sharps[selectedKey || 0]) },  // Only chord name
+    ]);
   };
 
   const getChordName = (romanNumeral, selectedKey) => {
-    const rootNote = selectedKey; // Find root note
-    let chordName = '';
+    // const chordMap = new Map([
+    //   ['I', { interval: 0, type: 'Major' }],
+    //   ['ii', { interval: 2, type: 'minor' }],
+    //   ['iii', { interval: 4, type: 'minor' }],
+    //   ['IV', { interval: 5, type: 'Major' }],
+    //   ['V', { interval: 7, type: 'Major' }],
+    //   ['vi', { interval: 9, type: 'minor' }],
+    //   ['vii°', { interval: 11, type: 'diminished' }],
+    //   ['i', { interval: 0, type: 'minor' }],
+    //   ['ii°', { interval: 2, type: 'diminished' }],
+    //   ['III', { interval: 3, type: 'Major' }],
+    //   ['iv', { interval: 5, type: 'minor' }],
+    //   ['v', { interval: 7, type: 'minor' }],
+    //   ['VI', { interval: 8, type: 'Major' }],
+    //   ['VII', { interval: 10, type: 'Major' }],
+    // ]);
 
-    console.log("Test : ", (guitar.notes.sharps.indexOf(rootNote)) % 12);
+    const chordMap = [
+      { interval: 0, type: 'Major' },
+      { interval: 2, type: 'minor' },
+      { interval: 4, type: 'minor' },
+      { interval: 5, type: 'Major' },
+      { interval: 7, type: 'Major' },
+      { interval: 9, type: 'minor' },
+      { interval: 11, type: 'diminished' },
+      { interval: 0, type: 'minor' },
+      { interval: 2, type: 'diminished' },
+      { interval: 3, type: 'Major' },
+      { interval: 5, type: 'minor' },
+      { interval: 7, type: 'minor' },
+      { interval: 8, type: 'Major' },
+      { interval: 10, type: 'Major' },
+    ];
 
-    switch (romanNumeral) {
-      case 'I':
-        chordName = `${guitar.notes.sharps[(guitar.notes.sharps.indexOf(rootNote)) % 12]} Major`;
-        break;
-      case 'ii':
-        chordName = `${guitar.notes.sharps[(guitar.notes.sharps.indexOf(rootNote) + 2) % 12]} minor`;
-        break;
-      case 'iii':
-        chordName = `${guitar.notes.sharps[(guitar.notes.sharps.indexOf(rootNote) + 4) % 12]} minor`;
-        break;
-      case 'IV':
-        chordName = `${guitar.notes.sharps[(guitar.notes.sharps.indexOf(rootNote) + 5) % 12]} Major`;
-        break;
-      case 'V':
-        chordName = `${guitar.notes.sharps[(guitar.notes.sharps.indexOf(rootNote) + 7) % 12]} Major`;
-        break;
-      case 'vi':
-        chordName = `${guitar.notes.sharps[(guitar.notes.sharps.indexOf(rootNote) + 9) % 12]} minor`;
-        break;
-      case 'vii°':
-        chordName = `${guitar.notes.sharps[(guitar.notes.sharps.indexOf(rootNote) + 11) % 12]} diminished`;
-        break;
-      case 'i':
-        chordName = `${guitar.notes.sharps[(guitar.notes.sharps.indexOf(rootNote) + 9) % 12]} minor`;
-        break;
-      case 'ii°':
-        chordName = `${guitar.notes.sharps[(guitar.notes.sharps.indexOf(rootNote) + 11) % 12]} diminished`;
-        break;
-      case 'III':
-        chordName = `${guitar.notes.sharps[(guitar.notes.sharps.indexOf(rootNote) + 12) % 12]} Major`;
-        break;
-      case 'iv':
-        chordName = `${guitar.notes.sharps[(guitar.notes.sharps.indexOf(rootNote) + 2) % 12]} minor`;
-        break;
-      case 'v':
-        chordName = `${guitar.notes.sharps[(guitar.notes.sharps.indexOf(rootNote) + 4) % 12]} minor`;
-        break;
-      case 'VI':
-        chordName = `${guitar.notes.sharps[(guitar.notes.sharps.indexOf(rootNote) + 5) % 12]} Major`;
-        break;
-      case 'VII':
-        chordName = `${guitar.notes.sharps[(guitar.notes.sharps.indexOf(rootNote) + 7) % 12]} Major`;
-        break;
-    }
+    const romanArray = [...initialRomanNumerals.values()];
 
-    return chordName;
+    console.log(romanArray)
+
+    const chordInfo = chordMap[romanArray.indexOf(romanNumeral)]
+    console.log(`Chord Info for ${romanNumeral}:`, chordInfo);
+
+    if (!chordInfo) return '';
+    const noteIndex = guitar.notes.sharps.indexOf(selectedKey);
+    if (noteIndex === -1) return 'Invalid Key';
+
+    const note = guitar.notes.sharps[noteIndex];
+    const chordRootIndex = (noteIndex + chordInfo.interval) % guitar.notes.sharps.length;
+    const chordRoot = guitar.notes.sharps[chordRootIndex];
+
+    return `${chordRoot} ${chordInfo.type}`;
   };
 
-  const initialNodes = initialRomanNumerals.map((roman, index) => ({
-    id: `${roman}-${index}`,
-    label: `${roman} - ${getChordName(roman, guitar.notes.sharps[selectedKey || 0])}`,
-    group: 'roman',
-    x: Math.random() * 400, 
-    y: Math.random() * 400,
-  }));
-
-  // Arrays to hold major and minor arpeggios
-  const majorArpeggios = [];
-  const minorArpeggios = [];
-
-  // Loop through the arppegios object
-  for (const key in guitar.arppegios) {
-    const arp = guitar.arppegios[key];
-
-    // Check if degree is Major or Minor and push the name to the corresponding array
-    if (arp.degree === "Major") {
-      majorArpeggios.push(arp.name);
-    } else if (arp.degree === "Minor") {
-      minorArpeggios.push(arp.name);
-    }
-  }
-
   useEffect(() => {
-   const chordNames = initialRomanNumerals.map(roman => {
+    const chordNames = Array.from(initialRomanNumerals.values()).map((roman) => {
       return `${roman} - ${getChordName(roman, guitar.notes.sharps[selectedKey || 0])}`;
     });
-    // Dynamically generate tupdateBoardshe chord names based on the selected key
+
     setChordNames(chordNames);
-  }, [selectedKey,]);
+
+    const initialNodes = Array.from(initialRomanNumerals.entries()).map(([index, roman]) => ({
+      id: `${roman}-${index}`,
+      label: `${roman} - ${getChordName(roman, guitar.notes.sharps[selectedKey || 0])}`,
+      group: 'roman',
+      x: Math.random() * 400,
+      y: Math.random() * 400,
+    }));
+    setNodes(initialNodes);
+  }, [selectedKey]);
 
   return (
     <Root>
       <Grid container spacing={2}>
         <Grid item xs={12}>
-          <Typography variant="h6">Please, chose a key to begin</Typography>
+          <Typography variant="h6">Please, choose a key to begin</Typography>
           <KeySelector choice="key" selectedKey={selectedKey || 0} onElementChange={onElementChange} />
         </Grid>
         <Grid item xs={12}>
           <ProgressionContainer>
             {chordPath.length === 0 && (
-              <Typography variant="h6">Selected Chord Progression Should Appear Here...</Typography>
+              <Typography variant="h6">Selected Chord Progression Will Appear Here...</Typography>
             )}
-            {chordPath.length > 0 && chordPath.map((chord, index) => (
+            {chordPath.map((chord, index) => (
               <React.Fragment key={index}>
                 <Card
                   style={{
@@ -194,100 +173,27 @@ const ChordComposer = ({ addChordToProgression, saveProgression, playProgression
                     justifyContent: 'center',
                     whiteSpace: 'nowrap',
                     border: '1px solid rgba(0, 0, 0, 0.3)',
-                    boxShadow: '2px 2px 4px rgba(0, 0, 0, 0.1)',
+                    boxShadow: '2px 2px 5px rgba(0, 0, 0, 0.2)',
+                    padding: '0 10px',
                   }}
                 >
-                  <Typography variant="h6" sx={{ m: 4 }}>
-                    {chord.label}
-                  </Typography>
-                  <Select
-                    labelId="arppegio-name-label"
-                    id="arppegio-name-select"
-                    fullWidth
-                    value={selectedArppegio}
-                    onChange={(e) => onElementChange(e.target.value, 'choice')}
-                    displayEmpty
-                  >
-                    {isLowerCase(chord.label[0]) && 
-                      minorArpeggios.map((arppegioName, index) => (
-                        <MenuItem key={index} value={arppegioName}>
-                          {arppegioName}
-                        </MenuItem>
-                    ))}
-
-                    {!isLowerCase(chord.label[0]) &&
-                      majorArpeggios.map((arppegioName, index) => (
-                        <MenuItem key={index} value={arppegioName}>
-                          {arppegioName}
-                        </MenuItem>
-                    ))}
-                  </Select>
+                  [{index + 1}] {chord.label}
                 </Card>
                 {index < chordPath.length - 1 && (
-                  <span style={{ margin: '0 0.5rem', fontSize: '1.5rem' }}>→</span>
+                  <Typography variant="h6" style={{ margin: '0 10px' }}>
+                    →
+                  </Typography>
                 )}
               </React.Fragment>
             ))}
           </ProgressionContainer>
         </Grid>
         <Grid item xs={12}>
-          <StyledFormControl>
-            <InputLabel id="select-roman-label">Selected Roman Numeral</InputLabel>
-            <Select
-              labelId="select-roman-label"
-              value={chordNames[0] || ''}
-              onChange={handleSelectChange}
-              sx={{ border: "none" }}
-            >
-              {chordNames.length > 0 && chordNames.map((chord, index) => (
-                <MenuItem key={index} value={chord}>
-                  {chord}
-                </MenuItem>
-              ))}
-            </Select>
-          </StyledFormControl>
-        </Grid>
-      </Grid>
-
-      <GraphContainer>
-        <ChordGraph
-          nodesData={showInitial ? initialNodes : nodes}
-          edgesData={edges}
-          onNodeClick={handleNodeClick}
-        />
-      </GraphContainer>
-
-      <Grid container spacing={2} style={{ marginTop: '1rem' }}>
-        <Grid item xs={12} style={{ textAlign: 'center' }}>
-          <Button
-            variant="outlined"
-            size="large"
-            onClick={() => saveProgression(chordProgression)}
-          >
-            Save Progression
-          </Button>
-        </Grid>
-        <Grid item xs={12} style={{ textAlign: 'center' }}>
-          <Button
-            variant="outlined"
-            size="large"
-            onClick={() => playProgression(chordProgression)}
-          >
-            Play Progression
-          </Button>
+          <ChordGraph nodesData={nodes} edgesData={edges} onNodeClick={handleNodeClick} />
         </Grid>
       </Grid>
     </Root>
   );
-};
-
-ChordComposer.propTypes = {
-  addChordToProgression: PropTypes.func.isRequired,
-  saveProgression: PropTypes.func.isRequired,
-  playProgression: PropTypes.func.isRequired,
-  selectedArppegio: PropTypes.string,
-  onElementChange: PropTypes.func.isRequired,
-  selectedKey: PropTypes.number.isRequired,
 };
 
 export default ChordComposer;

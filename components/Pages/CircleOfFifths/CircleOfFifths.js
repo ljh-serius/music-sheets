@@ -9,6 +9,8 @@ const CircleOfFifths = ({
     const [selectedTone, setSelectedTone] = useState(null);
     const [selectedQuality, setSelectedQuality] = useState(null);
 
+    console.log("tone" , tone)
+    console.log("quality" , quality )
     useEffect(() => {
         setSelectedTone(tone);
         setSelectedQuality(quality);
