@@ -117,7 +117,6 @@ const ChordComposer = ({ selectedKey, onElementChange }) => {
 
     const romanArray = [...initialRomanNumerals.values()];
 
-    console.log(romanArray)
 
     const chordInfo = chordMap[romanArray.indexOf(romanNumeral)]
     console.log(`Chord Info for ${romanNumeral}:`, chordInfo);
