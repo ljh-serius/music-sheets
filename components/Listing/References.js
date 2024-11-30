@@ -6,7 +6,6 @@ import ArticleCard from './ArticleCard';
 import { Card, CardContent, Typography } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import ReferencesHeader from '../AdSense/ReferencesHeader';
-import ReferencesMiddle from '../AdSense/ReferencesMiddle';
 import ReferencesBottom from '../AdSense/ReferencesBottom';
 
 const content = `# Preface
