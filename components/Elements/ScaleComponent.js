@@ -5,6 +5,7 @@ import { styled } from '@mui/system';
 import ArticleCard from '../Listing/ArticleCard'; // Adjust the path if needed
 import Meta from '../Partials/Head';
 import { Typography } from '@mui/material';
+import TopOfScale from '../AdSense/TopOfScale';
 
 const Root = styled('div')({
   display: 'flex',
@@ -18,6 +19,7 @@ const ScaleComponent = ({ board, keyIndex, scale, modeIndex, shape, articleConte
       <Meta 
         title={articleContent.title} 
         description="Explore my complete references for musical keys, scales, modes, and arpeggios. Find detailed information and resources for all keys, sharps, scales, modes, and arpeggios to enhance your musical knowledge."></Meta>
+      <TopOfScale></TopOfScale> 
       <Typography variant="h3">
         {articleContent.title}
       </Typography>

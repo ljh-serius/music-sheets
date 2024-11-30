@@ -5,6 +5,9 @@ import Meta from '../Partials/Head';
 import ArticleCard from './ArticleCard';
 import { Card, CardContent, Typography } from '@mui/material';
 import { styled } from '@mui/material/styles';
+import ReferencesHeader from '../AdSense/ReferencesHeader';
+import ReferencesMiddle from '../AdSense/ReferencesMiddle';
+import ReferencesBottom from '../AdSense/ReferencesBottom';
 
 const content = `# Preface
 
@@ -100,6 +103,7 @@ const References = ({ elements = [] }) => {
                 title="Musical Guitar Sheets Complete References (5000 pages for FREE / No Subscription / No Fees / No Payments)" 
                 description="Explore my complete references for musical keys, scales, modes, and arpeggios. Find detailed information and resources for all keys, sharps, scales, modes, and arpeggios to enhance your musical knowledge."
             />
+            <ReferencesHeader></ReferencesHeader>
             <ArticleCard article={{
                 content: content
             }}></ArticleCard>
@@ -134,6 +138,7 @@ const References = ({ elements = [] }) => {
                     </ol>
                 </CardContent>
             </StyledCard>
+            <ReferencesBottom></ReferencesBottom>
         </div>
     );
 };

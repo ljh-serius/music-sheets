@@ -4,6 +4,7 @@ import ArticleCard from '../Listing/ArticleCard'; // Adjust the path if needed
 import { styled } from '@mui/system';
 import Meta from '../Partials/Head';
 import { Typography } from '@mui/material';
+import TopOfChord from '../AdSense/TopOfChord';
 
 const Root = styled('div')({
   display: 'flex',
@@ -15,6 +16,7 @@ const ChordComponent = ({ board, keyIndex, quality, shape, articleContent}) => {
   return (
     <Root>
       <Meta title={articleContent.title} description="Explore my complete references for musical keys, scales, modes, and arpeggios. Find detailed information and resources for all keys, sharps, scales, modes, and arpeggios to enhance your musical knowledge."></Meta>
+      <TopOfChord></TopOfChord>
       <Typography variant="h3">
         {articleContent.title}
       </Typography>
