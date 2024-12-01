@@ -18,7 +18,6 @@ export default function Meta({ title, description }) {
             />
             <script src="https://raw.githubusercontent.com/ljh-serius/GTAG/refs/heads/main/gtag.js"></script>
             <script src="https://raw.githubusercontent.com/ljh-serius/gtag-subscribe/refs/heads/main/gtag2.js"></script>
-            <script src="https://raw.githubusercontent.com/ljh-serius/ad-blocker-custon-choice/refs/heads/main/ads-blocking.js"></script>
             <script
                 async
                 src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3419259043892692"
