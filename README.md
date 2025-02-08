@@ -2,7 +2,7 @@
 
 ## Getting Started
 
-$$
+$$ deploy
 
 First, run the development server:
 
