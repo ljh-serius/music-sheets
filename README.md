@@ -2,7 +2,7 @@
 
 ## Getting Started
 
-$$ deploy
+$$$ redeploy gesture
 
 First, run the development server:
 
